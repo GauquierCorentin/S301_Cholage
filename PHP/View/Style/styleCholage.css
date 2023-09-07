@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    text-align: center;
+    background-color: lightblue;
+    color: #0c76d9;
+}
+
+input.form-control {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 280px;
+    height: 50px;
+    border-color: #5669c0;
+}
+
+header{
+    margin-top: 50px;
+}
+
+button.btn-info {
+    margin-top: 15px;
+    background-color: #5669c0;
+    color: white;
+    border-color: #5669c0;
+    width: 10%;
+    height: 5%;
+}
+
+button.btn-info:hover {
+    border-color: #85beeb;
+    border-width: 4px;
+    margin-top: 15px;
+    background-color: #5669c0;
+    color: white;
+    width: 10%;
+    height: 5%;
+}
+
