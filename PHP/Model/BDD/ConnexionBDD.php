@@ -3,7 +3,7 @@
 /**
  *
  */
-class ConnectionBDD {
+class ConnexionBDD {
     private static $instance;
     private static $pdo;
 
