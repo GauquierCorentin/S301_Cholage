@@ -19,30 +19,30 @@
 
 <form method="post">
     <div class="form-group">
-        <input type="email" class="form-control" placeholder="Email" name="mail" id="mail" aria-describedby="basic-addon1" required>
+        <input type="email" class="form-control form-acc" placeholder="Email" name="mail" id="mail" aria-describedby="basic-addon1" required>
     </div>
 
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nom" name="nom" id="nom" aria-describedby="basic-addon1" required>
+        <input type="text" class="form-control form-acc" placeholder="Nom" name="nom" id="nom" aria-describedby="basic-addon1" required>
     </div>
 
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Prenom" name="prenom" id="prenom" aria-describedby="basic-addon1" required>
+        <input type="text" class="form-control form-acc" placeholder="Prenom" name="prenom" id="prenom" aria-describedby="basic-addon1" required>
     </div>
 
     <div class="form-group form-pw">
-        <input type="password" class="form-control" placeholder="Password" name="mdp" id="mdp" aria-describedby="basic-addon1" required>
+        <input type="password" class="form-control form-acc" placeholder="Password" name="mdp" id="mdp" aria-describedby="basic-addon1" required>
         <button type="button" name="seePW" id="seePW" class="btn btn-info btn-PW" onclick="changer('mdp')">0</button>
     </div>
 
     <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password Check" name="mdpcheck" id="mdpcheck" aria-describedby="basic-addon1" required>
+        <input type="password" class="form-control form-acc" placeholder="Password Check" name="mdpcheck" id="mdpcheck" aria-describedby="basic-addon1" required>
     </div>
 
     <div>
         <button type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc">Confirmer</button>
     </div>
 </form>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

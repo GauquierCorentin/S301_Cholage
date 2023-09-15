@@ -18,11 +18,11 @@
 
     <form method="post">
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email" name="mail" id="mail" aria-describedby="basic-addon1" required>
+            <input type="email" class="form-control form-acc" placeholder="Email" name="mail" id="mail" aria-describedby="basic-addon1" required>
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" name="mdp" id="mdp" aria-describedby="basic-addon1" required>
+            <input type="password" class="form-control form-acc" placeholder="Password" name="mdp" id="mdp" aria-describedby="basic-addon1" required>
         </div>
 
         <div>
