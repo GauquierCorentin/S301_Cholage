@@ -18,23 +18,21 @@ header{
     margin-top: 50px;
 }
 
-button.btn-sub-acc {
+.btn-sub-acc {
     margin-top: 15px;
     background-color: #5669c0;
     color: white;
     border-color: #5669c0;
-    width: 10%;
-    height: 5%;
+
 }
 
-button.btn-sub-acc:hover {
+.btn-sub-acc:hover {
     border-color: #85beeb;
     border-width: 4px;
     margin-top: 15px;
     background-color: #5669c0;
     color: white;
-    width: 10%;
-    height: 5%;
+
 }
 
 button.btn-PW {
@@ -51,4 +49,8 @@ button.btn-PW:hover {
     background-color: #5669c0;
     color: white;
     border-color: #85beeb;
+}
+
+.form-pw {
+    display: inline-block;
 }

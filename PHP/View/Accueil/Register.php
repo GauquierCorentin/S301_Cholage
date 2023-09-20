@@ -40,7 +40,7 @@
     </div>
 
     <div>
-        <button type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc">Confirmer</button>
+        <input type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc btn-lg" value="Confirmer">
     </div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

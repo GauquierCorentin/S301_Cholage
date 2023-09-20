@@ -5,6 +5,7 @@
     <title>Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="../../View/Style/styleCholage.css?v=<?php echo time(); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
         </div>
 
         <div>
-            <button type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc">Confirmer</button>
+            <input type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc btn-lg" value="Confirmer"></input>
         </div>
     </form>
     <a class="lien" href="Register.php">Créer un compte</a>

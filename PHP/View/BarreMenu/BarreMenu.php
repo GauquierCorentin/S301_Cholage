@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Calendrier</a>
+                    <a class="nav-link" href="#">Activités</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Messagerie</a>
@@ -31,8 +31,8 @@
                     <a class="nav-link" href="#">Disabled</a>
                 </li>
                 <li class="nav-item disconnect">
-                    <a class="logo" href="../../Controler/Accueil/Disconnect.php">
-                        <img class="rounded float-left" src="../../View/Image/Deconnexion.png" width="50" height="50"/>
+                    <a class="logo nav-link" href="../../Controler/Accueil/Disconnect.php">
+                        <img class="rounded float-left img-fluid img-disconnect" src="../../View/Image/logOffIcon.png"/>
                     </a>
                 </li>
             </ul>

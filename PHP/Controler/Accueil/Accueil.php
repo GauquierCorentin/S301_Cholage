@@ -8,7 +8,7 @@ require("../../Model/BDD/ConnexionBDD.php");
 require("../../Model/Accueil/Connexion.php");
 
 $conn= ConnexionBDD::getInstance();
-$pdo=$conn::getpdo();
+$pdo= $conn::getpdo();
 $Conn= new Connexion();
 
 if(isset($_POST['mail'])){
@@ -16,7 +16,15 @@ if(isset($_POST['mail'])){
         $_SESSION['mail']= $_POST['mail'];
         header('Location: MainPage.php');
     } else {
-        echo '<script>alert("Vos informations de connexion sont incorrectes.")';
+        ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Incorrect',
+                text: 'Impossible de trouver votre compte.'
+            })
+        </script>
+        <?php
     }
 }
 ?>
