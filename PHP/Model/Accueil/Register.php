@@ -29,7 +29,14 @@ function signIn($mail, $mdp, $mdpcheck)
             $user->execute(array($mail));
 
             if ($user->fetch()) {
-                echo '<script>alert("le compte a déjà été crée.")</script>';
+                ?>
+                <script>Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: 'Votre compte existe déjà.'
+                    })</script>
+                <?php
+                return "oui";
             }
 
             try {
@@ -37,8 +44,7 @@ function signIn($mail, $mdp, $mdpcheck)
                 $req->setFetchMode(PDO::FETCH_ASSOC);
 
             } catch (PDOException $e) {
-                die ($e->getMessage());
-
+                die($e->getMessage());
             }
             header('Location: Accueil.php');
         }

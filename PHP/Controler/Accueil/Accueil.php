@@ -20,7 +20,7 @@ if(isset($_POST['mail'])){
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Incorrect',
+                title: 'Erreur',
                 text: 'Impossible de trouver votre compte.'
             })
         </script>
