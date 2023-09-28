@@ -28,7 +28,7 @@ include("../../View/BarreMenu/BarreMenu.php")
 </div>
 <div>
     <h1> Vidéo de présentation</h1>
-    <div style="position:relative;padding-bottom: 25%;"align="center" class="Video"> <iframe frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x88gicg" allowfullscreen title="Dailymotion Video Player" > </iframe> </div>
+    <div class="Video"> <iframe frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x88gicg" allowfullscreen title="Dailymotion Video Player" > </iframe> </div>
 </div>
 <div>
     <h1>Informations utiles</h1>
