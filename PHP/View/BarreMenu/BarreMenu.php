@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Disabled</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Accueil/Information.php">Informations</a>
+                </li>
                 <li class="nav-item disconnect">
                     <a class="logo nav-link" href="../../Controler/Accueil/Disconnect.php">
                         <img class="rounded float-left img-fluid img-disconnect" src="../../View/Image/logOffIcon.png"/>
