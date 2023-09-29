@@ -31,6 +31,10 @@
         <input type="text" class="form-control form-acc" placeholder="Prenom" name="prenom" id="prenom" aria-describedby="basic-addon1" required>
     </div>
 
+    <div class="form-group">
+        <input type="text" class="form-control form-acc" placeholder="Numero Tel" name="tel" id="tel" aria-describedby="basic-addon1" required>
+    </div>
+
     <div class="form-group form-pw">
         <input type="password" class="form-control form-acc" placeholder="Password" name="mdp" id="mdp" aria-describedby="basic-addon1" required>
         <button type="button" name="seePW" id="seePW" class="btn btn-info btn-PW" onclick="changer('mdp')">0</button>
