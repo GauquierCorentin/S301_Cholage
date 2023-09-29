@@ -53,7 +53,7 @@ function signIn($mail, $mdp, $mdpcheck)
                 try {
 
                     //Server settings
-                    $mailer->SMTPDebug = 1;
+                    $mailer->SMTPDebug = 0;
                     $mailer->isSMTP();
                     $mailer->Host       = 'smtp.gmail.com';
                     $mailer->SMTPAuth   = true;
