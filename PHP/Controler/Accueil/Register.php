@@ -6,3 +6,4 @@ require("../../Model/Accueil/Register.php");
 
 @signIn($_POST['mail'], $_POST['mdp'], $_POST['mdpcheck']);
 ?>
+
