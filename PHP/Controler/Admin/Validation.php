@@ -5,20 +5,26 @@ require_once '../../View/Admin/Validation.html';
 require_once '../../Model/Admin/Validation.php';
 global $usersNonValidate;
 
-if ($usersNonValidate == null){
+if ($usersNonValidate == null) {
     echo '<h1>Il n\'y a pas d\'utilisateur à valider</h1>';
 }
 
 //On affiche dans un tableau html tous les user Non Validé
-foreach ($usersNonValidate as $item){
+    echo '<table class="tableau">';
+        echo '<tr>';
+            echo '<th>Mail</th>';
+            echo '<th>Valider</th>';
+        echo '</tr>';
+foreach ($usersNonValidate as $item) {
     echo '<form method="post" action="../../Model/Admin/Validation.php">';
         echo '<tr>';
-            echo '<td>'.$item['email'].'</td>';
-            echo '<input type="hidden" name="test" value="'.$item['email'].'">';
-            echo '<td><input type="submit" name="submit" value="Valider"></td>';
+        echo '<td>' . $item['email'] . '</td>';
+        echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
+        echo '<td><input type="submit" name="submit" value="Valider"></td>';
         echo '</tr>';
     echo '</form>';
 }
+echo('</table>');
 
 
 
