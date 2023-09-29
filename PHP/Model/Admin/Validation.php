@@ -1,18 +1,25 @@
 <?php
 require_once '../../Model/BDD/ConnexionBDD.php';
-global $pdo;
 //On récupère les données de la table User
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
-$requete = $pdo->prepare('SELECT * FROM User WHERE isValidate = false');
+try {
+    $conn = ConnexionBDD::getInstance();
+    $pdo = $conn::getpdo();
+} catch (PDOException $e) {
+    die ('Erreur : ' . $e->getMessage());
+}
+
+$requete = $pdo->prepare('SELECT * FROM users WHERE isvalidate = false');
 $requete->execute();
 $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
-
 //On modifie la valeur de isValidate à true
 
-if(isset($_POST['id'])){
-    $id = $_POST['id'];
-    $requete = $pdo->prepare('UPDATE User SET isValidate = true WHERE id = :id');
-    $requete->bindParam(':id', $id);
-    $requete->execute();
-    header('Location: ../../View/Admin/Validation.php');
+global $email;
+if(isset($email)){
+    echo ('On est dans la fonction pour valider un user');
+    $requete = $pdo->prepare('UPDATE users SET isvalidate = true WHERE email = ?');
+    $requete->execute(array($email));
+    header('Location: ../../Controler/Admin/Validation.php');
 }

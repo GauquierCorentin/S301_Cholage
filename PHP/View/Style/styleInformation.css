@@ -1,0 +1,34 @@
+body{
+    background-color: #def8ff;
+}
+
+p{
+    margin: 3%;
+    text-align: justify;
+}
+h1{
+    margin: 1%;
+    text-align: center;
+}
+h2{
+    margin: 4%;
+}
+
+.divVideo{
+    margin: 4%;
+    height: 1000px;
+}
+
+.Video{
+    text-align: center;
+    margin: 4%;
+    position: relative;
+}
+
+iframe{
+    top: 0;
+    left: 0;
+    height: 25vw;
+    width: 40vw;
+
+}

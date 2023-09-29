@@ -1,18 +1,16 @@
 <?php
+include("../../View/BarreMenu/BarreMenu.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>Informations</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../View/Style/styleCholage.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../Style/styleInformation.css">
 </head>
 
 <body>
-<?php
-include("../../View/BarreMenu/BarreMenu.php")
-?>
 <div>
     <h1>Présentation</h1>
     <p>Le chôlage est un sport de rue ressemblant à une sorte de golf, pratiqué dans quelques rares villages du nord dont notamment Quarouble ; les joueurs se réunissent une fois par an pour participer à un tournoi qui dure toute la journée qui est traditionnellement commencée par un petit déjeuner de tripes. Différent parcours sont préparés par le président du club et les perdants de chaque manche paient leur tournée au bar le plus proche du fût d’arrivée</p>
@@ -27,6 +25,10 @@ include("../../View/BarreMenu/BarreMenu.php")
 </div>
 <div>
     <h1>Comment y participer ?</h1>
+</div>
+<div>
+    <h1> Vidéo de présentation</h1>
+    <div class="Video"> <iframe frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x88gicg" allowfullscreen title="Dailymotion Video Player" > </iframe> </div>
 </div>
 <div>
     <h1>Informations utiles</h1>
