@@ -16,8 +16,8 @@ $requete->execute();
 $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
 //On modifie la valeur de isValidate à true
 
-global $email;
-if(isset($email)){
+if(isset($_POST['submit'])){
+    $email = $_POST['test'];
     echo ('On est dans la fonction pour valider un user');
     $requete = $pdo->prepare('UPDATE users SET isvalidate = true WHERE email = ?');
     $requete->execute(array($email));

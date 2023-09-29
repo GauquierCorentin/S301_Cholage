@@ -14,7 +14,7 @@ foreach ($usersNonValidate as $item){
     echo '<form method="post" action="../../Model/Admin/Validation.php">';
         echo '<tr>';
             echo '<td>'.$item['email'].'</td>';
-            $email = $item['email'];
+            echo '<input type="hidden" name="test" value="'.$item['email'].'">';
             echo '<td><input type="submit" name="submit" value="Valider"></td>';
         echo '</tr>';
     echo '</form>';
