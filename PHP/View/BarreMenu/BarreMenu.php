@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +35,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../../View/Accueil/Information.php">Informations</a>
                 </li>
+                <?php
+                    if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
+                        echo('<li class="nav-item">
+                        <a class="nav-link" href="../../Controler/Admin/Validation.php">Validation</a>
+                        </li>');
+                    }
+                ?>
                 <li class="nav-item disconnect">
                     <a class="logo nav-link" href="../../Controler/Accueil/Disconnect.php">
                         <img class="rounded float-left img-fluid img-disconnect" src="../../View/Image/logOffIcon.png"/>
