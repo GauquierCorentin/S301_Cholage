@@ -63,10 +63,24 @@ button.btn-PW:hover {
 .tableau{
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
 
 }
 
-.nom{
-    display: list-item;
+.test{
+    margin-left: auto;
+    margin-right: auto;
 }
+
+th,td{
+    padding: 15px;
+    text-align: center;
+    border-bottom: solid #000000;
+    color: #1e2125;
+}
+
+.searchbar{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:2%;
+    width: 40%;
+    border-color: #5669c0;
