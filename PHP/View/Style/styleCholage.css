@@ -78,9 +78,10 @@ th,td{
     color: #1e2125;
 }
 
-.searchbar{
+.searchbar {
     margin-left: auto;
     margin-right: auto;
-    margin-top:2%;
+    margin-top: 2%;
     width: 40%;
     border-color: #5669c0;
+}
