@@ -16,6 +16,7 @@ include("../../View/BarreMenu/BarreMenu.php")
     <p>Le chôlage est un sport de rue ressemblant à une sorte de golf, pratiqué dans quelques rares villages du nord dont notamment Quarouble ; les joueurs se réunissent une fois par an pour participer à un tournoi qui dure toute la journée qui est traditionnellement commencée par un petit déjeuner de tripes. Différent parcours sont préparés par le président du club et les perdants de chaque manche paient leur tournée au bar le plus proche du fût d’arrivée</p>
 </div>
 <div>
+    <h1> Vidéo de présentation</h1>
     <div class="Video"> <iframe frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x88gicg" allowfullscreen title="Dailymotion Video Player" > </iframe> </div>
 </div>
 <div>
