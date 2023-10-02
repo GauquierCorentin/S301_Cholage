@@ -7,3 +7,20 @@ function changer(id){
 
     }
 }
+
+/* Fonction qui permet de rechercher un nom dans une liste sur la page Validation*/
+
+function search_Nom() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('test');
+
+    for (i = 0; i < x.length; i++) {
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";
+        }
+    }
+}

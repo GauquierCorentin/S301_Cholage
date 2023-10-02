@@ -66,3 +66,7 @@ button.btn-PW:hover {
     margin-top: 5%;
 
 }
+
+.nom{
+    display: list-item;
+}
