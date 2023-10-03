@@ -5,7 +5,11 @@ require("../../Model/Includes/PHPMailer/src/PHPMailer.php");
 require ("../../Model/Includes/PHPMailer/src/SMTP.php");
 require("../../Model/BDD/ConnexionBDD.php");
 require("Premier.php");
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 function signIn($mail, $mdp, $mdpcheck)
 {
@@ -49,7 +53,7 @@ function signIn($mail, $mdp, $mdpcheck)
                 $req->execute();
                 $req->setFetchMode(PDO::FETCH_ASSOC);
 
-                $mailer= new PHPMailer\PHPMailer\PHPMailer(true);
+                $mailer= new PHPMailer(true);
                 try {
 
                     //Server settings
@@ -58,7 +62,7 @@ function signIn($mail, $mdp, $mdpcheck)
                     $mailer->Host       = 'smtp.gmail.com';
                     $mailer->SMTPAuth   = true;
                     $mailer->Username   = 'cholage.offi@gmail.com';
-                    $mailer->Password   = 'fufv ajtu ygoj mfro';
+                    $mailer->Password   = 'fufvajtuygojmfro';
                     $mailer->SMTPSecure = 'tls';
                     $mailer->Port       = 587;
                     //Recipients
@@ -70,12 +74,13 @@ function signIn($mail, $mdp, $mdpcheck)
                     $mailer->send();
                     echo 'Message has been sent';
                 } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
                 }
 
             } catch (PDOException $e) {
                 die($e->getMessage());
             }
+            /*header('Location: Accueil.php');*/
             header('Location: Accueil.php');
             return true;
         }
