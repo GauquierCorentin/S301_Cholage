@@ -26,9 +26,9 @@ foreach ($usersNonValidate as $item) {
         echo '<tr class="test">';
         echo '<td>' . $item['email'] . '</td>';
         echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
-        echo '<td>' . $item['nom'] . '</td>';
+        echo '<td class="nom">' . $item['nom'] . '</td>';
         echo '<td>' . $item['prenom'] . '</td>';
-        echo '<td><input type="submit" name="submit" value="Valider"></td>';
+        echo '<td><input class="btn btn-info btn-sub-acc" type="submit" name="submit" value="Valider"></td>';
         echo '</tr>';
     echo '</form>';
 }
