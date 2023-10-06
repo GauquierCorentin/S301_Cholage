@@ -2,14 +2,16 @@
 
 require("../../Model/Includes/PHPMailer/src/Exception.php");
 require("../../Model/Includes/PHPMailer/src/PHPMailer.php");
-require ("../../Model/Includes/PHPMailer/src/SMTP.php");
+require("../../Model/Includes/PHPMailer/src/SMTP.php");
 require("../../Model/BDD/ConnexionBDD.php");
 require("Premier.php");
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 
 function signIn($mail, $mdp, $mdpcheck)
 {
@@ -17,10 +19,10 @@ function signIn($mail, $mdp, $mdpcheck)
     $session->premier('first');
     @$nom = $_POST['nom'];
     @$prenom = $_POST['prenom'];
-    @$numtel= @$_POST['tel'];
+    @$numtel = @$_POST['tel'];
 
     if ($_SESSION['first'] == 2) {
-        if($mdp==$mdpcheck){
+        if ($mdp == $mdpcheck) {
             try {
                 $conn = ConnexionBDD::getInstance();
                 $pdo = $conn::getpdo();
@@ -30,7 +32,7 @@ function signIn($mail, $mdp, $mdpcheck)
             $hash = password_hash($mdp, PASSWORD_DEFAULT);
             $sql = "INSERT INTO users VALUES (:mail,:nom,:prenom,:numtel,:hash,null,null,false,false,false,false,false,0)";
             $req = $pdo->prepare($sql);
-            $req->bindParam('mail',$mail);
+            $req->bindParam('mail', $mail);
             $req->bindParam('nom', $nom);
             $req->bindParam('prenom', $prenom);
             $req->bindParam('numtel', $numtel);
@@ -53,23 +55,23 @@ function signIn($mail, $mdp, $mdpcheck)
                 $req->execute();
                 $req->setFetchMode(PDO::FETCH_ASSOC);
 
-                $mailer= new PHPMailer(true);
+                $mailer = new PHPMailer(true);
                 try {
 
                     //Server settings
                     $mailer->SMTPDebug = 0;
                     $mailer->isSMTP();
-                    $mailer->Host       = 'smtp.gmail.com';
-                    $mailer->SMTPAuth   = true;
-                    $mailer->Username   = 'cholage.offi@gmail.com';
-                    $mailer->Password   = 'fufvajtuygojmfro';
+                    $mailer->Host = 'smtp.gmail.com';
+                    $mailer->SMTPAuth = true;
+                    $mailer->Username = 'cholage.offi@gmail.com';
+                    $mailer->Password = 'fufvajtuygojmfro';
                     $mailer->SMTPSecure = 'tls';
-                    $mailer->Port       = 587;
+                    $mailer->Port = 587;
                     //Recipients
-                    $mailer->CharSet='UTF-8';
+                    $mailer->CharSet = 'UTF-8';
                     $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
                     $mailer->Subject = 'Compte créer avec succès !';
-                    $mailer->Body='Votre compte a été créer dans le système avec succès, bienvenue !';
+                    $mailer->Body = 'Votre compte a été créer dans le système avec succès, bienvenue !';
                     $mailer->addAddress($mail, 'Joe User');
                     $mailer->send();
                     echo 'Message has been sent';
