@@ -1,6 +1,6 @@
 <?php
-require_once '../../View/BarreMenu/BarreMenu.php';
 require_once '../../Model/Admin/Validation.php';
+require_once '../../View/Admin/Validation.php';
 global $pdo;
 
 if($_SESSION['isadmin'] == false || $_SESSION['isadmin'] == null){
@@ -11,6 +11,8 @@ $dateValidation = get_dateValidation($pdo);
 
 $usersNonValidate = get_usersNonValidate($pdo);
 
+$_SESSION['usersNonValidate'] = $usersNonValidate;
+
 if (isset($_POST['submit'])){
-    feur($pdo);
+    update_isValidate($pdo);
 }

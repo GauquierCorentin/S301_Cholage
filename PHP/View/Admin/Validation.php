@@ -17,10 +17,7 @@
        name="search" placeholder="recherche Nom">
 
 <?php
-require_once '../../Model/Admin/Validation.php';
-require_once '../../Controler/Admin/Validation.php';
-global $usersNonValidate;
-
+$usersNonValidate = $_SESSION['usersNonValidate'];
 if ($usersNonValidate == null) {
 echo '<h1>Il n\'y a pas d\'utilisateur à valider</h1>';
 }
