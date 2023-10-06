@@ -12,6 +12,10 @@
 <body>
 
 <header>
+    <a class="lien lien-acc" href="../../Controler/Accueil/Accueil.php">
+        <img src="../../View/Image/returnAcc.png" width="50" height="50">
+    </a>
+
     <a class="logo" href="Accueil.php">
         <img src="../../View/Image/logo0.png" width=200 height=200 alt="">
     </a>
@@ -50,9 +54,4 @@
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
-<footer>
-    <a class="lien lien-acc" href="../../Controler/Accueil/Accueil.php">
-        <img src="../../View/Image/returnAcc.png" width="50" height="50">
-    </a>
-</footer>
 </html>
