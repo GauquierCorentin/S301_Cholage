@@ -38,7 +38,7 @@ session_start();
                 <?php
                     if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
                         echo('<li class="nav-item">
-                        <a class="nav-link" href="../../View/Admin/Validation.php">Validation</a>
+                        <a class="nav-link" href="../../Controler/Admin/Validation.php">Validation</a>
                         </li>');
                     }
                 ?>
