@@ -18,12 +18,10 @@
 
 <?php
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-global $usersNonValidate;
+$usersNonValidate = $_SESSION['usersNonValidate'];
 
 if ($usersNonValidate == null) {
-echo '<h1>Il n\'y a pas d\'utilisateur à valider</h1>';
+    echo '<h1>Il n\'y a pas d\'utilisateur à valider</h1>';
 }
 
 //On affiche dans un tableau html tous les user Non Validé
