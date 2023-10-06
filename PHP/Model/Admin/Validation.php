@@ -38,25 +38,28 @@ function get_dateValidation($pdo)
 
 function get_usersNonValidate($pdo){
 //Request pour récupérer les users non validé
+<<<<<<< Updated upstream
 
     $requete = $pdo->prepare('SELECT * FROM users WHERE isvalidate = false or datevalidation = null order by email');
     $requete->execute();
     $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
 
     return $usersNonValidate;
+=======
+$requete = $pdo->prepare('SELECT * FROM users WHERE isvalidate = false');
+$requete->execute();
+$usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
+return $usersNonValidate;
+>>>>>>> Stashed changes
 }
-
 function update_isValidate($pdo)
 {
 //On modifie la valeur de isValidate à true et on ajoute la date de validation
-    if (isset($_POST['submit'])) {
-        $email = $_POST['test'];
+        $email = $_POST["test"];
         $requete = $pdo->prepare('UPDATE users SET isvalidate = true WHERE email = ?');
         $requete->execute(array($email));
-
         $date = date("Y-m-d");
         $req = $pdo->prepare('UPDATE users SET datevalidation=? WHERE email = ?');
         $req->execute(array($date, $email));
-
-    }
+        header("Location: ../../View/Admin/Validation.php");
 }

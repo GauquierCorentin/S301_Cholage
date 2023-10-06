@@ -6,13 +6,10 @@ global $pdo;
 if($_SESSION['isadmin'] == false || $_SESSION['isadmin'] == null){
     header('Location: ../../View/Accueil/MainPage.php');
 }
-
-$dateValidation = get_dateValidation($pdo);
-
+get_dateValidation($pdo);
 $usersNonValidate = get_usersNonValidate($pdo);
-
 $_SESSION['usersNonValidate'] = $usersNonValidate;
 
-if (isset($_POST['submit'])){
+if (isset($_POST['valider'])){
     update_isValidate($pdo);
 }
