@@ -39,11 +39,11 @@ function get_dateValidation($pdo)
 function get_usersNonValidate($pdo){
 //Request pour récupérer les users non validé
 
-$requete = $pdo->prepare('SELECT * FROM users WHERE isvalidate = false or datevalidation = null order by email');
-$requete->execute();
-$usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
+    $requete = $pdo->prepare('SELECT * FROM users WHERE isvalidate = false or datevalidation = null order by email');
+    $requete->execute();
+    $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-return $usersNonValidate;
+    return $usersNonValidate;
 }
 
 function update_isValidate($pdo)
