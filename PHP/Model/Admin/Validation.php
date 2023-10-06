@@ -46,3 +46,4 @@ if(isset($_POST['submit'])){
     $req->execute(array($date,$email));
     header('Location: ../../Controler/Admin/Validation.php');
 }
+
