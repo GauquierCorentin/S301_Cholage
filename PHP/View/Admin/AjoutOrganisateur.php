@@ -27,12 +27,13 @@ ini_set("display_errors", 1);
       $users=$_SESSION["users"];
         foreach ($users as $item){
             echo "<form method='post'>";
-            echo "<tr class='test'>";
-            echo "<td>". $item["email"]."</td>";
-            echo '<td>' . $item['nom'] . '</td>';
-            echo '<td>' . $item['prenom'] . '</td>';
-            echo '<td><input type="submit" name="submit" value="Valider"></td>';
-            echo '</tr>';
+                echo "<tr class='test'>";
+                echo "<td>". $item["email"]."</td>";
+                echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
+                echo '<td>' . $item['nom'] . '</td>';
+                echo '<td>' . $item['prenom'] . '</td>';
+                echo '<td><input type="submit" name="submit" value="Valider"></td>';
+                echo '</tr>';
             echo '</form>';
 
         }

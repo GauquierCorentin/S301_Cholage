@@ -9,5 +9,6 @@ require ("../../View/Admin/AjoutOrganisateur.php");
 recupUsersNonOrga();
 if (isset($_POST["submit"])){
     UpdateStatut($_POST["test"]);
+    header("Location: AjoutOrganisateur.php");
 }
 
