@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-require ('../../View/BarreMenu/BarreMenu.php');
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 ?>

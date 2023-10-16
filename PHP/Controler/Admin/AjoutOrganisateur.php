@@ -1,7 +1,7 @@
 <?php
-session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+require ('../../View/BarreMenu/BarreMenu.php');
 ?>
 <?php
 require ("../../Model/Admin/AjoutOrganisateur.php");

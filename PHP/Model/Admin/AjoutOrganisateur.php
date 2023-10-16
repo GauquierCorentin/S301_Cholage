@@ -18,7 +18,7 @@ function recupUsersNonOrga()
 }
 function UpdateStatut($email){
     global $pdo;
-    $requete=$pdo->prepare("Update users set isOrganisateur where email=?");
-    $requete->execute($email);
+    $requete=$pdo->prepare("Update users set isOrganisateur=true where email=?");
+    $requete->execute(array($email));
     echo "vous avez modifié l'utilisateur ". $email;
 }
