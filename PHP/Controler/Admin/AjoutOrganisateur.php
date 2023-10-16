@@ -1,14 +1,15 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-require ('../../View/BarreMenu/BarreMenu.php');
+include ('../../View/BarreMenu/BarreMenu.php');
 ?>
 <?php
 require ("../../Model/Admin/AjoutOrganisateur.php");
 require ("../../View/Admin/AjoutOrganisateur.php");
+header("Cache-Control: no-cache, must-revalidate");
 recupUsersNonOrga();
 if (isset($_POST["submit"])){
-    UpdateStatut($_POST["test"]);
-    header("Location: AjoutOrganisateur.php");
+    echo $_POST["test"];
+    //UpdateStatut($_POST["test"]);
 }
 

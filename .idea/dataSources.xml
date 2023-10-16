@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://iutinfo-sgbd.uphf.fr:5432/iutinfo70</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="iutinfo70@iutinfo-sgbd.uphf.fr" uuid="4edf02af-f414-4c18-ab67-89551bef230e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://iutinfo-sgbd.uphf.fr:5432/iutinfo70</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
