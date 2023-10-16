@@ -33,8 +33,3 @@ foreach ($usersNonValidate as $item) {
     echo '</form>';
 }
 echo('</table>');
-
-
-
-
-
