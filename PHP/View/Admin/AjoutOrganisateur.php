@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,12 +29,10 @@ ini_set("display_errors", 1);
                 echo '<td>' . $item['prenom'] . '</td>';
                 echo '<td><input type="submit" name="submit" value="Valider"></td>';
                 echo '</tr>';
-            echo '</form>';
-
+            echo "</form>";
         }
       ?>
   </table>
 </div>
-
 </body>
 </html>
