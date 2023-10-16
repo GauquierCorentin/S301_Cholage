@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 require_once '../../Model/BDD/ConnexionBDD.php';
 require_once '../../View/BarreMenu/BarreMenu.php';
 require_once '../../Model/Password/RequestResetPassword.php';
@@ -29,8 +29,17 @@ $email = $_POST['email'];
 //On vérifie que l'email existe dans la base de données
 $user = checkEmail($email);
 
-//On insère le token dans la base de données et on rajoute 5min à la date d'expiration
-insertToken($token,$email);
+//On vérifie si l'utilisateur a déjà un token
+$tokenUser = getToken($email);
+
+//Si l'utilisateur a déjà un token, on update le token
+if($tokenUser){
+    UpdateToken($token,$email);
+}
+else{
+    //Sinon on insère le token dans la base de données
+    insertToken($token,$email);
+}
 
 //Si l'email n'existe pas, on affiche un message d'erreur
 if (!$user) {
@@ -57,9 +66,10 @@ try {
     $mailer->Body='Bonjour, cliquez sur ce lien pour 
     réinitialiser votre mot de passe :
      http://localhost/S301_Cholage/PHP/View/Password/ResetPassword.php?email='.$email.'&token='.$token.'';
-    $mailer->addAddress($email, 'Joe User');
+    $mailer->addAddress($email);
     $mailer->send();
     echo 'Message has been sent';
+    header('Location: ../../View/Accueil/Accueil.php');
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
 }

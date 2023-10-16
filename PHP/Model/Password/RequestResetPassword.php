@@ -26,3 +26,17 @@ function insertToken($token,$email)
     $insertToken->execute(array($token, $date,$email ));
 
 }
+
+function UpdateToken($token,$email){
+    global $pdo;
+    $update = $pdo->prepare('UPDATE token SET token = ? WHERE email = ?');
+    $update->execute(array($token,$email));
+}
+
+function getToken($email){
+    global $pdo;
+    $getToken = $pdo->prepare('SELECT * FROM token WHERE email = ?');
+    $getToken->execute(array($email));
+    $token = $getToken->fetch();
+    return $token;
+}
