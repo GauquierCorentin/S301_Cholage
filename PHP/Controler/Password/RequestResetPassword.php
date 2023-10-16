@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 require_once '../../Model/BDD/ConnexionBDD.php';
 require_once '../../View/BarreMenu/BarreMenu.php';
 require_once '../../Model/Password/RequestResetPassword.php';
@@ -21,12 +23,14 @@ try {
 } catch (Exception $e) {
 }
 
-$_SESSION['token'] = $token;
-
 //Récupération de l'email
 $email = $_POST['email'];
 
-$_SESSION['email'] = $email;
+//On vérifie que l'email existe dans la base de données
+$user = checkEmail($email);
+
+//On insère le token dans la base de données et on rajoute 5min à la date d'expiration
+insertToken($token,$email);
 
 //Si l'email n'existe pas, on affiche un message d'erreur
 if (!$user) {

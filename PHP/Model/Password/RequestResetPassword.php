@@ -1,19 +1,28 @@
 <?php
-session_start();
 require_once '../../Model/BDD/ConnexionBDD.php';
-global $pdo;
 
-$email = $_SESSION['email'];
-$token = $_SESSION['token'];
+try {
+    $conn = ConnexionBDD::getInstance();
+    $pdo = $conn::getpdo();
+} catch (PDOException $e) {
+    die ('Erreur : ' . $e->getMessage());
+}
 
 //On vérifie que l'email existe dans la base de données
-$checkEmail = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+function checkEmail($email)
+{
+    global $pdo;
+    $checkEmail = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+    $checkEmail->execute(array($email));
+    $user = $checkEmail->fetch();
+    return $user;
+}
 
-$checkEmail->execute([$email]);
-
-$user = $checkEmail->fetch();
-
+function insertToken($token,$email)
+{
+    global $pdo;
 //On insère le token dans la base de données et on rajoute 5min à la date d'expiration
-$pdo->prepare('UPDATE users SET reset_token = ?, 
-                 reset_at = DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email = ?')->execute([$token, $email]);
-
+    $req=$pdo->prepare('UPDATE users SET token = ?, 
+                 reset_at = (NOW() + INTERVAL 1 MINUTE) WHERE email = ?');
+    $req->execute(array($token,$email));
+}
