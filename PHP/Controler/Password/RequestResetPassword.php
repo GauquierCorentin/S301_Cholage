@@ -38,7 +38,7 @@ if (!$user) {
     exit();
 }
 
-//Envoie du mail avec le token dans l'url et expiration au bout de 5min
+//Envoie du mail avec le token dans l'url
 $mailer= new PHPMailer(true);
 try {
 
@@ -52,9 +52,7 @@ try {
     $mailer->SMTPSecure = 'tls';
     $mailer->Port       = 587;
     //Recipients
-    $mailer->setFrom('
-    
-    ', 'Cholage');
+    $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
     $mailer->Subject = 'Réinitialisation de votre mot de passe';
     $mailer->Body='Bonjour, cliquez sur ce lien pour 
     réinitialiser votre mot de passe :
