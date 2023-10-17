@@ -65,7 +65,7 @@ try {
     $mailer->Subject = 'Réinitialisation de votre mot de passe';
     $mailer->Body='Bonjour, cliquez sur ce lien pour 
     réinitialiser votre mot de passe :
-     http://localhost/S301_Cholage/PHP/View/Password/ResetPassword.php?email='.$email.'&token='.$token.'';
+    http://localhost:63342/S301_Cholage/PHP/Controler/Password/ResetPassword.php?email='.$email.'&token='.$token.'';
     $mailer->addAddress($email);
     $mailer->send();
     echo 'Message has been sent';
