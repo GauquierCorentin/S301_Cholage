@@ -2,7 +2,7 @@
 //error_reporting(E_ALL);
 //ini_set("display_errors", 1);
 require_once '../../Model/BDD/ConnexionBDD.php';
-require_once '../../View/BarreMenu/BarreMenu.php';
+session_start();
 require_once '../../Model/Password/RequestResetPassword.php';
 require_once '../../View/Password/RequestResetPassword.php';
 
