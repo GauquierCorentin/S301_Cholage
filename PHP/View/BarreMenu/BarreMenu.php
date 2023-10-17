@@ -41,6 +41,11 @@ session_start();
                         <a class="nav-link" href="../../Controler/Admin/Validation.php">Validation</a>
                         </li>');
                     }
+                if($_SESSION['isadmin'] == true){
+                    echo('<li class="nav-item">
+                        <a class="nav-link" href="../../Controler/Admin/AjoutOrganisateur.php">Gestion Organisateur</a>
+                        </li>');
+                }
                 ?>
                 <li class="nav-item disconnect">
                     <a class="logo nav-link" href="../../Controler/Accueil/Disconnect.php">

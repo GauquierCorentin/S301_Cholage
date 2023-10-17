@@ -1,15 +1,20 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-include ('../../View/BarreMenu/BarreMenu.php');
 ?>
 <?php
-require ("../../Model/Admin/AjoutOrganisateur.php");
-require ("../../View/Admin/AjoutOrganisateur.php");
-header("Cache-Control: no-cache, must-revalidate");
+ob_start();
+require_once ("../../Model/Admin/AjoutOrganisateur.php");
+require_once ("../../View/Admin/AjoutOrganisateur.php");
 recupUsersNonOrga();
+if($_SESSION['isadmin'] == false || $_SESSION['isadmin'] == null){
+    header('Location: ../../View/Accueil/MainPage.php');
+}
+if ($_SESSION["users"] == null) {
+    echo '<h1>Il n\'y a pas d\'utilisateur à valider</h1>';
+}
+
 if (isset($_POST["submit"])){
-    echo $_POST["test"];
-    //UpdateStatut($_POST["test"]);
+    UpdateStatut($_POST["test"]);
+    header("Location: AjoutOrganisateur.php?".uniqid());
+    exit();
 }
 
