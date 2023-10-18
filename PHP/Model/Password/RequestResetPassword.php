@@ -29,8 +29,9 @@ function insertToken($token,$email)
 
 function UpdateToken($token,$email){
     global $pdo;
-    $update = $pdo->prepare('UPDATE token SET token = ? WHERE email = ?');
-    $update->execute(array($token,$email));
+    $date = date("Y-m-d H:i:s");
+    $update = $pdo->prepare('UPDATE token,creation SET token = ? WHERE email = ?');
+    $update->execute(array($token,$date,$email));
 }
 
 function getToken($email){

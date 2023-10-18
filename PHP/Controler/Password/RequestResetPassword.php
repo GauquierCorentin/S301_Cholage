@@ -63,6 +63,7 @@ try {
     //Recipients
     $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
     $mailer->Subject = 'Réinitialisation de votre mot de passe';
+    //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
     $mailer->Body='Bonjour, cliquez sur ce lien pour 
     réinitialiser votre mot de passe :
     http://localhost:63342/S301_Cholage/PHP/Controler/Password/ResetPassword.php?email='.$email.'&token='.$token.'';
