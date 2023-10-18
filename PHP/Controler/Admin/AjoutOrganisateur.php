@@ -1,10 +1,11 @@
 <?php
+include ('../../View/BarreMenu/BarreMenu.php');
 ?>
 <?php
 ob_start();
 require_once ("../../Model/Admin/AjoutOrganisateur.php");
-require_once ("../../View/Admin/AjoutOrganisateur.php");
 recupUsersNonOrga();
+require_once ("../../View/Admin/AjoutOrganisateur.php");
 if($_SESSION['isadmin'] == false || $_SESSION['isadmin'] == null){
     header('Location: ../../View/Accueil/MainPage.php');
 }
