@@ -16,7 +16,7 @@ function getCreationToken($mail) {
     $date = $pdo->prepare('select creation from token where email = ?');
     $date->execute(array($mail));
     $getDate=$date->fetch();
-    return $getDate;
+    return $getDate[0];
 }
 
 function changePassword($mail, $pass) {
