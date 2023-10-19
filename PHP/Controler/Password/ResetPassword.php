@@ -21,28 +21,7 @@ echo 'email : ' . $mail;
 $pass1 = $_POST["pass1"];
 $pass2 = $_POST["pass2"];
 
-// Si mdp == null, on fait la vérification de token
-/*
-if ($pass1 == null) {
-    $creation = getCreationToken($mail);
-    $now = date("Y-m-d H:i:s");
-    $date = date("H:i:s",strtotime($now . + "5 minute"));
-    if ($now<$date) {
-        header('../../View/Password/ResetPassword.php');
-
-    } else {
-        $erreur = 'Délai de 5 minutes dépassé';
-        header('../../View/Password/RequestResetPassword.php?error_message=$erreur');
-    }
-} else { // sinon, l'utilisateur est dans le process donc on fait la modif
-    if ($pass1 != $pass2) { // si les mdp sont différents, on renvoie sur la page de changement
-        $erreur = 'Les mots de passe ne correspondent pas';
-        header('../../View/Password/ResetPassword.php?error_message=$erreur');
-    } else { // sinon on fait la modif
-        changePassword($mail, $pass1);
-    }
-}
-*/
+// Si un mdp est rentré, on engage la modification
 if (isset($_POST["pass1"])) {
     if ($pass1 != $pass2) { // si les mdp sont différents, on renvoie sur la page de changement
         $erreur = 'Les mots de passe ne correspondent pas';
@@ -50,17 +29,17 @@ if (isset($_POST["pass1"])) {
     } else { // sinon on fait la modif
         changePassword($mail, $pass1);
     }
-} else {
-    $creation = getCreationToken($mail);
+} else { // Pas de mdp, donc demande en cours
+    $creation = getCreationToken($mail); // Date de création du Token
     print($creation);
-    $interval = strtotime($creation . '5 minutes');
-    $date = date("Y-m-d H:i:s", $interval);
-    $now = date("Y-m-d H:i:s");
+    $interval = strtotime($creation . '5 minutes'); // On crée un intervale de 5 minutes
+    $date = date("Y-m-d H:i:s", $interval); // On crée une date fictive avec l'intervale de 5 minutes en plus
+    $now = date("Y-m-d H:i:s"); // Maintenant
     print('La date avec 5min de + : '.$date);
-    print('test' . $now<$date);
-    if ($now<$date) {
+    print('test' . $now<=$date);
+    if ($now<=$date) { // Si le token est valide (-5 mins), on envoie sur la page de modification
         header('../../View/Password/ResetPassword.php');
-    } else {
+    } else { // Sinon on renvoie sur la demande de modification
         $erreur = 'Délai de 5 minutes dépassé';
         header('../../View/Password/RequestResetPassword.php?error_message=$erreur');
     }

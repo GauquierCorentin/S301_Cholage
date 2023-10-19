@@ -11,6 +11,7 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 
+// Récupération du token lié au mail donné
 function getCreationToken($mail) {
     global $pdo;
     $date = $pdo->prepare('select creation from token where email = ?');
@@ -19,6 +20,7 @@ function getCreationToken($mail) {
     return $getDate[0];
 }
 
+// Modification du mot de passe lié au mail donné
 function changePassword($mail, $pass) {
     global $pdo;
     $change = $pdo->prepare('update users set password = ? where email = ?');
