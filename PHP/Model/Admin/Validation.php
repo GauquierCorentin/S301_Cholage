@@ -11,6 +11,11 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 //Requetes pour récupérer tout les users
+/**
+ * On récupère tout les users de la bdd
+ * @author WILLIAME Anthony
+ * @return array
+ */
 function getusers()
 {
     global $pdo;
@@ -19,7 +24,11 @@ function getusers()
     $users = $requete->fetchAll(PDO::FETCH_ASSOC);
     return $users;
 }
-//On regarde la date de validation de chaque user
+
+/**
+ * On récupère les utilisateur et on leurs attribut une date de validation qui dure un an
+ * @author WILLIAME Anthony
+ */
 function setDateValidation()
 {
     global $pdo;
@@ -36,16 +45,27 @@ function setDateValidation()
     }
 }
 //Request pour récupérer les users non validé
+/**
+ * On récupère tout les users non validé de la bdd et on les
+ * stock dans une variable de session pour les afficher dans la vue Validation.php
+ * @author WILLIAME Anthony
+ */
 function getUsersNonValidate()
 {
     global $pdo;
-    $requete = $pdo->prepare('SELECT * FROM users WHERE isvalidate = false or datevalidation = null order by email');
+    $requete=$pdo->prepare('SELECT * FROM users WHERE isvalidate= false or datevalidation = null order by email');
     $requete->execute();
     $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
     $_SESSION["usersNonValidate"]=$usersNonValidate;
 }
 //On modifie la valeur de isValidate à true
 
+/**
+ * On update la valeur de isValidate à true et on attribut la date du jour à la date de validation
+ * @author WILLIAME Anthony, GALOUIN Matisse
+ * @param $email
+ *
+ */
 function setValidation($email)
 {
     global $pdo;

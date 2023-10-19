@@ -8,7 +8,12 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 
-//On vérifie que l'email existe dans la base de données
+/**
+ * On vérifie que l'email existe dans la bdd
+ * @author WILLIAME Anthony
+ * @param $email
+ * @return array
+ */
 function checkEmail($email)
 {
     global $pdo;
@@ -18,6 +23,12 @@ function checkEmail($email)
     return $user;
 }
 
+/**
+ * On insère le token dans la bdd avec la date de création et l'email de l'utilisateur
+ * @author  WILLIAME Anthony
+ * @param $token
+ * @param $email
+ */
 function insertToken($token,$email)
 {
     global $pdo;
@@ -27,6 +38,12 @@ function insertToken($token,$email)
 
 }
 
+/**
+ * On update le token et la date dans la bdd avec l'email de l'utilisateur
+ * @author WILLIAME Anthony
+ * @param $token
+ * @param $email
+ */
 function UpdateToken($token,$email){
     global $pdo;
     $date = date("Y-m-d H:i:s");
@@ -34,6 +51,11 @@ function UpdateToken($token,$email){
     $update->execute(array($token,$date,$email));
 }
 
+/**
+ * On récupère le token dans la bdd avec l'email de l'utilisateur
+ * @param $email
+ * @return array
+ */
 function getToken($email){
     global $pdo;
     $getToken = $pdo->prepare('SELECT * FROM token WHERE email = ?');
