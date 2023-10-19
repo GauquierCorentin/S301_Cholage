@@ -24,7 +24,6 @@ function insertToken($token,$email)
     $date = date("Y-m-d H:i:s");
     $insertToken = $pdo->prepare('INSERT INTO token (token, creation, email) VALUES (?, ?, ?)');
     $insertToken->execute(array($token, $date,$email ));
-
 }
 
 function UpdateToken($token,$email){
