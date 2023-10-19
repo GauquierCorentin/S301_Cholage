@@ -53,12 +53,13 @@ if (isset($_POST["pass1"])) {
 } else {
     $creation = getCreationToken($mail);
     print($creation);
+    $interval = strtotime($creation . '5 minutes');
+    $date = date("Y-m-d H:i:s", $interval);
     $now = date("Y-m-d H:i:s");
-    $date = date("Y-m-d H:i:s");
     print('La date avec 5min de + : '.$date);
+    print('test' . $now<$date);
     if ($now<$date) {
         header('../../View/Password/ResetPassword.php');
-
     } else {
         $erreur = 'Délai de 5 minutes dépassé';
         header('../../View/Password/RequestResetPassword.php?error_message=$erreur');
