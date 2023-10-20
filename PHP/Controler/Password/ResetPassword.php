@@ -31,13 +31,14 @@ echo 'email : ' . $mail;
             $pass1 = $_POST["pass1"];
             $pass2 = $_POST["pass2"];
             if ($pass1 != $pass2) { // si les mdp sont différents, on renvoie sur la page de changement
-                header('Location : ../../View/Password/ResetPassword.php');
+                header('Location: ../../View/Password/ResetPassword.php');
             } else { // sinon on fait la modif
                 changePassword($mail, $pass1);
-                header('Location : ../../View/Accueil/Accueil.php');
+                echo('Mot de passe modifié');
+                header('Location: ../../View/Accueil/Accueil.php');
             }
         }
     } else { // Sinon on renvoie sur la demande de modification
-        header('Location :../../View/Password/RequestResetPassword.php');
+        header('Location: ../../View/Password/RequestResetPassword.php');
     }
 
