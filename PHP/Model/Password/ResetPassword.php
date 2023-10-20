@@ -16,14 +16,14 @@ function getCreationToken($mail) {
     global $pdo;
     $date = $pdo->prepare('select creation from token where email = ?');
     $date->execute(array($mail));
-    $getDate=$date->fetch();
-    return $getDate[0];
+    $getDate=$date->fetchAll();
+    return $getDate[0]['creation'];
 }
 
 // Modification du mot de passe lié au mail donné
 function changePassword($mail, $pass) {
     global $pdo;
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
     $change = $pdo->prepare('update users set password = ? where email = ?');
     $change->execute(array($pass, $mail));
-
 }

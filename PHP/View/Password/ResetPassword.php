@@ -18,10 +18,10 @@
     </div>
     <div class="content">
         <h2>Réinitialisation de mot de passe</h2><br>
-        <form action="../../Controler/Password/ResetPassword.php" method="post">
+        <form method="post">
             <input type="password" name="pass1" placeholder="Nouveau Mot de Passe" required><br><br>
             <input type="password" name="pass2" placeholder="Confirmer Mot de Passe" required><br><br>
-            <input type="submit" value="Envoyer">
+            <input type="submit" name="submit" value="Envoyer">
         </form>
 
     </div>
