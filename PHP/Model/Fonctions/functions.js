@@ -4,7 +4,6 @@ function changer(id){
     }
     else{
         document.getElementById(id).setAttribute("type","password");
-
     }
 }
 

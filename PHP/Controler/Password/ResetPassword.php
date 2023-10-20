@@ -18,27 +18,24 @@ try {
 
 $mail = $_GET["email"];
 $_SESSION["mail"] = $mail;
-echo 'email : ' . $mail;
 
-    $creation = getCreationToken($mail); // Date de création du Token
-    print($creation);
-    $interval = strtotime($creation . '5 minutes'); // On crée un intervale de 5 minutes
-    $date = date("Y-m-d H:i:s", $interval); // On crée une date fictive avec l'intervale de 5 minutes en plus
-    $now = date("Y-m-d H:i:s"); // Maintenant
-    if ($now<=$date) { // Si le token est valide (-5 mins), on envoie sur la page de modification
-        print('On est dans le if de la date');
-        if (isset($_POST["submit"])) {
-            $pass1 = $_POST["pass1"];
-            $pass2 = $_POST["pass2"];
-            if ($pass1 != $pass2) { // si les mdp sont différents, on renvoie sur la page de changement
-                header('Location: ../../View/Password/ResetPassword.php');
-            } else { // sinon on fait la modif
-                changePassword($mail, $pass1);
-                echo('Mot de passe modifié');
-                header('Location: ../../View/Accueil/Accueil.php');
-            }
+$creation = getCreationToken($mail); // Date de création du Token
+$expiration = clone $creation; // Copie de $creation
+$interval = date_interval_create_from_date_string("00:05:00"); // On crée un intervale de 5 minutes
+$expiration->add($interval); // Date de création +5 minutes = date d'expiration
+$now = date("Y-m-d H:i:s"); // Maintenant
+if ($now <= $expiration) { // Si le token est valide (-5 mins), on envoie sur la page de modification
+    if (isset($_POST["submit"])) {
+        $pass1 = $_POST["pass1"];
+        $pass2 = $_POST["pass2"];
+        if ($pass1 != $pass2) { // si les mdp sont différents, on renvoie sur la page de changement
+            $erreur = "Mots de Passe difféents";
+            header('Location: ../../View/Password/ResetPassword.php');
+        } else { // sinon on fait la modif
+            changePassword($mail, $pass1);
+            header('Location: ../../View/Accueil/Accueil.php');
         }
-    } else { // Sinon on renvoie sur la demande de modification
-        header('Location: ../../View/Password/RequestResetPassword.php');
     }
-
+} else { // Sinon on renvoie sur la demande de modification
+    header('Location: ../../View/Password/RequestResetPassword.php');
+}
