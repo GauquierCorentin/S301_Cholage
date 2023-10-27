@@ -66,7 +66,7 @@ try {
     //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
     $mailer->Body='Bonjour, cliquez sur ce lien pour 
     réinitialiser votre mot de passe :
-    http://localhost:63342/S301_Cholage/PHP/Controler/Password/ResetPassword.php?email='.$email.'&token='.$token.'';
+    http://localhost:63342/S301_Cholage/PHP/Controler/Password/ResetPassword.php?email='.$email.'&token='.$token;
     $mailer->addAddress($email);
     $mailer->send();
     echo 'Message has been sent';

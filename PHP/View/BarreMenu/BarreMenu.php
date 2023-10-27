@@ -43,7 +43,7 @@ session_start();
                     }
                 if($_SESSION['isadmin'] == true){
                     echo('<li class="nav-item">
-                        <a class="nav-link" href="../../Controler/Admin/AjoutOrganisateur.php">Gestion Organisateur</a>
+                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Gestion Organisateur</a>
                         </li>');
                 }
                 ?>
@@ -56,6 +56,23 @@ session_start();
         </div>
     </div>
 </nav>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Que voulez-vous faire ?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <a href="../../Controler/Admin/AjoutOrganisateur.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ajouter un organisateur</button></a>
+                <a href="../../Controler/Admin/SupprOrganisateur.php"><button type="button" class="btn btn-primary">Supprimer un organisateur</button></a>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>function alert(){
+    window.alert("sima")
+    }</script>
 </body>
 </html>
