@@ -21,7 +21,7 @@ $_SESSION["mail"] = $mail;
 $creation = getCreationToken($mail); // Date de création du Token
 $convertcreation=date_create($creation);
 $expiration = $convertcreation; // Copie de $creation
-$interval = date_interval_create_from_date_string("00:05:00"); // On crée un intervale de 5 minutes
+$interval = date_interval_create_from_date_string("300 seconds"); // On crée un intervale de 5 minutes
 $expiration->add($interval); // Date de création +5 minutes = date d'expiration
 $now = date("Y-m-d H:i:s"); // Maintenant
 
