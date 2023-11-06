@@ -15,15 +15,16 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 
-
 $mail = $_GET["email"];
 $_SESSION["mail"] = $mail;
 
 $creation = getCreationToken($mail); // Date de création du Token
-$expiration = clone $creation; // Copie de $creation
+$convertcreation=date_create($creation);
+$expiration = $convertcreation; // Copie de $creation
 $interval = date_interval_create_from_date_string("00:05:00"); // On crée un intervale de 5 minutes
 $expiration->add($interval); // Date de création +5 minutes = date d'expiration
 $now = date("Y-m-d H:i:s"); // Maintenant
+
 if ($now <= $expiration) { // Si le token est valide (-5 mins), on envoie sur la page de modification
     if (isset($_POST["submit"])) {
         $pass1 = $_POST["pass1"];
@@ -33,9 +34,9 @@ if ($now <= $expiration) { // Si le token est valide (-5 mins), on envoie sur la
             header('Location: ../../View/Password/ResetPassword.php');
         } else { // sinon on fait la modif
             changePassword($mail, $pass1);
-            header('Location: ../../View/Accueil/Accueil.php');
+            header('Location: ../../Controler/Accueil/Accueil.php');
         }
     }
 } else { // Sinon on renvoie sur la demande de modification
-    header('Location: ../../View/Password/RequestResetPassword.php');
+    header('Location: ../../Controler/Password/RequestResetPassword.php');
 }
