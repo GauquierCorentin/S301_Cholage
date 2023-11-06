@@ -39,4 +39,7 @@ function changePassword($mail, $pass)
     $pass = password_hash($pass, PASSWORD_DEFAULT);
     $change = $pdo->prepare('update users set password = ? where email = ?');
     $change->execute(array($pass, $mail));
+
+    $delToken = $pdo->prepare('delete from token where email = ?');
+    $delToken->execute(array($mail));
 }

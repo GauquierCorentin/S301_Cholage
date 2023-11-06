@@ -52,6 +52,7 @@ function UpdateToken($token,$email){
 
 /**
  * On récupère le token dans la bdd avec l'email de l'utilisateur
+ * @author WILLIAME Anthony
  * @param $email
  * @return array
  */

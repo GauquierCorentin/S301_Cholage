@@ -62,7 +62,7 @@ function getUsersNonValidate()
 
 /**
  * On update la valeur de isValidate à true et on attribut la date du jour à la date de validation
- * @author WILLIAME Anthony, GALOUIN Matisse
+ * @author WILLIAME Anthony, GALLOUIN Matisse
  * @param $email
  *
  */
