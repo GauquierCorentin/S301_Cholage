@@ -3,6 +3,13 @@ require_once '../../Model/BDD/ConnexionBDD.php';
 //On récupère les données de la table User
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+//Require pour utiliser pph mailer
+require("../../Model/Includes/PHPMailer/src/Exception.php");
+require("../../Model/Includes/PHPMailer/src/PHPMailer.php");
+require ("../../Model/Includes/PHPMailer/src/SMTP.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 try {
     $conn = ConnexionBDD::getInstance();
@@ -75,7 +82,32 @@ function setValidation($email)
     $date = date("Y-m-d");
     $req = $pdo->prepare('UPDATE users SET datevalidation=? WHERE email = ?');
     $req->execute(array($date, $email));
-    header('Location: ../../Controler/Admin/Validation.php');
-    exit();
+
+    //Envoie d'un mail afin de prévenir de la validation de la cotisation
+    $mailer = new PHPMailer(true);
+    try {
+
+        //Server settings
+        $mailer->SMTPDebug = 0;
+        $mailer->isSMTP();
+        $mailer->Host = 'smtp.gmail.com';
+        $mailer->SMTPAuth = true;
+        $mailer->Username = 'cholage.offi@gmail.com';
+        $mailer->Password = 'fufvajtuygojmfro';
+        $mailer->SMTPSecure = 'tls';
+        $mailer->Port = 587;
+        //Recipients
+        $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
+        $mailer->Subject = 'Validation de votre cotisation';
+        //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
+        $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que votre cotisation a bien été prise en compte';
+        $mailer->addAddress($email);
+        $mailer->send();
+        echo 'Message has been sent';
+        header('Location: ../../Controler/Admin/Validation.php');
+        exit();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
+    }
 }
 

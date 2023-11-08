@@ -16,5 +16,5 @@ if ($_SESSION["usersNonValidate"] == null) {
 }
 
 if (isset($_POST["submit"])){
-    setValidation($_POST["test"]);
+    setValidation($_POST["email"]);
 }

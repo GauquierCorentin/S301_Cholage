@@ -32,11 +32,13 @@ ini_set("display_errors", 1);
             echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
             echo '<td>' . $item['nom'] . '</td>';
             echo '<td>' . $item['prenom'] . '</td>';
-            echo '<td><input type="submit" id="submit"  name="submit" value="Valider"></td>';
+            echo '<td><input type="submit" id="submit" onclick="popupUser()" name="submit" value="Valider"></td>';
             echo '</tr>';
             echo "</form>";
         }
       ?></table>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

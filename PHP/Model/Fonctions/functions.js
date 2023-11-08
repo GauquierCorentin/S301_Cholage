@@ -1,3 +1,4 @@
+
 function changer(id){
     if(document.getElementById(id).getAttribute("type")=="password" ){
         document.getElementById(id).setAttribute("type","text");
@@ -22,4 +23,12 @@ function search_Nom() {
             x[i].style.display="table-row";
         }
     }
+}
+
+//Fonction qui sert a envoyé un popUp
+function popupUser(){
+    Swal.fire({
+        icon: 'check',
+        title: 'Validé',
+        text: "Vous avez bien mis à jour l'utilisateur."})
 }

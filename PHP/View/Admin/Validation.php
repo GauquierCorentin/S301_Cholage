@@ -27,10 +27,10 @@ foreach ($usersNonValidate as $item) {
     echo '<form method="post">';
     echo '<tr class="test">';
     echo '<td>' . $item['email'] . '</td>';
-    echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
+    echo '<input type="hidden" name="email" value="' . $item['email'] . '">';
     echo '<td>' . $item['nom'] . '</td>';
     echo '<td>' . $item['prenom'] . '</td>';
-    echo '<td><input type="submit" name="submit" value="Valider"></td>';
+    echo '<td><input type="submit" onclick="popupUser()" name="submit" value="Valider"></td>';
     echo '</tr>';
     echo '</form>';
 }
@@ -40,7 +40,10 @@ echo('</table>');
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="../../Model/Fonctions/functions.js"></script>
 </html>
 
