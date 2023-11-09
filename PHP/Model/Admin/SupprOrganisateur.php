@@ -38,12 +38,12 @@ function UpdateStatut($email){
         $mailer->Port = 587;
         //Recipients
         $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
-        $mailer->Subject = 'Nouvel Organisateur';
+        $mailer->Subject = 'Suppression Organisateur';
         //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
-        $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que vous devenez un Organisateur';
+        $mailer->Body = "Bonjour, nous avons le regret de vous annoncer que vous n'êtes plus un Organisateur ";
         $mailer->addAddress($email);
         $mailer->send();
-        echo 'Message has been sent';
+        echo "Message has been sent";
         header('Location: ../../Controler/Admin/AjoutOrganisateur.php');
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
