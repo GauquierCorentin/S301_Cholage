@@ -71,7 +71,6 @@ function getUsersNonValidate()
  * On update la valeur de isValidate à true et on attribut la date du jour à la date de validation
  * @author WILLIAME Anthony, GALLOUIN Matisse
  * @param $email
- *
  */
 function setValidation($email)
 {
@@ -110,4 +109,3 @@ function setValidation($email)
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }
 }
-
