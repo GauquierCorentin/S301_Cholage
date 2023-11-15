@@ -16,6 +16,9 @@
 </div>
 <form method="post">
     <div>
+        <input type="text" name="nom" placeholder="Nom du questionnaire">
+    </div>
+    <div>
         <input type="text" name="question0" placeholder="question">
         <input type="hidden" name="nbQuestion" id="nbQuestion" value=0>
     </div>
@@ -26,6 +29,10 @@
 
     <input type="button" name="addQ" value="Ajouter Question" onclick="addQuestion(document.getElementById('nbQuestion').value)">
     <input type="button" name="removeQ" value="Supprimer Question" onclick="suppQuestion(document.getElementById('nbQuestion').value)">
+
+    <div>
+        <input type="submit" name="submit" value="Valider">
+    </div>
 </form>
 </body>
 </html>
