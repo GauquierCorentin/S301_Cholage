@@ -8,19 +8,12 @@ require_once ('../../View/Tournoi/AjouterQuestionnaire.php');
 if (isset($_POST['submit'])){
     $nom = $_POST['nom'];
     addQuestionnaire($nom);
-    $idquestionnaire = getQuestionnaire();
-    print($idquestionnaire);
+    $idquestionnaire = getQuestionnaire()[0];
     $nbQuestion = $_POST['nbQuestion'];
-    $ok=true;
-    while($ok){
-        $i=0;
-        if($_POST['question'.$i] == null){
-            $ok=false;
-        }else{
-            $question = $_POST['question'.$i];
-            addQuestion($question,$idquestionnaire);
-            $i++;
-        }
+    for($i=0 ; $i<$nbQuestion; $i++ ) {
+        $question = $_POST['question' . $i];
+        addQuestion($question, $idquestionnaire);
+        $i++;
     }
 
 }

@@ -24,3 +24,9 @@ function addQuestion($question,$idquestionnaire){
     $req = $pdo->prepare('INSERT INTO question VALUES (default,?,?)');
     $req->execute(array($question,$idquestionnaire));
 }
+
+function addReponse($reponse){
+    global $pdo;
+    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?)');
+    $req->execute(array($reponse));
+}
