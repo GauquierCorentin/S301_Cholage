@@ -17,60 +17,25 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
-//Requetes pour récupérer tout les users
-/**
- * On récupère tout les users de la bdd
- * @author WILLIAME Anthony
- * @return array
- */
-function getusers()
-{
-    global $pdo;
-    $requete = $pdo->prepare('SELECT * FROM users order by email');
-    $requete->execute();
-    $users = $requete->fetchAll(PDO::FETCH_ASSOC);
-    return $users;
-}
 
 /**
- * On récupère les utilisateur et on leurs attribut une date de validation qui dure un an
+ * On récupère tout les users caché de la bdd
  * @author WILLIAME Anthony
+ * @return void
  */
-function setDateValidation()
-{
+function getUsersHidden(){
     global $pdo;
-    $users=getusers();
-    foreach ($users as $item) {
-        $date = $item['datevalidation'];
-        $datephp = date("Y-m-d");
-        $dateValidUnAn = date("Y-m-d", strtotime($date . "+1 year"));
-        //Si la date de validation à un an de moins que la date du jour on update le users
-        if ($dateValidUnAn <= $datephp) {
-            $requete = $pdo->prepare('UPDATE users SET isvalidate = false WHERE email = ?');
-            $requete->execute(array($item['email']));
-        }
-    }
-}
-//Request pour récupérer les users non validé
-/**
- * On récupère tout les users non validé de la bdd et on les
- * stock dans une variable de session pour les afficher dans la vue Validation.php
- * @author WILLIAME Anthony
- */
-function getUsersNonValidate()
-{
-    global $pdo;
-    $requete=$pdo->prepare('SELECT * FROM users WHERE isvalidate= false or datevalidation = null order by email');
+    $requete=$pdo->prepare('SELECT * FROM users WHERE hidden= true order by email');
     $requete->execute();
-    $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
-    $_SESSION["usersNonValidate"]=$usersNonValidate;
+    $usersHidden = $requete->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION["usersHidden"]=$usersHidden;
 }
-//On modifie la valeur de isValidate à true
 
 /**
  * On update la valeur de isValidate à true et on attribut la date du jour à la date de validation
  * @author WILLIAME Anthony, GALLOUIN Matisse
  * @param $email
+ *
  */
 function setValidation($email)
 {
@@ -103,9 +68,21 @@ function setValidation($email)
         $mailer->addAddress($email);
         $mailer->send();
         echo 'Message has been sent';
-        header('Location: ../../Controler/Admin/Validation.php');
+        header('Location: ../../Controler/Admin/ShowHiddenValidation.php');
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }
+}
+
+/**
+ * Fonction qui update la variable hidden a false
+ * @author WILLIAME Anthony
+ * @param $email
+ * @return void
+ */
+function updateHidden($email){
+    global $pdo;
+    $requete = $pdo->prepare('UPDATE users SET hidden = false WHERE email = ?');
+    $requete->execute(array($email));
 }

@@ -38,7 +38,7 @@ session_start();
                 <?php
                     if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
                         echo('<li class="nav-item">
-                        <a class="nav-link" href="../../Controler/Admin/Validation.php">Validation</a>
+                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Validation">Validation</a>
                         </li>');
                     }
                 if($_SESSION['isadmin'] == true){
@@ -66,6 +66,21 @@ session_start();
             <div class="modal-footer">
                 <a href="../../Controler/Admin/AjoutOrganisateur.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ajouter un organisateur</button></a>
                 <a href="../../Controler/Admin/SupprOrganisateur.php"><button type="button" class="btn btn-primary">Supprimer un organisateur</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Div afin d'afficher deux bouton distinc pour la gestion de la validation -->
+<div class="modal fade" id="Validation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Que voulez-vous faire ?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <a href="../../Controler/Admin/ManageValidation.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir tous les Utilisateurs</button></a>
+                <a href="../../Controler/Admin/ShowHiddenValidation.php"><button type="button" class="btn btn-primary">Voir les utilisateurs caché</button></a>
             </div>
         </div>
     </div>

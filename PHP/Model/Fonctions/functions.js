@@ -32,3 +32,17 @@ function popupUser(){
         title: 'Validé',
         text: "Vous avez bien mis à jour l'utilisateur."})
 }
+
+//Fonction afin d'ajouter une question dans une div
+var i = 0;
+function addQuestion(){
+    var doc = document.getElementById('newQ');
+    const input = document.createElement('input');
+    input.type="text";
+    input.placeholder="Question...";
+    input.name="question" +i.toString();
+    input.classList.add('input_question');
+    doc.appendChild(input);
+    i = i + 1;
+    return i;
+}
