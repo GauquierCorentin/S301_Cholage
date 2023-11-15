@@ -35,7 +35,8 @@ function popupUser(){
 
 //Fonction afin d'ajouter une question dans une div
 var i = 0;
-function addQuestion(){
+function addQuestion(i){
+    console.log(i);
     var doc = document.getElementById('newQ');
     const input = document.createElement('input');
     input.type="text";
@@ -43,6 +44,15 @@ function addQuestion(){
     input.name="question" +i.toString();
     input.classList.add('input_question');
     doc.appendChild(input);
-    i = i + 1;
+    i = parseInt(i) + 1;
+    document.getElementById('nbQuestion').value=i;
+    return i;
+}
+
+function suppQuestion(i){
+    var doc = document.getElementById('newQ');
+    doc.removeChild(doc.lastChild);
+    i = parseInt(i) - 1;
+    document.getElementById('nbQuestion').value=i;
     return i;
 }
