@@ -53,19 +53,18 @@ function setDateValidation()
 }
 //Request pour récupérer les users non validé
 /**
- * On récupère tout les users non validé de la bdd et on les
- * stock dans une variable de session pour les afficher dans la vue Validation.php
+ * On récupère tout les users non validé de la bdd ainsi que les non caché
+ * stock dans une variable de session pour les afficher dans la vue ManageValidation.php
  * @author WILLIAME Anthony
  */
-function getUsersNonValidate()
+function getUsersNonValidateHidden()
 {
     global $pdo;
-    $requete=$pdo->prepare('SELECT * FROM users WHERE isvalidate= false or datevalidation = null order by email');
+    $requete=$pdo->prepare('SELECT * FROM users WHERE (isvalidate= false or datevalidation = null) and hidden=false order by email');
     $requete->execute();
     $usersNonValidate = $requete->fetchAll(PDO::FETCH_ASSOC);
     $_SESSION["usersNonValidate"]=$usersNonValidate;
 }
-//On modifie la valeur de isValidate à true
 
 /**
  * On update la valeur de isValidate à true et on attribut la date du jour à la date de validation
@@ -104,10 +103,48 @@ function setValidation($email)
         $mailer->addAddress($email);
         $mailer->send();
         echo 'Message has been sent';
-        header('Location: ../../Controler/Admin/Validation.php');
+        header('Location: ../../Controler/Admin/ManageValidation.php');
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }
 }
 
+/**
+ * On passe la variable hidden de l'utilsiateur à true pour le cacher de la liste des utilisateurs non validé
+ * @author WILLIAME Anthony
+ * @param $email
+ * @return void
+ */
+function setRefus($email)
+{
+    global $pdo;
+    $requete = $pdo->prepare('UPDATE users set hidden=true where email = ?');
+    $requete->execute(array($email));
+
+    //Envoie d'un mail afin de prévenir de la validation de la cotisation
+    $mailer = new PHPMailer(true);
+    try {
+        //Server settings
+        $mailer->SMTPDebug = 0;
+        $mailer->isSMTP();
+        $mailer->Host = 'smtp.gmail.com';
+        $mailer->SMTPAuth = true;
+        $mailer->Username = 'cholage.offi@gmail.com';
+        $mailer->Password = 'fufvajtuygojmfro';
+        $mailer->SMTPSecure = 'tls';
+        $mailer->Port = 587;
+        //Recipients
+        $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
+        $mailer->Subject = 'Validation de votre cotisation';
+        //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
+        $mailer->Body = 'Bonjour, nous avons le regret de vous annoncer que votre cotisation n\'a pas été prise en compte';
+        $mailer->addAddress($email);
+        $mailer->send();
+        echo 'Message has been sent';
+        header('Location: ../../Controler/Admin/ManageValidation.php');
+        exit();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
+        }
+}
