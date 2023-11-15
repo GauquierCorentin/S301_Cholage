@@ -29,7 +29,7 @@
 
     <input type="button" name="addQ" value="Ajouter Question" onclick="addQuestion(document.getElementById('nbQuestion').value)">
     <input type="button" name="removeQ" value="Supprimer Question" onclick="suppQuestion(document.getElementById('nbQuestion').value)">
-
+    <input type="button" name="addRep" value="Ajouter réponse" onclick="addReponse(document.getElementById('nbQuestion').value)">
     <div>
         <input type="submit" name="submit" value="Valider">
     </div>
