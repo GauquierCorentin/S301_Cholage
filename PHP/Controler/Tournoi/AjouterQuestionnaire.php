@@ -14,14 +14,15 @@ if (isset($_POST['submit'])){
     $nbQuestion = (int) $nbQuestion;
     print($nbQuestion);
     for($i=0 ; $i<=$nbQuestion; $i++ ) {
+        echo('i : '.$i);
         $question = $_POST['question' . $i];
         $idquestion=addQuestion($question, $idquestionnaire);
-        echo(gettype($idquestion));
-        for ($j=0; $j<$_POST['nbReponseQ'.$i]; $j++){
-            $reponse = $_POST[$i.'reponse'.$j];
+        for ($j=1; $j<=$_POST['nbReponseQ'.$i]; $j++){
+            echo('I au début du j : '.$i.'\n');
+            $reponse = $_POST["Q".$i.'reponse'.$j];
             addReponse($reponse,$idquestion);
         }
     }
-    header('Location: ../../Controler/Tournoi/AjouterQuestionnaire.php');
-    exit();
+    //header('Location: ../../Controler/Tournoi/AjouterQuestionnaire.php');
+    //exit();
 }

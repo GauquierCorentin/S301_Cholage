@@ -19,7 +19,6 @@
         <input type="text" name="nom" placeholder="Nom du questionnaire">
     </div>
     <div>
-        <input type="text" name="question0" placeholder="question">
         <input type="hidden" name="nbQuestion" id="nbQuestion" value=0>
         <input type="hidden" name="nbReponseQ" id="nbReponseQ0" value=0>
     </div>
