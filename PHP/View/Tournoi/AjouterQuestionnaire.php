@@ -21,6 +21,7 @@
     <div>
         <input type="text" name="question0" placeholder="question">
         <input type="hidden" name="nbQuestion" id="nbQuestion" value=0>
+        <input type="hidden" name="nbReponseQ" id="nbReponseQ0" value=0>
     </div>
 
     <div id="newQ">
@@ -29,7 +30,7 @@
 
     <input type="button" name="addQ" value="Ajouter Question" onclick="addQuestion(document.getElementById('nbQuestion').value)">
     <input type="button" name="removeQ" value="Supprimer Question" onclick="suppQuestion(document.getElementById('nbQuestion').value)">
-    <input type="button" name="addRep" value="Ajouter réponse" onclick="addReponse(document.getElementById('nbQuestion').value)">
+    <input type="button" name="addRep" value="Ajouter réponse" onclick="addReponse(document.getElementById('nbQuestion').value,document.getElementById('nbReponseQ'+document.getElementById('nbQuestion').value).value)">
     <div>
         <input type="submit" name="submit" value="Valider">
     </div>

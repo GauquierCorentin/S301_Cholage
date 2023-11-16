@@ -40,6 +40,10 @@ session_start();
                         echo('<li class="nav-item">
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Validation">Validation</a>
                         </li>');
+                        echo('<li class="nav-item" >
+
+                        <a class="nav-link" href="../../Controler/Tournoi/AjouterQuestionnaire.php">Créer un questionnaire</a>
+                        </li>');
                     }
                 if($_SESSION['isadmin'] == true){
                     echo('<li class="nav-item">

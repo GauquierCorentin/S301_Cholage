@@ -23,10 +23,15 @@ function addQuestion($question,$idquestionnaire){
     global $pdo;
     $req = $pdo->prepare('INSERT INTO question VALUES (default,?,?)');
     $req->execute(array($question,$idquestionnaire));
+
+    $idquestion = $pdo->prepare('SELECT idquestion FROM question order by idquestion desc');
+    $idquestion->execute();
+    $idquestions = $idquestion->fetch();
+    return $idquestions[0];
 }
 
-function addReponse($reponse){
+function addReponse($reponse,$idquestion){
     global $pdo;
-    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?)');
-    $req->execute(array($reponse));
+    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,default,?)');
+    $req->execute(array($reponse,$idquestion));
 }

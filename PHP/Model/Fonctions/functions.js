@@ -44,15 +44,31 @@ function addQuestion(i){
     input.placeholder="Question...";
     input.name="question" +i.toString();
     input.classList.add('input_question');
+    const inputhidden = document.createElement('input');
+    inputhidden.type="hidden";
+    inputhidden.name="nbReponseQ"+i.toString();
+    inputhidden.id="nbReponseQ"+i.toString();
+    inputhidden.value="0";
     doc.appendChild(input);
+    doc.appendChild(inputhidden);
     document.getElementById('nbQuestion').value=i;
     return i;
 }
 
 
 function suppQuestion(i){
+    //on supprime la question i
     var doc = document.getElementById('newQ');
-    doc.removeChild(doc.lastChild);
+    var input = document.getElementsByName("question"+i.toString())[0];
+    var inputhidden = document.getElementById("nbReponseQ"+i.toString());
+    doc.removeChild(input);
+    // on supprime les reponses de la question i
+    var nbReponse = inputhidden.value;
+    for(var j=1;j<=nbReponse;j++){
+        var input = document.getElementsByName("Q"+i.toString()+"reponse"+j.toString())[0];
+        doc.removeChild(input);
+    }
+    doc.removeChild(inputhidden);
     if(i>0){
         i = parseInt(i) - 1;
     }
@@ -61,15 +77,15 @@ function suppQuestion(i){
 }
 
 var j=0;
-function addReponse(i){
-    console.log(i);
+function addReponse(i,j){
+    console.log(j);
+    j++;
     var doc = document.getElementById('newQ');
     const input = document.createElement('input');
     input.type="text";
     input.placeholder="Réponse...";
-    input.name= +i.toString()+"reponse"+j.toString();
+    input.name= "Q"+i.toString()+"reponse"+j.toString();
     input.classList.add('input_reponse');
     doc.appendChild(input);
-    j++;
-    document.getElementById('nbReponse').value=i;
+    document.getElementById('nbReponseQ'+i.toString()).value=j;
 }
