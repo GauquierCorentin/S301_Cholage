@@ -1,4 +1,3 @@
-
 function changer(id){
     if(document.getElementById(id).getAttribute("type")=="password" ){
         document.getElementById(id).setAttribute("type","text");
@@ -35,24 +34,29 @@ function popupUser(){
 
 //Fonction afin d'ajouter une question dans une div
 var i = 0;
-function addQuestion(i){
+function addQuestion() {
     i = parseInt(i) + 1;
     console.log(i);
     var doc = document.getElementById('newQ');
+    const questionContainer = document.createElement('div');
+    questionContainer.classList.add('question-container');
     const input = document.createElement('input');
-    input.type="text";
-    input.placeholder="Question...";
-    input.name="question" +i.toString();
+    input.type = "text";
+    input.placeholder = "Question...";
+    input.name = "question" + i.toString();
     input.classList.add('input_question');
+    const responseCountContainer = document.createElement('div');
+    responseCountContainer.classList.add('response-count-container');
     const inputhidden = document.createElement('input');
-    inputhidden.type="hidden";
-    inputhidden.name="nbReponseQ"+i.toString();
-    inputhidden.id="nbReponseQ"+i.toString();
-    inputhidden.value="0";
-    doc.appendChild(input);
-    doc.appendChild(inputhidden);
-    document.getElementById('nbQuestion').value=i;
-    return i;
+    inputhidden.type = "hidden";
+    inputhidden.name = "nbReponseQ" + i.toString();
+    inputhidden.id = "nbReponseQ" + i.toString();
+    inputhidden.value = "0";
+    questionContainer.appendChild(input);
+    questionContainer.appendChild(responseCountContainer);
+    questionContainer.appendChild(inputhidden);
+    doc.appendChild(questionContainer);
+    document.getElementById('nbQuestion').value = i;
 }
 
 
@@ -77,15 +81,16 @@ function suppQuestion(i){
 }
 
 var j=0;
-function addReponse(i,j){
-    console.log(j);
+function addReponse(i) {
     j++;
     var doc = document.getElementById('newQ');
+    var responseCountContainer = document.getElementsByClassName('response-count-container')[i - 1];
     const input = document.createElement('input');
-    input.type="text";
-    input.placeholder="Réponse...";
-    input.name= "Q"+i.toString()+"reponse"+j.toString();
+    input.type = "text";
+    input.placeholder = "Réponse...";
+    input.name = "Q" + i.toString() + "reponse" + j.toString();
     input.classList.add('input_reponse');
     doc.appendChild(input);
-    document.getElementById('nbReponseQ'+i.toString()).value=j;
+    var nbReponseInput = responseCountContainer.lastElementChild;
+    nbReponseInput.value = j;
 }
