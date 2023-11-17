@@ -6,6 +6,7 @@ require_once '../../View/BarreMenu/BarreMenu.php';
 require_once ('../../Model/Tournoi/AjouterQuestionnaire.php');
 require_once ('../../View/Tournoi/AjouterQuestionnaire.php');
 
+$email = getUsersValidate();
 if (isset($_POST['submit'])){
     $nom = $_POST['nom'];
     addQuestionnaire($nom);
@@ -21,6 +22,11 @@ if (isset($_POST['submit'])){
             $reponse = $_POST["Q".$i.'reponse'.$j];
             addReponse($reponse,$idquestion);
         }
+    }
+
+    //On envoie un mail à tous les utilisateurs validés
+    foreach ($email as $mail){
+        sendMailQuestionnaire($mail[0]);
     }
     header('Location: ../../Controler/Tournoi/AjouterQuestionnaire.php');
     exit();
