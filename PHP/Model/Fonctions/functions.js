@@ -55,6 +55,7 @@ function addQuestion() {
     questionContainer.appendChild(input);
     questionContainer.appendChild(responseCountContainer);
     questionContainer.appendChild(inputhidden);
+    input.style.margin = '10px';
     doc.appendChild(questionContainer);
     document.getElementById('nbQuestion').value = i;
 }
@@ -90,6 +91,8 @@ function addReponse(i) {
     input.placeholder = "Réponse...";
     input.name = "Q" + i.toString() + "reponse" + j.toString();
     input.classList.add('input_reponse');
+    input.style.margin = '3px';
+    input.style.marginBottom = '10px';
     doc.appendChild(input);
     var nbReponseInput = responseCountContainer.lastElementChild;
     nbReponseInput.value = j;
