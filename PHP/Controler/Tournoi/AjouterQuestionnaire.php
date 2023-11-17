@@ -6,6 +6,8 @@ require_once '../../View/BarreMenu/BarreMenu.php';
 require_once ('../../Model/Tournoi/AjouterQuestionnaire.php');
 require_once ('../../View/Tournoi/AjouterQuestionnaire.php');
 
+if ($_SESSION['isadmin'] == true || $_SESSION['isorganisateur']==true){
+
 $email = getUsersValidate();
 if (isset($_POST['submit'])){
     $nom = $_POST['nom'];
@@ -29,5 +31,10 @@ if (isset($_POST['submit'])){
         sendMailQuestionnaire($mail[0]);
     }
     header('Location: ../../Controler/Tournoi/AjouterQuestionnaire.php');
+    exit();
+}
+}
+else{
+    header('Location: ../../Controler/Accueil/Accueil.php');
     exit();
 }
