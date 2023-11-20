@@ -17,26 +17,30 @@ $questions = $_SESSION['showQuestions'];
     <?php
     foreach ($questionnaires as $i) { // parcourt tous les questionnaires, notés i
         echo('<div>');
-        echo($i[1] . "<br>");
+        echo("<h1>" . $i[1] . "</h1>" . "<br>");
         foreach ($questions as $q) { // parcourt toutes les questions, notées q
             if ($q[2] == $i[0]) { // vérifie si la question q est associée au questionnaire i
-                echo($q[1] . "<br>");
+                echo("<h2>" . $q[1] . "</h2>" . "<br>");
                 $_SESSION['idquestion'] = $q[0];
                 $reponses = getRep($q[0]); // récupère les réponses liées à la question q
-                $x = 0;
-                foreach ($reponses as $r) { // parcourt toutes les réponses liées à la question q, notées r
-                    echo($r[1]);                                        //
-                    echo("&nbsp;&nbsp;&nbsp;");                         // affiche la question r et une checkbox associée
-                    echo("<input type='checkbox' name='$x'><br>");      //
-                    $x++;
+                if (sizeof($reponses) == 0) {
+                    echo("<input type='text' name='$q[0]'><br>");
+                } else {
+                    $x = 0;
+                    foreach ($reponses as $r) { // parcourt toutes les réponses liées à la question q, notées r
+                        echo($r[1]);                                        //
+                        echo("&nbsp;&nbsp;&nbsp;");                         // affiche la question r et une checkbox associée
+                        echo("<input type='checkbox' name='$x' ><br>");      //
+                        $x++;
+                    }
                 }
             }
         }
+        echo("<input type='submit' name='submit'>");
     }
     echo("<br>");
     echo('</div>');
-
     ?>
-    <input type="submit" name="submit">
+
 </form>
 </body>
