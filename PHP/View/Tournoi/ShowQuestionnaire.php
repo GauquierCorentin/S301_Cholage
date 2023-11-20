@@ -22,10 +22,10 @@ $questions = $_SESSION['showQuestions'];
         foreach ($questions as $q) {
             if ($q[2] == $i[0]) {
                 echo($q[1] . "<br>");
-                $_SESSION['idQuestion'] = $q[0];
-                $reponses = getRep($_SESSION['idQuestion']);
+                $_SESSION['idquestion'] = $q[0];
+                $reponses = getRep($q[0]);
                 foreach ($reponses as $r){
-                    echo($r . "<br>");
+                    echo($r[1] . "<br>");
                 }
             }
         }

@@ -1,9 +1,5 @@
 <?php
-require_once("../../View/BarreMenu/BarreMenu.php");
-require_once("../../Model/Tournoi/ShowQuestionnaire.php");
-require_once("../../View/Tournoi/ShowQuestionnaire.php");
 require_once ('../../Model/BDD/ConnexionBDD.php');
-
 
 try {
     $conn = ConnexionBDD::getInstance();
@@ -28,10 +24,10 @@ function getQuestions(){
     return $rep;
 }
 
-function getRep($idRep){
+function getRep($idquestion){
     global $pdo;
-    $req = $pdo->prepare("select * from reponse where idquestion = ?");
-    $req->execute(array($idRep));
+    $req = $pdo->prepare('select * from reponse where idquestion = ?');
+    $req->execute(array($idquestion));
     $rep = $req->fetchAll();
     return $rep;
 }
