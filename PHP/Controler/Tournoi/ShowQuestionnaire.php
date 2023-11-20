@@ -9,5 +9,11 @@ require_once('../../View/Tournoi/ShowQuestionnaire.php');
 $questionnaires = getQuesitionnaires();
 $questions = getQuestions();
 
+
 $_SESSION['showQuestionnaires'] = $questionnaires;
 $_SESSION['showQuestions'] = $questions;
+
+
+function showReponses($id){
+    return getReponses($id);
+}

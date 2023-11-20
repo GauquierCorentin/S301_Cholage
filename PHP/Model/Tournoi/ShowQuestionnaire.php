@@ -22,9 +22,20 @@ function getQuesitionnaires() {
 
 function getQuestions(){
     global $pdo;
-    $req = $pdo->prepare('select * from question join public.reponse r on question.idquestion = r.idquestion order by idquestionnaire');
+    $req = $pdo->prepare('select * from question order by idquestionnaire');
     $req->execute();
     $rep = $req->fetchAll();
     return $rep;
 }
 
+function getReponses($id){
+    global $pdo;
+    $id = (int) $id;
+    echo($id . gettype($id));
+    $req = $pdo->prepare('select * from reponse where idquestion = (?)');
+    echo(2);
+    $req->execute(array($id));
+    echo(3);
+    $rep = $req->fetchAll();
+    return $rep;
+}
