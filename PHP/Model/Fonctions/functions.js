@@ -34,30 +34,26 @@ function popupUser(){
 
 //Fonction afin d'ajouter une question dans une div
 var i = 0;
-function addQuestion() {
+function addQuestion(i){
     i = parseInt(i) + 1;
     console.log(i);
     var doc = document.getElementById('newQ');
-    const questionContainer = document.createElement('div');
-    questionContainer.classList.add('question-container');
     const input = document.createElement('input');
-    input.type = "text";
-    input.placeholder = "Question...";
-    input.name = "question" + i.toString();
+    input.type="text";
+    input.placeholder="Question...";
+    input.name="question" +i.toString();
+    input.style
     input.classList.add('input_question');
-    const responseCountContainer = document.createElement('div');
-    responseCountContainer.classList.add('response-count-container');
     const inputhidden = document.createElement('input');
-    inputhidden.type = "hidden";
-    inputhidden.name = "nbReponseQ" + i.toString();
-    inputhidden.id = "nbReponseQ" + i.toString();
-    inputhidden.value = "0";
-    questionContainer.appendChild(input);
-    questionContainer.appendChild(responseCountContainer);
-    questionContainer.appendChild(inputhidden);
+    inputhidden.type="hidden";
+    inputhidden.name="nbReponseQ"+i.toString();
+    inputhidden.id="nbReponseQ"+i.toString();
+    inputhidden.value="0";
+    doc.appendChild(input);
+    doc.appendChild(inputhidden);
     input.style.margin = '10px';
-    doc.appendChild(questionContainer);
-    document.getElementById('nbQuestion').value = i;
+    document.getElementById('nbQuestion').value=i;
+    return i;
 }
 
 
@@ -82,18 +78,17 @@ function suppQuestion(i){
 }
 
 var j=0;
-function addReponse(i) {
+function addReponse(i,j){
+    console.log(j);
     j++;
     var doc = document.getElementById('newQ');
-    var responseCountContainer = document.getElementsByClassName('response-count-container')[i - 1];
     const input = document.createElement('input');
-    input.type = "text";
-    input.placeholder = "Réponse...";
-    input.name = "Q" + i.toString() + "reponse" + j.toString();
+    input.type="text";
+    input.placeholder="Réponse...";
+    input.name= "Q"+i.toString()+"reponse"+j.toString();
     input.classList.add('input_reponse');
     input.style.margin = '3px';
     input.style.marginBottom = '10px';
     doc.appendChild(input);
-    var nbReponseInput = responseCountContainer.lastElementChild;
-    nbReponseInput.value = j;
+    document.getElementById('nbReponseQ'+i.toString()).value=j;
 }
