@@ -39,6 +39,8 @@ function addQuestion(i){
     console.log(i);
     var doc = document.getElementById('newQ');
     const input = document.createElement('input');
+    const passerLigne = document.createElement('br');
+    const passerLigne2 = document.createElement('br');
     input.type="text";
     input.placeholder="Question...";
     input.name="question" +i.toString();
@@ -49,9 +51,12 @@ function addQuestion(i){
     inputhidden.name="nbReponseQ"+i.toString();
     inputhidden.id="nbReponseQ"+i.toString();
     inputhidden.value="0";
+    passerLigne.id = "passerLigne"+i.toString();
+    passerLigne2.id = "passerLigne2"+i.toString();
+    doc.appendChild(passerLigne);
     doc.appendChild(input);
     doc.appendChild(inputhidden);
-    input.style.margin = '10px';
+    doc.appendChild(passerLigne2);
     document.getElementById('nbQuestion').value=i;
     return i;
 }
@@ -62,6 +67,8 @@ function suppQuestion(i){
     var doc = document.getElementById('newQ');
     var input = document.getElementsByName("question"+i.toString())[0];
     var inputhidden = document.getElementById("nbReponseQ"+i.toString());
+    var passerLigne =document.getElementById("passerLigne"+i.toString());
+    var passerLigne2 =document.getElementById("passerLigne2"+i.toString());
     doc.removeChild(input);
     // on supprime les reponses de la question i
     var nbReponse = inputhidden.value;
@@ -70,6 +77,8 @@ function suppQuestion(i){
         doc.removeChild(input);
     }
     doc.removeChild(inputhidden);
+    doc.removeChild(passerLigne);
+    doc.removeChild(passerLigne2);
     if(i>0){
         i = parseInt(i) - 1;
     }
@@ -87,8 +96,8 @@ function addReponse(i,j){
     input.placeholder="Réponse...";
     input.name= "Q"+i.toString()+"reponse"+j.toString();
     input.classList.add('input_reponse');
-    input.style.margin = '3px';
-    input.style.marginBottom = '10px';
+    input.style.margin = '5px';
+    input.style.marginBottom = '5px';
     doc.appendChild(input);
     document.getElementById('nbReponseQ'+i.toString()).value=j;
 }
