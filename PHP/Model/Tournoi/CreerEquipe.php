@@ -6,6 +6,13 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
+/**
+ * @author Gallouin Matisse
+ * @param $user string
+ * @param $nom string
+ * @param $idtournoi int
+ * @return void
+ */
 function addEquipe($user,$nom/*,$idtournoi*/){
     global $pdo;
     $req=$pdo->prepare("insert into equipe values (default,?/*,?*/)");
@@ -17,6 +24,12 @@ function addEquipe($user,$nom/*,$idtournoi*/){
     $req->execute(array($idequipe[0],$user));
     
 }
+
+/**
+ * @author Gallouin Matisse
+ * fonction permettant d'aller chercher le dernier id de tournoi
+ * @return int
+ */
 function gettournoi(){
     global $pdo;
     $req=$pdo->prepare("Select idtournoi from tournoi order by idtournoi desc");

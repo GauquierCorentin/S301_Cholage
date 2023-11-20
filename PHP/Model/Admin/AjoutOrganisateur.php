@@ -13,6 +13,11 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
+/**
+ * @author Gallouin Matisse
+ * ajout des users non organisateurs dans une session pour les transmettre à la view
+ * @return void
+ */
 function recupUsersNonOrga()
 {
     global $pdo;
@@ -21,6 +26,13 @@ function recupUsersNonOrga()
     $resultat=$requete->fetchAll(PDO::FETCH_ASSOC);
     $_SESSION['users']=$resultat;
 }
+
+/**
+ * @author Gallouin Matisse, Williame Anthony
+ * fonction changer le statut du user
+ * @param $email string
+ * @return void
+ */
 function UpdateStatut($email){
     global $pdo;
     $requete=$pdo->prepare("Update users set isOrganisateur=true where email=?");

@@ -13,6 +13,11 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
+/**
+ * @author Gallouin Matisse
+ * fonction permettant de récupérer les users organisateurs
+ * @return void
+ */
 function recupUsersOrga()
 {
     global $pdo;
@@ -21,6 +26,13 @@ function recupUsersOrga()
     $resultat=$requete->fetchAll(PDO::FETCH_ASSOC);
     $_SESSION['users']=$resultat;
 }
+
+/**
+ * @author Gallouin Matisse, Williame Anthony
+ * fonction qui met à jour le statut pour enlever le role organisateur
+ * @param $email string
+ * @return void
+ */
 function UpdateStatut($email){
     global $pdo;
     $requete=$pdo->prepare("Update users set isOrganisateur=false where email=?");

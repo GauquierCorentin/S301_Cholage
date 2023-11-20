@@ -47,8 +47,5 @@ if (isset($_POST["CreerEquipe"])){
         });
         </script>
 <?php }
-    else{
-
-    }
 }
 
