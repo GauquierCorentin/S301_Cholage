@@ -16,7 +16,7 @@ if (isset($_POST['submit'])){
     $nbQuestion = $_POST['nbQuestion'];
     $nbQuestion = (int) $nbQuestion;
     print($nbQuestion);
-    for($i=0 ; $i<=$nbQuestion; $i++ ) {
+    for($i=1 ; $i<=$nbQuestion; $i++ ) {
         $question = $_POST['question' . $i];
         $idquestion=addQuestion($question, $idquestionnaire);
         for ($j=1; $j<=$_POST['nbReponseQ'.$i]; $j++){
