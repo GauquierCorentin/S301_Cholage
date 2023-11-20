@@ -17,6 +17,9 @@ class Connexion
 
         if(password_verify($password, $row['password']) and $mail==$row['email']){
             $_SESSION['mail']=$mail;
+            $_SESSION['isValidate']=$row["isvalidate"];
+            $_SESSION['isCaptain']=$row["iscaptain"];
+            $_SESSION['equipe']=$row["equipe_id"];
             $_SESSION['isorganisateur']=$row['isorganisateur'];
             $_SESSION['isadmin']=$row['isadmin'];
             return true;

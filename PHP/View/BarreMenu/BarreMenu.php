@@ -36,6 +36,12 @@ session_start();
                     <a class="nav-link" href="../../View/Accueil/Information.php">Informations</a>
                 </li>
                 <?php
+                ob_start();
+                    if ($_SESSION['isValidate']==true || $_SESSION['isadmin']==true){
+                        echo('<li class="nav-item">
+                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Equipe">équipe</a>
+                        </li>');
+                    }
                     if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
                         echo('<li class="nav-item">
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Validation">Validation</a>
@@ -47,7 +53,7 @@ session_start();
                     }
                 if($_SESSION['isadmin'] == true){
                     echo('<li class="nav-item">
-                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Gestion Organisateur</a>
+                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Organisateur">Gestion Organisateur</a>
                         </li>');
                 }
                 ?>
@@ -60,7 +66,10 @@ session_start();
         </div>
     </div>
 </nav>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+
+<!-- Div afin de permettre le choix dans gestion organisateur -->
+<div class="modal fade" id="Organisateur" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -74,8 +83,27 @@ session_start();
         </div>
     </div>
 </div>
+
+
 <!-- Div afin d'afficher deux bouton distinc pour la gestion de la validation -->
-<div class="modal fade" id="Validation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="Equipe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Que voulez-vous faire ?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button>
+                <a href="../../Controler/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- div permettant les choix entres les différentes pages liées aux équipes -->
+<div class="modal fade" id="Equipe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,6 +117,7 @@ session_start();
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>function alert(){
     window.alert("sima")

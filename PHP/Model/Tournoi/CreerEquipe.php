@@ -13,7 +13,7 @@ function addEquipe($user,$nom/*,$idtournoi*/){
     $req=$pdo->prepare("Select * from equipe where nom=? order by idequipe desc");
     $req->execute(array($nom));
     $idequipe=$req->fetch();
-    $req=$pdo->prepare("update users set equipe_id=? where email=?");
+    $req=$pdo->prepare("update users set equipe_id=?,iscaptain=true where email=?");
     $req->execute(array($idequipe[0],$user));
     
 }

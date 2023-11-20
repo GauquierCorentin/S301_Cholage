@@ -7,17 +7,48 @@ ob_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-if (isset($_POST["CreerEquipe"])){
-    echo"ma bite1";
-    addEquipe($_SESSION["mail"],$_POST["NameEquipe"]/*,gettournoi()[0]*/);
-    echo"ma bite";?>
+if ($_SESSION["isValidate"]!=true){
+    header("Location: ../../View/Accueil/MainPage.php");
+    exit();
+}
+else if ($_SESSION["equipe"]!=null || $_SESSION["isCaptain"] == true ){
+    ?>
     <script>
     Swal.fire({
-                icon: 'success',
-                title: 'Nouvelle Equipe',
-                text: 'Vous avez créez une nouvelle équipe'
-            })
+                    icon: 'error',
+                    title: 'Nouvelle Equipe',
+                    text: 'Vous avez déjà une équipe'
+        }).then((result) => {
+            // Vérifier si le bouton "OK" a été cliqué
+            if (result.value) {
+                // Redirection côté client
+                window.location.href = '../../View/Accueil/MainPage.php';
+            }
+        });
+    </script>
+    <?php
+}
+
+if (isset($_POST["CreerEquipe"])){
+    if ($_POST["NameEquipe"]!=null){
+        addEquipe($_SESSION["mail"],$_POST["NameEquipe"]/*,gettournoi()[0]*/);
+        ?>
+        <script>
+        Swal.fire({
+                    icon: 'success',
+                    title: 'Nouvelle Equipe',
+                    text: 'Vous avez créez une nouvelle équipe'
+        }).then((result) => {
+            // Vérifier si le bouton "OK" a été cliqué
+            if (result.value) {
+                // Redirection côté client
+                window.location.href = '../../View/Accueil/MainPage.php';
+            }
+        });
         </script>
-<?php
+<?php }
+    else{
+
+    }
 }
 
