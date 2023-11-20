@@ -32,9 +32,9 @@ function getReponses($id){
     global $pdo;
     $id = (int) $id;
     echo($id . gettype($id));
-    $req = $pdo->prepare('select * from reponse where idquestion = (?)');
+    $req = $pdo->prepare('select * from reponse where idquestion = ($1)');
     echo(2);
-    $req->execute(array($id));
+    $req->execute($id);
     echo(3);
     $rep = $req->fetchAll();
     return $rep;
