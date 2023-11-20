@@ -14,6 +14,4 @@ $_SESSION['showQuestionnaires'] = $questionnaires;
 $_SESSION['showQuestions'] = $questions;
 
 
-function showReponses($id){
-    $_SESSION['showReponses'] = getReponses($id);
-}
+getRep($_SESSION['idQuestion']);
