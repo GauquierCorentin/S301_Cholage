@@ -2,7 +2,7 @@
 ob_start();
 require_once '../../View/BarreMenu/BarreMenu.php';
 require_once '../../Model/Admin/ManageValidation.php';
-getUsersNonValidateHidden();
+getUsersNonValidate();
 require_once '../../View/Admin/ManageValidation.php';
 
 
