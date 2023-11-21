@@ -10,7 +10,7 @@ $recupMsg= $bdd->query("SELECT * FROM messages order by date desc");
 while($message= $recupMsg->fetch()){
     ?>
     <div class="message">
-        <p>DEBUG : <?=$message['fullname']?> : <?=$message['message']?></p>
+        <p><?=$message['fullname']?> : <?=$message['message']?></p>
     </div>
     <?php
     }

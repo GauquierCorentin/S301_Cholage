@@ -29,5 +29,19 @@ function loadChat(){
     </script>
     <?php
 }
+function deleteOldMessages($pdo) {
+    try {
+        $currentDate = new DateTime();
+        $currentDate->modify('-1 day');
+        $formattedDate = $currentDate->format('Y-m-d H:i:s');
+        $query = "DELETE FROM messages WHERE date < :formattedDate";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':formattedDate', $formattedDate, PDO::PARAM_STR);
+        $statement->execute();
+
+    } catch (PDOException $e) {
+        echo "Erreur PDO : " . $e->getMessage();
+    }
+}
 
 ?>

@@ -7,5 +7,6 @@ $conn= ConnexionBDD::getInstance();
 $pdo= $conn::getpdo();
 
 envoyerMess($pdo);
+deleteOldMessages($pdo);
 loadChat();
 ?>
