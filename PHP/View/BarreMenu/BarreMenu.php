@@ -92,7 +92,7 @@ session_start();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button>
-                <a href="../../Controler/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
+                <a href="../../Controller/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
             </div>
         </div>
     </div>

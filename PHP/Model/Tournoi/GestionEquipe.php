@@ -1,4 +1,5 @@
 <?php
+include ("../../Model/BDD/ConnexionBDD.php");
 try {
     $conn = ConnexionBDD::getInstance();
     $pdo = $conn::getpdo();
@@ -41,4 +42,7 @@ function supprEquipe($idequipe){
     }
     $req=$pdo->prepare("delete * from users where idequipe=? ");
     $req->execute(array($idequipe));
+}
+function inviter($mail,$equipe){
+//todo
 }

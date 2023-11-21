@@ -1,7 +1,6 @@
 <?php
 include("../../View/BarreMenu/BarreMenu.php");
 require_once("../../View/Tournoi/CreationEquipe.html");
-require_once("../../Controller/Tournoi/CreerEquipe.php");
 require_once ("../../Model/Tournoi/CreerEquipe.php");
 ob_start();
 error_reporting(E_ALL);
