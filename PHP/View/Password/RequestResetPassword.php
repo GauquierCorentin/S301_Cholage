@@ -17,7 +17,7 @@
         </div>
         <div class="content">
             <h2>Demande de réinitialisation de mot de passe</h2>
-                <form action="../../Controler/Password/RequestResetPassword.php" method="post">
+                <form action="../../Controller/Password/RequestResetPassword.php" method="post">
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="submit" value="Envoyer">
                 </form>

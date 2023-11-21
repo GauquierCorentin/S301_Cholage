@@ -34,9 +34,9 @@ if ($now <= $expiration) { // Si le token est valide (-5 mins), on envoie sur la
             header('Location: ../../View/Password/ResetPassword.php');
         } else { // sinon on fait la modif
             changePassword($mail, $pass1);
-            header('Location: ../../Controler/Accueil/Accueil.php');
+            header('Location: ../../Controller/Accueil/Accueil.php');
         }
     }
 } else { // Sinon on renvoie sur la demande de modification
-    header('Location: ../../Controler/Password/RequestResetPassword.php');
+    header('Location: ../../Controller/Password/RequestResetPassword.php');
 }

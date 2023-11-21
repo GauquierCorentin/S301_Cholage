@@ -11,7 +11,7 @@ session_start();
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../../Controler/Accueil/MainPage.php">
+        <a class="navbar-brand" href="../../Controller/Accueil/MainPage.php">
             <img src="../../View/Image/logo0.png" width=70 height=70 alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,16 +21,13 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Activités</a>
+                    <a class="nav-link" href="#">Activités/Tournois</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Messagerie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Disabled</a>
+                    <a class="nav-link" href="../../Controller/Chat/chat.php">Chat</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../View/Accueil/Information.php">Informations</a>
@@ -48,7 +45,7 @@ session_start();
                         </li>');
                         echo('<li class="nav-item" >
 
-                        <a class="nav-link" href="../../Controler/Tournoi/AjouterQuestionnaire.php">Créer un questionnaire</a>
+                        <a class="nav-link" href="../../Controller/Tournoi/AjouterQuestionnaire.php">Créer un questionnaire</a>
                         </li>');
                     }
                 if($_SESSION['isadmin'] == true){
@@ -58,7 +55,7 @@ session_start();
                 }
                 ?>
                 <li class="nav-item disconnect">
-                    <a class="logo nav-link" href="../../Controler/Accueil/Disconnect.php">
+                    <a class="logo nav-link" href="../../Controller/Accueil/Disconnect.php">
                         <img class="rounded float-left img-fluid img-disconnect" src="../../View/Image/logOffIcon.png"/>
                     </a>
                 </li>
@@ -77,8 +74,8 @@ session_start();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
-                <a href="../../Controler/Admin/AjoutOrganisateur.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ajouter un organisateur</button></a>
-                <a href="../../Controler/Admin/SupprOrganisateur.php"><button type="button" class="btn btn-primary">Supprimer un organisateur</button></a>
+                <a href="../../Controller/Admin/AjoutOrganisateur.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ajouter un organisateur</button></a>
+                <a href="../../Controller/Admin/SupprOrganisateur.php"><button type="button" class="btn btn-primary">Supprimer un organisateur</button></a>
             </div>
         </div>
     </div>
@@ -111,8 +108,8 @@ session_start();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
-                <a href="../../Controler/Admin/ManageValidation.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir tous les Utilisateurs</button></a>
-                <a href="../../Controler/Admin/ShowHiddenValidation.php"><button type="button" class="btn btn-primary">Voir les utilisateurs caché</button></a>
+                <a href="../../Controller/Admin/ManageValidation.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir tous les Utilisateurs</button></a>
+                <a href="../../Controller/Admin/ShowHiddenValidation.php"><button type="button" class="btn btn-primary">Voir les utilisateurs caché</button></a>
             </div>
         </div>
     </div>

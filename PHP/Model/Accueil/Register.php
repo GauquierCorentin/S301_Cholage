@@ -11,6 +11,15 @@ use PHPMailer\PHPMailer\Exception;
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+/* Fonction d'inscription au site. Ecris toute les informations nécessaires dans la BDD, comprend également un envoi de
+mail avec PHPMailer*/
+/**
+ * @param $mail
+ * @param $mdp
+ * @param $mdpcheck
+ * @return bool|void
+ * @author Corentin Gauquier
+ */
 function signIn($mail, $mdp, $mdpcheck)
 {
     $session = new Premier();
@@ -80,7 +89,6 @@ function signIn($mail, $mdp, $mdpcheck)
             } catch (PDOException $e) {
                 die($e->getMessage());
             }
-            /*header('Location: Accueil.php');*/
             header('Location: Accueil.php');
             return true;
         }

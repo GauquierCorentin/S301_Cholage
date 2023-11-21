@@ -21,7 +21,7 @@ if(isset($_POST['mail'])){
             Swal.fire({
                 icon: 'error',
                 title: 'Erreur',
-                text: 'Impossible de trouver votre compte.'
+                text: "La combinaison email/mot de passe n'existe pas."
             })
         </script>
         <?php

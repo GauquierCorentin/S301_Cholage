@@ -2,12 +2,14 @@
 
 class Connexion
 {
+    // Fonction servant a se connecter au site après verification des informations de connexion
     /**
      * @param $bdd
      * @param $mail
      * @param $password
-     * @return bool */
-
+     * @return bool
+     * @author Corentin Gauquier
+     */
     function logUser($bdd, $mail, $password) {
         $sql=$bdd->prepare("SELECT * FROM users where email= ?");
         $sql->BindParam(1,$mail);
@@ -22,6 +24,7 @@ class Connexion
             $_SESSION['equipe']=$row["equipe_id"];
             $_SESSION['isorganisateur']=$row['isorganisateur'];
             $_SESSION['isadmin']=$row['isadmin'];
+            $_SESSION['fullname']= $row['nom'] . ' ' . $row['prenom'];
             return true;
         } else {
             return false;

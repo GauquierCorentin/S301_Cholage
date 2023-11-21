@@ -58,7 +58,7 @@ function UpdateStatut($email){
         $mailer->addAddress($email);
         $mailer->send();
         echo 'Message has been sent';
-        header('Location: ../../Controler/Admin/AjoutOrganisateur.php');
+        header('Location: ../../Controller/Admin/AjoutOrganisateur.php');
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";

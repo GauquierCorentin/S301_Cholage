@@ -2,7 +2,8 @@
 
 class Premier
 {
-    /* permet lors des vérifications de l'entrée desdonnées de savoir si la page vien d'être lancée ou si */
+    /* permet lors des vérifications de l'entrée des données de savoir si la page vient d'être lancée ou non
+    sert à éviter de multiple envoie du formulaire (surement plus utile lors du dev)*/
     /**
      * @param $name
      */

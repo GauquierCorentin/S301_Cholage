@@ -30,11 +30,11 @@ if (isset($_POST['submit'])){
     foreach ($email as $mail){
         sendMailQuestionnaire($mail[0]);
     }
-    header('Location: ../../Controler/Tournoi/AjouterQuestionnaire.php');
+    header('Location: ../../Controller/Tournoi/AjouterQuestionnaire.php');
     exit();
 }
 }
 else{
-    header('Location: ../../Controler/Accueil/Accueil.php');
+    header('Location: ../../Controller/Accueil/Accueil.php');
     exit();
 }

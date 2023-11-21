@@ -12,7 +12,7 @@
 <body>
 
 <header>
-    <a class="lien lien-acc" href="../../Controler/Accueil/Accueil.php">
+    <a class="lien lien-acc" href="../../Controller/Accueil/Accueil.php">
         <img src="../../View/Image/returnAcc.png" width="50" height="50">
     </a>
 
