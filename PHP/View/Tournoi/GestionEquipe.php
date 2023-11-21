@@ -17,14 +17,13 @@ echo "<h1>".$_SESSION["NomEquipe"][0]."</h1>";
 <div>
     <form method="post">
         <input type="submit" name="inviter" value="inviter des joueurs">
-        <input type='submit' name='SupprEquipe' value='Dissoudr  l équipe'>
         <?php
-           /* if ($_SESSION["isCaptain"]==true){
+            if ($_SESSION["isCaptain"]==true){
                 echo "<input type='submit' name='SupprEquipe' value='Dissoudre  l équipe'>";
             }
             else{
                 echo "<input type='submit' name='QuitterEquipe' value='Quitter l équipe'>";
-            }*/
+            }
         ?>
 
     </form>
