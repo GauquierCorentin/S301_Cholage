@@ -24,6 +24,12 @@ function addQuestionnaire($nom){
     global $pdo;
     $req = $pdo->prepare('INSERT INTO questionnaire VALUES (default,?)');
     $req->execute(array($nom));
+    $users = getUsersValidate();
+    $q = getQuestionnaire()[0];
+    foreach ($users as $u) {
+        $req = $pdo->prepare('insert into repqestionnaire values (?, ?, false)');
+        $req->execute(array($u[0], $q));
+    }
 }
 
 /**
@@ -66,7 +72,7 @@ function addQuestion($question,$idquestionnaire){
  */
 function addReponse($reponse,$idquestion){
     global $pdo;
-    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,default,?)');
+    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?)');
     $req->execute(array($reponse,$idquestion));
 }
 
