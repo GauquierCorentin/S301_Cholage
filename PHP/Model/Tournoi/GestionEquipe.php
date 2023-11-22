@@ -6,7 +6,9 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
-
+ob_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 function getMembre_Role($idequipe){
     global $pdo;
@@ -34,14 +36,17 @@ function supprUser($iduser){
     $req=$pdo->prepare("Update users set equipe_id=null,iscaptain=false where email=?");
     $req->execute(array($iduser));
 }
-function supprEquipe($idequipe){
+function supprEquipe($idequipe)
+{
     global $pdo;
-    $membreequipe=getMembre_Role($idequipe);
+    error_log("fonction appelé avec succès");
+    $membreequipe = getMembre_Role($idequipe);
     foreach ($membreequipe as $membre) {
         supprUser($membre['email']);
     }
-    $req=$pdo->prepare("delete * from users where idequipe=? ");
+    $req = $pdo->prepare("delete * from equipe where idequipe=? ");
     $req->execute(array($idequipe));
+
 }
 function inviter($mail,$equipe){
 //todo
