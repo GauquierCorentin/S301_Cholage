@@ -55,8 +55,6 @@ function UpdateStatut($email){
         $mailer->Body = "Bonjour, nous avons le regret de vous annoncer que vous n'êtes plus un Organisateur ";
         $mailer->addAddress($email);
         $mailer->send();
-        echo "Message has been sent";
-        header('Location: ../../Controller/Admin/AjoutOrganisateur.php');
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }

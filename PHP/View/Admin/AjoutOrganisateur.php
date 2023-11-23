@@ -10,6 +10,8 @@ ini_set("display_errors", 1);
         rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
         crossorigin="anonymous">
   <link rel="stylesheet" href="../../View/Style/styleCholage.css?v=<?php echo time(); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <title>Validation d'un utilisateur</title>
 </head>
 <body>
@@ -32,13 +34,12 @@ ini_set("display_errors", 1);
             echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
             echo '<td>' . $item['nom'] . '</td>';
             echo '<td>' . $item['prenom'] . '</td>';
-            echo '<td><input type="submit" id="submit" onclick="popupUser()" name="submit" value="Valider"></td>';
+            echo '<td><input type="submit" id="submit" name="submit" value="Valider"></td>';
             echo '</tr>';
             echo "</form>";
         }
       ?></table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

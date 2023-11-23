@@ -33,7 +33,7 @@ function recupUsersNonOrga()
  * @param $email string
  * @return void
  */
-function UpdateStatut($email){
+function UpdateStatutAdd($email){
     global $pdo;
     $requete=$pdo->prepare("Update users set isOrganisateur=true where email=?");
     $requete->execute(array($email));
@@ -57,9 +57,6 @@ function UpdateStatut($email){
         $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que vous devenez un Organisateur';
         $mailer->addAddress($email);
         $mailer->send();
-        echo 'Message has been sent';
-        header('Location: ../../Controller/Admin/AjoutOrganisateur.php');
-        exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }

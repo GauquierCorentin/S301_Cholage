@@ -15,6 +15,20 @@ if ($_SESSION["users"] == null) {
 
 if (isset($_POST["submit"])){
     UpdateStatut($_POST["test"]);
-    header("Location: SupprOrganisateur.php?".uniqid());
-    exit();
+
+    ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Nouvel organisateur suppirmé',
+        text: 'Le nouvel organisateur a bien été supirmé !'
+    }).then((result) => {
+        // Vérifier si le bouton "OK" a été cliqué
+        if (result.value) {
+            // Redirection côté client
+            window.location.href = '../../Controller/Admin/SupprOrganisateur.php';
+        }
+    });
+</script>
+<?php
 }
