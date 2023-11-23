@@ -21,6 +21,7 @@ function addEquipe($user,$nom/*,$idtournoi*/){
     $req->execute(array($nom));
     $idequipe=$req->fetch();
     $_SESSION["equipe"]=$idequipe[0];
+    $_SESSION["isCaptain"]=true;
     $req=$pdo->prepare("update users set equipe_id=?,iscaptain=true where email=?");
     $req->execute(array($idequipe[0],$user));
     

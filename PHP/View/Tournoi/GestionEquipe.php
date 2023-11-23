@@ -13,9 +13,7 @@ require_once "../../View/BarreMenu/BarreMenu.php";
 </head>
 <body>
 <?php
-if ($_SESSION["equipe"]==null) {
-    echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
-}
+echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
 ?>
 <div>
     <form method="post">

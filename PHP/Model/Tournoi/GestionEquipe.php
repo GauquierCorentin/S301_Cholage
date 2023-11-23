@@ -35,18 +35,8 @@ function supprUser($iduser){
     global $pdo ;
     $req=$pdo->prepare("Update users set equipe_id=null,iscaptain=false where email=?");
     $req->execute(array($iduser));
-}
-function supprEquipe($idequipe)
-{
-    global $pdo;
-    error_log("fonction appelé avec succès");
-    $membreequipe = getMembre_Role($idequipe);
-    foreach ($membreequipe as $membre) {
-        supprUser($membre['email']);
-    }
-    $req = $pdo->prepare("delete * from equipe where idequipe=? ");
-    $req->execute(array($idequipe));
-
+    $_SESSION["equipe"]=null;
+    $_SESSION["isCaptain"]=null;
 }
 function inviter($mail,$equipe){
 //todo
