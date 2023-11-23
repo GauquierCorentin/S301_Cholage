@@ -25,13 +25,6 @@ function search_Nom() {
     }
 }
 
-//Fonction qui sert a envoyé un popUp
-function popupUser(){
-    Swal.fire({
-        icon: 'check',
-        title: 'Validé',
-        text: "Vous avez bien mis à jour l'utilisateur."})
-}
 
 //Fonction afin d'ajouter une question dans une div
 var i = 0;

@@ -67,9 +67,6 @@ function setValidation($email)
         $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que votre cotisation a bien été prise en compte';
         $mailer->addAddress($email);
         $mailer->send();
-        echo 'Message has been sent';
-        header('Location: ../../Controller/Admin/ShowHiddenValidation.php');
-        exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }

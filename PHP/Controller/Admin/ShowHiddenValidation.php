@@ -16,4 +16,19 @@ if ($_SESSION["usersNonValidate"] == null) {
 if (isset($_POST["Valider"])){
     updateHidden($_POST["email"]);
     setValidation($_POST["email"]);
+    ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Nouvel utilisateur validé',
+        text: 'Le nouvel utilisateur a bien été validé !'
+    }).then((result) => {
+        // Vérifier si le bouton "OK" a été cliqué
+        if (result.value) {
+            // Redirection côté client
+            window.location.href = '../../Controller/Admin/ShowHiddenValidation.php';
+        }
+    });
+</script>
+<?php
 }

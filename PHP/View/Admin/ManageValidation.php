@@ -31,8 +31,8 @@ foreach ($usersNonValidate as $item) {
     echo '<input type="hidden" name="email" value="' . $item['email'] . '">';
     echo '<td>' . $item['nom'] . '</td>';
     echo '<td>' . $item['prenom'] . '</td>';
-    echo '<td><input type="submit" onclick="popupUser()" name="Valider" value="Valider"></td>';
-    echo '<td><input type="submit" onclick="popupUser()" name="Refuser" value="Refuser"></td>';
+    echo '<td><input type="submit" name="Valider" value="Valider"></td>';
+    echo '<td><input type="submit" name="Refuser" value="Refuser"></td>';
     echo '</tr>';
     echo '</form>';
 }

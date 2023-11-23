@@ -16,11 +16,40 @@ if ($_SESSION["usersNonValidate"] == null) {
 }
 
 if (isset($_POST["Valider"])){
+    ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Nouvel utilisateur validé',
+        text: 'Le nouvel utilisateur a bien été validé !'
+    }).then((result) => {
+        // Vérifier si le bouton "OK" a été cliqué
+        if (result.value) {
+            // Redirection côté client
+            window.location.href = '../../Controller/Admin/ManageValidation.php';
+        }
+    });
+</script>
+<?php
     setValidation($_POST["email"]);
+    setDateValidation();
 }
 
 if (isset($_POST["Refuser"])){
+    ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Nouvel utilisateur caché',
+        text: 'Le nouvel utilisateur a bien été caché !'
+    }).then((result) => {
+        // Vérifier si le bouton "OK" a été cliqué
+        if (result.value) {
+            // Redirection côté client
+            window.location.href = '../../Controller/Admin/ManageValidation.php';
+        }
+    });
+</script>
+<?php
     setRefus($_POST["email"]);
 }
-
-setDateValidation();
