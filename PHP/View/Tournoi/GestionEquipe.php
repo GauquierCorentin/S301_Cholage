@@ -77,27 +77,29 @@ echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
                     <th>Inviter</th>
                 </tr>
 <?php
+$i=0;
 foreach ($_SESSION["MembresInvitables"] as $item){
     echo "<form method='post'>";
     echo "<tr class='test'>";
     echo "<td>". $item["email"]."</td>";
-    echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
+    echo '<input type="hidden" name="email" id="email" value="' . $item['email'].'">';
+    echo '<input type="hidden" id="nbinviter" value='.$i.'>';
     echo '<td>' . $item['nom'] . '</td>';
     echo '<td>' . $item['prenom'] . '</td>';
     echo '<td><input type="submit" name="inviter" value="Inviter">';
     echo '</tr>';
     echo "</form>";
+    $i++;
 }
 ?>
                 </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button>
-                <a href="../../Controller/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
             </div>
         </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>
+
+</script>
 </body>
 </html>

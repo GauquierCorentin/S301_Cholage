@@ -116,3 +116,6 @@ if (isset($_POST["QuitterEquipe"])){
         </script>
 <?php
 }
+if (isset($_POST["inviter"])){
+    inviter($_POST["email"],$_SESSION["equipe"]);
+}
