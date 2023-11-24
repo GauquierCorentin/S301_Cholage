@@ -16,10 +16,9 @@ function getEquipe(): array
     return $req->fetchAll();
 }
 
-function getMembreEquipe($idequipe){
+function getMembreEquipe(){
     global $pdo;
-    $req = $pdo -> prepare("select nom, prenom from users where equipe_id=:id;");
-    $req->bindParam(':id', $idequipe);
+    $req = $pdo -> prepare("select nom, prenom, equipe_id from users");
     $req->execute();
     $l = array();
     while ($row = $req->fetch()) {
