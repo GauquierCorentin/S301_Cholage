@@ -5,5 +5,5 @@ include("../../Model/Tournoi/afficherEquipe.php");
 
 $equipe = getEquipe();
 $_SESSION['equipes'] = $equipe;
-$membreEquipe = getMembreEquipe($_SESSION['idequipe']);
+$membreEquipe = getMembreEquipe();
 $_SESSION['mbEquipe'] = $membreEquipe;
