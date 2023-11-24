@@ -17,7 +17,7 @@ echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
 ?>
 <div>
     <form method="post">
-        <input type="submit" name="inviter" value="inviter des joueurs">
+        <input type="button" name="inviter" data-bs-toggle="modal" data-bs-target="#Invitation" value="inviter des joueurs">
         <?php
         echo '<input type="hidden" name="idequipe" id="idequipe" value="' . $_SESSION["equipe"] . '">';
             if ($_SESSION["isCaptain"]==true){
@@ -59,6 +59,44 @@ echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
 }
 ?>
     </table>
+</div>
+<!-- Div afin d'afficher deux bouton distinc pour la gestion de la validation -->
+<div class="modal fade" id="Invitation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Que voulez-vous faire ?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="tableau">
+                <tr>
+                    <th>Mail</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Inviter</th>
+                </tr>
+<?php
+foreach ($_SESSION["MembresInvitables"] as $item){
+    echo "<form method='post'>";
+    echo "<tr class='test'>";
+    echo "<td>". $item["email"]."</td>";
+    echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
+    echo '<td>' . $item['nom'] . '</td>';
+    echo '<td>' . $item['prenom'] . '</td>';
+    echo '<td><input type="submit" name="inviter" value="Inviter">';
+    echo '</tr>';
+    echo "</form>";
+}
+?>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button>
+                <a href="../../Controller/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

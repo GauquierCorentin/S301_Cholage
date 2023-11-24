@@ -26,7 +26,7 @@ function getNomEquipe($idequipe){
 }
 function getMembreSansEquipe(){
     global $pdo;
-    $req=$pdo->prepare("Select nom,prenom,email from users where equipe_id=null");
+    $req=$pdo->prepare("Select nom,prenom,email from users where equipe_id is null");
     $req->execute();
     $rep=$req->fetchAll();
     return $rep;
@@ -37,6 +37,12 @@ function supprUser($iduser){
     $req->execute(array($iduser));
     $_SESSION["equipe"]=null;
     $_SESSION["isCaptain"]=null;
+}
+function verifequipe($iduser){
+    global $pdo;
+    $req=$pdo->prepare("Select equipe_id from users where email=?");
+    $req->execute(array($iduser));
+    return $req->fetch();
 }
 function inviter($mail,$equipe){
 //todo

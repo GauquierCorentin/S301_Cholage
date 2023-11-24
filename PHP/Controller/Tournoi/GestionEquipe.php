@@ -6,14 +6,19 @@ $_SESSION["NomEquipe"] = getNomEquipe($_SESSION["equipe"]);
 $_SESSION["MembresInvitables"] = getMembreSansEquipe();
 
 include ("../../View/Tournoi/GestionEquipe.php");
-
-if($_SESSION["equipe"]==false){
+if($_SESSION["equipe"]==null){
     ?>
     <script>
         Swal.fire({
-            title: 'Pas d\'équipe'
+            icon: 'error',
+            title: 'Pas d\'équipe',
             text: 'Vous n\'avez pas d\'équipe'
-            icon: 'error'
+        }).then((result) => {
+            // Vérifier si le bouton "OK" a été cliqué
+            if (result.value) {
+                // Redirection côté client
+                window.location.href = '../../View/Accueil/MainPage.php';
+            }
         });
     </script>
         <?php
@@ -94,11 +99,11 @@ if (isset($_POST["QuitterEquipe"])){
         confirmButtonText: "Valider"
     }).then((result) => {
         if(result.isConfirmed){
-            supprimerEquipe();
+            supprimerUser();
             Swal.fire({
                 icon: 'success',
-                title: 'Supprimer Equipe',
-                text: 'Vous avez supprimer l\'équipe'
+                title: 'Quitter Equipe',
+                text: 'Vous avez quittez l\'équipe'
             }).then((result) => {
                 // Vérifier si le bouton "OK" a été cliqué
                 if (result.value) {
@@ -111,4 +116,3 @@ if (isset($_POST["QuitterEquipe"])){
         </script>
 <?php
 }
-
