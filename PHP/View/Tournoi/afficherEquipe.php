@@ -16,8 +16,10 @@
     foreach ($equipes as $equipe){
         echo ("<h3> le nom de l'équipe est : ".$equipe[1]."</h3>");
         $membreEquipe=$_SESSION['mbEquipe'];
-        for ($a = 0; $a<sizeof($_SESSION['mbEquipe']) ;$a++){
-            echo $_SESSION['mbEquipe'][$a];
+        foreach ($membreEquipe as $membre){
+            if ($membre[2] == $equipe[0]) {
+                echo $membre[0], " ", $membre[1], "\n";
+            }
         }
     }
     ?>
