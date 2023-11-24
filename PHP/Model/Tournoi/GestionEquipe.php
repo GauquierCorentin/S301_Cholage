@@ -95,7 +95,7 @@ function inviter($mail,$equipe){
         $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
         $mailer->Subject = 'Invitation dans une équipe';
 
-        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]."\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/GestionEquipe/Invitation.php?email='.$mail.'&token='.$token;";
+        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]."\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/GestionEquipe/Invitation.php?email='.$mail.'&token='.$token.'&equipe".$equipe;
         $mailer->addAddress($mail);
         $mailer->send();
     } catch (Exception $e) {
