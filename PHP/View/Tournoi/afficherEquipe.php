@@ -11,7 +11,7 @@
 </div>
 <div>
     <?php
-    $equipes=$_SESSION['equipes'];
+    $equipes=$_SESSION['equipe'];
     $j=0;
     foreach ($equipes as $equipe){
         echo ("<h3> le nom de l'équipe est : ".$equipe[1]."</h3>");
