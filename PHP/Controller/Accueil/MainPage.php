@@ -1,6 +1,6 @@
 <?php
-include("../../View/Accueil/MainPage.php");
-require("checkSession.php");
+require("../../Model/checkSession/checkSession.php");
 checkMail();
+include("../../View/Accueil/MainPage.php");
 ?>
 

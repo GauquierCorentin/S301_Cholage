@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../../View/BarreMenu/BarreMenu.php")
 ?>
 <!DOCTYPE html>

@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +19,6 @@ session_start();
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Activités/Tournois</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Messagerie</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../Controller/Chat/chat.php">Chat</a>

@@ -1,4 +1,7 @@
 <?php
+require("../../Model/checkSession/checkSession.php");
+checkMailValidate();
+checkMailCaptain();
 include("../../View/BarreMenu/BarreMenu.php");
 require_once("../../View/Tournoi/CreationEquipe.html");
 require_once ("../../Model/Tournoi/CreerEquipe.php");
@@ -6,11 +9,7 @@ ob_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-if ($_SESSION["isValidate"]!=true){
-    header("Location: ../../View/Accueil/MainPage.php");
-    exit();
-}
-else if ($_SESSION["equipe"]!=null || $_SESSION["isCaptain"] == true ){
+if ($_SESSION["equipe"]!=null || $_SESSION["isCaptain"] == true ){
     ?>
     <script>
     Swal.fire({

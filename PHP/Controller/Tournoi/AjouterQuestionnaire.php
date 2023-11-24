@@ -1,12 +1,12 @@
 <?php
+require("../../Model/checkSession/checkSession.php");
+checkMailOrga();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 ob_start();
 require_once '../../View/BarreMenu/BarreMenu.php';
 require_once ('../../Model/Tournoi/AjouterQuestionnaire.php');
 require_once ('../../View/Tournoi/AjouterQuestionnaire.php');
-
-if ($_SESSION['isadmin'] == true || $_SESSION['isorganisateur']==true){
 
 $email = getUsersValidate();
 if (isset($_POST['submit'])){
@@ -31,10 +31,5 @@ if (isset($_POST['submit'])){
         sendMailQuestionnaire($mail[0]);
     }
     header('Location: ../../Controller/Tournoi/AjouterQuestionnaire.php');
-    exit();
-}
-}
-else{
-    header('Location: ../../Controller/Accueil/Accueil.php');
     exit();
 }
