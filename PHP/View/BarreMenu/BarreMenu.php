@@ -90,8 +90,8 @@ session_start();
                 <h2>Que voulez-vous faire ?</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button>
+            <a class="modal-footer">
+                <a href="../../Controller/Tournoi/afficherEquipe.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button></a>
                 <a href="../../Controller/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
             </div>
         </div>
