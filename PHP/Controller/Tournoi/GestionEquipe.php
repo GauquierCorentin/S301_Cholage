@@ -4,7 +4,6 @@ include ("../../Model/Tournoi/GestionEquipe.php");
 $_SESSION["Membres"] = getMembre_Role($_SESSION["equipe"]);
 $_SESSION["NomEquipe"] = getNomEquipe($_SESSION["equipe"]);
 $_SESSION["MembresInvitables"] = getMembreSansEquipe();
-
 include ("../../View/Tournoi/GestionEquipe.php");
 if($_SESSION["equipe"]==null){
     ?>
@@ -118,4 +117,5 @@ if (isset($_POST["QuitterEquipe"])){
 }
 if (isset($_POST["inviter"])){
     inviter($_POST["email"],$_SESSION["equipe"]);
+    exit();
 }

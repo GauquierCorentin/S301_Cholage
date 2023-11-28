@@ -13,13 +13,14 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
-function getCreationToken($mail)
+function getCreationToken($token)
 {
     global $pdo;
-    $date = $pdo->prepare('select creation from token where email = ?');
-    $date->execute(array($mail));
-    $getDate = $date->fetchAll();
-    return $getDate[0]['creation'];
+    $date = $pdo->prepare('select creation from token where token = ? and isinvitation=true');
+    $date->execute(array($token));
+    $getDate = $date->fetch();
+    echo $getDate;
+    return $getDate;
 }
 function getNomEquipe($idequipe){
     global $pdo;
@@ -28,6 +29,8 @@ function getNomEquipe($idequipe){
     $rep=$req->fetch();
     return $rep;
 }
+
+function deleteToken($mail){}
 function rejoindreEquipe($idequipe,$mail){
     global $pdo;
     $req=$pdo->prepare("Update users set equipe_id=? where email=?");
@@ -51,6 +54,7 @@ function rejoindreEquipe($idequipe,$mail){
         $mailer->Body = 'Vous avez rejoint l\'équipe '.getNomEquipe($idequipe)[0];
         $mailer->addAddress($mail);
         $mailer->send();
+        exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }

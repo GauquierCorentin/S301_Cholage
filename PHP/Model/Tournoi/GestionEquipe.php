@@ -61,7 +61,7 @@ function insertToken($token,$email)
 function UpdateToken($token,$email){
     global $pdo;
     $date = date("Y-m-d H:i:s");
-    $update = $pdo->prepare('UPDATE token SET token = ?,creation=? WHERE email = ?');
+    $update = $pdo->prepare('UPDATE token SET token = ?,creation=? WHERE email = ? and isinvitation=true');
     $update->execute(array($token,$date,$email));
 }
 function getToken($email){
@@ -75,8 +75,14 @@ function inviter($mail,$equipe){
     $token=bin2hex(random_bytes(24));
     $token=base64_encode($token);
     if (getToken($mail)!=null){
+        ?>
+        <script>console.log("on est dans le if")</script>
+        <?php
         UpdateToken($token,$mail);
     }else{
+        ?>
+        <script>console.log("on est dans le else")</script>
+        <?php
         insertToken($token,$mail);
     }
     $mailer = new PHPMailer(true);
@@ -95,9 +101,10 @@ function inviter($mail,$equipe){
         $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
         $mailer->Subject = 'Invitation dans une équipe';
 
-        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]."\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/GestionEquipe/Invitation.php?email='.$mail.'&token='.$token.'&equipe".$equipe;
+        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]."\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/Tournoi/Invitation.php?email=".$mail."&token=".$token."&equipe=".$equipe;
         $mailer->addAddress($mail);
         $mailer->send();
+        exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
     }
