@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    text-align: center;
+    background-color: lightblue;
+    color: #0c76d9;
+}
+
+input.form-acc {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 280px;
+    height: 50px;
+    border-color: #5669c0;
+}
+
+header{
+    margin-top: 50px;
+}
+
+.btn-sub-acc {
+    margin-top: 15px;
+    background-color: #5669c0;
+    color: white;
+    border-color: #5669c0;
+
+}
+
+.btn-sub-acc:hover {
+    border-color: #85beeb;
+    border-width: 4px;
+    margin-top: 15px;
+    background-color: #5669c0;
+    color: white;
+
+}
+
+button.btn-PW {
+    width: 40px;
+    height: 40px;
+    background-color: #5669c0;
+    color: white;
+    border-color: #5669c0;
+}
+
+button.btn-PW:hover {
+    width: 40px;
+    height: 40px;
+    background-color: #5669c0;
+    color: white;
+    border-color: #85beeb;
+}
+
+.form-pw {
+    display: inline-block;
+}
+
+.lien-acc{
+    margin-right: 95%;
+    margin-bottom: 5%;
+}
+
+.tableau{
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.test{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th,td{
+    padding: 15px;
+    text-align: center;
+    border-bottom: solid #000000;
+    color: #5669c0;
+}
+
+.nom{
+    font-weight: bold;
+}
+
+.searchbar {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    width: 40%;
+    border-color: #5669c0;
+}
+
