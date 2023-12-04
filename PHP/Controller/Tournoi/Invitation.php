@@ -1,11 +1,26 @@
 <?php
 include("../../Model/Tournoi/Invitation.php");
-include ("../../View/Tournoi/Invtation.html");
+include("../../View/Tournoi/Invitation.html");
 ob_start();
 $email=$_GET["email"];
 $token=$_GET["token"];
-$equipe=$_GET["equipe"];
-
+$equipe=getequipeToken($token)[0];
+if (gettype($equipe)=="NULL"){
+    ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Token inexistant',
+            text: 'Le token n\'existe pas'
+        }).then((result)=>{
+            if (result) {
+                window.location.href ="../../Controller/Accueil/MainPage.php"
+            }
+        })
+    </script>
+    <?php
+}
+else{
 $creation=getCreationToken($token)[0];
 if (gettype($creation)=='NULL'){
     header("../../View/Accueil/Invitation.php");
@@ -15,35 +30,37 @@ $creation=date_create($creation);
 $copieDate=$creation;
 $decalage=date_interval_create_from_date_string("1 day");
 $copieDate->add($decalage);
-
 if ($creation>$decalage){
     ?>
     <script>
+        console.log("il ya une erreur")
         Swal.fire({
-            title: "Lien expiré"
-            text: "le lien d'invitation à expiré"
-            icon:"error"
+            icon: 'error',
+            title: 'Lien Expiré',
+            text: 'Le lien a expiré'
         }).then((result)=>{
             if (result) {
-                window.location.href ="../../View/Accueil/MainPage.php"
+                window.location.href ="../../Controller/Accueil/MainPage.php"
             }
         })
     </script>
 <?php
 }
 else{
-    rejoindreEquipe($equipe,$email);
+    rejoindreEquipe($equipe,$email,$token);
     ?>
     <script>
+        console.log("ya une erreur dans le swal")
         Swal.fire({
-            title: "Equipe rejointe"
-            text : "Vous avez rejoint l'équipe"
-            icon : "success"
+            icon: 'success',
+            title: 'Equipe rejointe',
+            text: 'Vous avez rejoint l\'équipe'
         }).then((result)=>{
             if(result) {
-                window.location.href = "../../View/Accueil/MainPage.php"
+                window.location.href = "../../Controller/Accueil/MainPage.php"
             }
         })
     </script>
     <?php
+}
 }

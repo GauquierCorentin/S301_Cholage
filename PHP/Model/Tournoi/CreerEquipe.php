@@ -13,28 +13,28 @@ try {
  * @param $idtournoi int
  * @return void
  */
-function addEquipe($user,$nom/*,$idtournoi*/){
+function addEquipe($user,$nom,$idtournoi){
     global $pdo;
-    $req=$pdo->prepare("insert into equipe values (default,?/*,?*/)");
-    $req->execute(array($nom/*,$idtournoi*/));
+    $req=$pdo->prepare("insert into equipe values (?,?,default)");
+    $req->execute(array($nom,$idtournoi));
     $req=$pdo->prepare("Select * from equipe where nom=? order by idequipe desc");
     $req->execute(array($nom));
     $idequipe=$req->fetch();
-    $_SESSION["equipe"]=$idequipe[0];
+    $_SESSION["equipe"]=$idequipe[2];
     $_SESSION["isCaptain"]=true;
     $req=$pdo->prepare("update users set equipe_id=?,iscaptain=true where email=?");
-    $req->execute(array($idequipe[0],$user));
+    $req->execute(array($idequipe[2],$user));
     
 }
-
 /**
  * @author Gallouin Matisse
  * fonction permettant d'aller chercher le dernier id de tournoi
- * @return int
+ * @return mixed
  */
-function gettournoi(){
+function getLastTournoi(){
     global $pdo;
     $req=$pdo->prepare("Select idtournoi from tournoi order by idtournoi desc");
     $req->execute();
     return $req->fetch();
 }
+
