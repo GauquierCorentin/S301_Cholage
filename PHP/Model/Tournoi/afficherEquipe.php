@@ -26,7 +26,7 @@ function getEquipe(): array
  */
 function getMembreEquipe(){
     global $pdo;
-    $req = $pdo -> prepare("select nom, prenom, equipe_id from users");
+    $req = $pdo -> prepare("select nom, prenom, equipe_id, iscaptain, email from users order by iscaptain desc ");
     $req->execute();
     $l = array();
     while ($row = $req->fetch()) {
