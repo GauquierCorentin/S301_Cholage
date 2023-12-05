@@ -17,36 +17,30 @@ $questions = $_SESSION['showQuestions'];
     <?php
     echo($_SESSION['mail']);
     $_SESSION['qr'] = array();
-    foreach ($questionnaires as $i) { // parcourt tous les questionnaires, notés i
-        echo('<div>');
-        echo("<h1>" . $i[1] . "</h1>" . "<br>");
-        $x = 0;
-        foreach ($questions as $q) { // parcourt toutes les questions, notées q
-            $y = 0;
-            if ($q[2] == $i[0]) { // vérifie si la question q est associée au questionnaire i
-                echo("<h2>" . $q[1] . "</h2>" . "<br>");
-                $_SESSION['idquestion'] = $q[0];
-                $reponses = getRep($q[0]); // récupère les réponses liées à la question q
-                if (sizeof($reponses) == 0) {
-                    echo("<input type='text' name='$x-1'><br>");
-                    $y++;
-                } else {
-                    foreach ($reponses as $r) { // parcourt toutes les réponses liées à la question q, notées r
-                        echo($r[1]);                                        //
-                        echo("&nbsp;&nbsp;&nbsp;");                         // affiche la question r et une checkbox associée
-                        echo("<input type='checkbox' name='$x-$y' ><br>");  //
-                        $y++;
-                    }
-                }
-                $qr = array($x, $y);
-                echo($qr[0] . '/' . $qr[1]);
-                $_SESSION['qr'].array_push($qr);
-                $_SESSION['idquestionnaire'] = $i[0];
+    foreach($questionnaires as $questionnaire) {
+        echo('<div class="questionnaire">');
+        echo('<h1>' . $questionnaire['nom'] . '</h1>');
+        $q = 0;
+        foreach($questions as $question) {
+            echo('<div class="question">');
+            echo('<h2>' . $question['textequestion'] . '</h2>');
+            $reponses = getRep($question['idquestion']);
+            $r = 0;
+            foreach($reponses as $reponse) {
+                echo('<div class="reponse">');
+                echo('<input type="radio" id="q' . $q . 'r' . $r . '" name="q' . $q . '" value="' . $reponse['textreponse'] . '">');
+                echo('<label for="q' . $q . 'r' . $r . '">' . $reponse['textreponse'] . '</label>');
+                echo('</div>');
+                $r++;
             }
-            $x++;
+            echo('</div>');
+            $q++;
         }
-        echo("<input type='submit' name='submit'>");
+        echo('<input type="submit" value="valider">');
+        echo('</div>');
     }
+
+
     echo("<br>");
     echo('</div>');
     ?>

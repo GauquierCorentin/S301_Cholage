@@ -64,7 +64,7 @@ function addQuestion($question,$idquestionnaire){
 }
 
 /**
- * @author WILLIAME Anthony, GALLOUIN Matisse
+ * @author WILLIAME Anthony, GALLOUIN Matisse, WEBER Guilhem
  * Fonction qui ajoute une réponse dans la table reponse
  * @param $reponse
  * @param $idquestion
@@ -72,8 +72,13 @@ function addQuestion($question,$idquestionnaire){
  */
 function addReponse($reponse,$idquestion){
     global $pdo;
-    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?)');
-    $req->execute(array($reponse,$idquestion));
+    $reqA = $pdo->prepare('select email from users where isvalidate = true');
+    $reqA->execute();
+    $users = $reqA->fetchAll();
+    foreach ($users as $u) {
+        $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?,?)');
+        $req->execute(array($reponse,$idquestion,$u[0]));
+    }
 }
 
 /**

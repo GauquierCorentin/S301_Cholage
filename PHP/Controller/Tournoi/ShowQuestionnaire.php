@@ -12,20 +12,23 @@ $questions = getQuestions();
 $_SESSION['showQuestionnaires'] = $questionnaires;
 $_SESSION['showQuestions'] = $questions;
 
-getRep($_SESSION['idquestion']);
-
-$reps = getReps($_SESSION['idquestionnaire']);
-
-if (isset($_POST["submit"])) {
-    $user = $_SESSION["mail"];
-    foreach ($_SESSION['qr'] as $qr) {
-        foreach ($qr as $r) {
-            $val = '<script> let nom = ("<?php $_POST[`$qr-$r`] ?>"); getChecked(); </script> ';
-            addRep($reps[$r], $val, $user);
+for ($i = 0; $i < count($questionnaires); $i++) {
+    $reps = getReponsesPasRepondues($questionnaires[$i]['id'], $_SESSION['mail']);
+    if (isset($_POST['q' . $i])) {
+        $qr = array();
+        $qr['idquestionnaire'] = $questionnaires[$i]['id'];
+        $qr['iduser'] = $_SESSION['mail'];
+        $qr['idquestion'] = $questions[$i]['idquestion'];
+        $qr['idreponse'] = 0;
+        foreach ($reps as $rep) {
+            if ($rep[1] == $qr['idquestion']) {
+                $qr['idreponse'] = $rep[0];
+            }
         }
+        $qr['rep'] = $_POST['q' . $i];
+        repondre($qr['idquestionnaire'], $qr['idreponse'], $qr['iduser'], $qr['rep']);
     }
 }
-
 ?>
 <script>
     function getChecked(nom) {

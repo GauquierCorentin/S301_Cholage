@@ -46,27 +46,9 @@ function getQuestions(): array
 function getRep(int $idquestion): array
 {
     global $pdo;
-    $req = $pdo->prepare('select * from reponse where idquestion = ?');
+    $req = $pdo->prepare('select distinct textreponse from reponse where idquestion = ?');
     $req->execute(array($idquestion));
     return $req->fetchAll();
-}
-
-/**
- * Ajoute un contenu à la réponse passée en paramètre pour l'utilisateur passé en paramètre
- * @param int $idrep id de la réponse à éditer
- * @param mixed $rep boolean ou string dépendant du type de réponse
- * @param string $iduser id de l'utilisateur courant
- * @return void
- * @author WEBER Guilhem
- */
-function addRep(int $idrep, mixed $rep, string $iduser) {
-    global $pdo;
-    if (gettype($rep) == "string") {
-        $req = $pdo->prepare('update reponse set textreponse = ? where idreponse = ? and iduser = ?');
-    } else {
-        $req = $pdo->prepare('update reponse set ischeckbox = ? where idreponse = ? and iduser = ?');
-    }
-    $req->execute(array($rep, $idrep, $iduser));
 }
 
 
@@ -78,7 +60,34 @@ function addRep(int $idrep, mixed $rep, string $iduser) {
  */
 function getReps(int $idq) {
     global $pdo;
-    $req = $pdo->prepare('select idreponse from reponse join public.question q on reponse.idquestion = q.idquestion where idquestionnaire = ?');
+    $req = $pdo->prepare('select distinct idreponse from reponse join public.question q on reponse.idquestion = q.idquestion where idquestionnaire = ?');
     $req->execute(array($idq));
+    return $req->fetchAll();
+}
+
+
+/**
+ * Mets à jour la table réponse selon la réponse de l'utilisateur
+ * Mets à jour la table repquestionnaire pour dire que l'utilisateur a répondu au questionnaire
+ * @param int $idq id du questionnaire
+ * @param int $idr id de la réponse
+ * @param string $idu id de l'utilisateur
+ * @param bool $rep réponse de l'utilisateur
+ * @return void
+ * @author Weber Guilhem
+ */
+function repondre(int $idq, $idr, $idu, bool $rep) {
+    global $pdo;
+    $reqA = $pdo->prepare('update reponse set ischeckbox = ? where idreponse = ? and iduser = ?');
+    $reqA->execute(array($rep, $idr, $idu));
+    $reqB = $pdo->prepare('update repqestionnaire set rep = true where idquestionnaire = ? and iduser = ?');
+    $reqB->execute(array($idq, $idu));
+}
+
+
+function getReponsesPasRepondues(int $idq, string $idu) {
+    global $pdo;
+    $req = $pdo->prepare('select idreponse, idquestion from reponse left join public.repqestionnaire r on reponse.iduser = r.iduser where idquestionnaire = ? and r.iduser = ? and rep = false');
+    $req->execute(array($idq, $idu));
     return $req->fetchAll();
 }

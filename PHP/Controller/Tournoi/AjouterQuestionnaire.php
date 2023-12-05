@@ -19,7 +19,7 @@ if (isset($_POST['submit'])){
     for($i=1 ; $i<=$nbQuestion; $i++ ) {
         $question = $_POST['question' . $i];
         $idquestion=addQuestion($question, $idquestionnaire);
-        for ($j=1; $j<=$_POST['nbReponseQ'.$i]; $j++){
+        for ($j=0; $j<=$_POST['nbReponseQ'.$i]; $j++){
             echo('I au début du j : '.$i.'\n');
             $reponse = $_POST["Q".$i.'reponse'.$j];
             addReponse($reponse,$idquestion);
