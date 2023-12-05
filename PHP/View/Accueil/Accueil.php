@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="../../View/Style/styleCholage.css?v=<?php echo time(); ?>">
@@ -23,11 +24,11 @@
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control form-acc" placeholder="Password" name="mdp" id="mdp" aria-describedby="basic-addon1" required>
+            <input type="password" class="form-control form-acc" placeholder="Password" name="mdp" id="mdp" required>
         </div>
 
         <div>
-            <input type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc btn-lg" value="Confirmer"></input>
+            <input type="submit" name="logSubmit" id="logSubmit" class="btn btn-info btn-sub-acc btn-lg" value="Confirmer">
         </div>
     </form>
     <a class="lien" href="Register.php">Créer un compte</a>
