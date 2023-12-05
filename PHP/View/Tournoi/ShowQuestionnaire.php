@@ -32,7 +32,7 @@ $questions = $_SESSION['showQuestions'];
                     $y++;
                 } else {
                     foreach ($reponses as $r) { // parcourt toutes les réponses liées à la question q, notées r
-                        echo($r[1]);                                        //
+                        echo($r[0]);                                        //
                         echo("&nbsp;&nbsp;&nbsp;");                         // affiche la question r et une checkbox associée
                         echo("<input type='checkbox' name='$x-$y' ><br>");  //
                         $y++;

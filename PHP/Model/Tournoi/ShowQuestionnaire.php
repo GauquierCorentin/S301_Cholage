@@ -46,7 +46,7 @@ function getQuestions(): array
 function getRep(int $idquestion): array
 {
     global $pdo;
-    $req = $pdo->prepare('select * from reponse where idquestion = ?');
+    $req = $pdo->prepare('select distinct textreponse from reponse where idquestion = ?');
     $req->execute(array($idquestion));
     return $req->fetchAll();
 }
@@ -78,7 +78,14 @@ function addRep(int $idrep, mixed $rep, string $iduser) {
  */
 function getReps(int $idq) {
     global $pdo;
-    $req = $pdo->prepare('select idreponse from reponse join public.question q on reponse.idquestion = q.idquestion where idquestionnaire = ?');
+    $req = $pdo->prepare('select distinct idreponse from reponse join public.question q on reponse.idquestion = q.idquestion where idquestionnaire = ?');
     $req->execute(array($idq));
     return $req->fetchAll();
+}
+
+
+function valider(int $idq, $idu) {
+    global $pdo;
+    $req = $pdo->prepare('update repqestionnaire set rep = true where idquestionnaire = ? and iduser = ?');
+    $req->execute(array($idq, $idq));
 }

@@ -72,8 +72,11 @@ function addQuestion($question,$idquestionnaire){
  */
 function addReponse($reponse,$idquestion){
     global $pdo;
-    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?)');
-    $req->execute(array($reponse,$idquestion));
+    $users = getUsersValidate();
+    foreach ($users as $u) {
+        $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?,?)');
+        $req->execute(array($reponse, $idquestion, $u[0]));
+    }
 }
 
 /**

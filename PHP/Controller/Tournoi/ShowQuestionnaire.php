@@ -19,10 +19,9 @@ $reps = getReps($_SESSION['idquestionnaire']);
 if (isset($_POST["submit"])) {
     $user = $_SESSION["mail"];
     foreach ($_SESSION['qr'] as $qr) {
-        foreach ($qr as $r) {
-            $val = '<script> let nom = ("<?php $_POST[`$qr-$r`] ?>"); getChecked(); </script> ';
-            addRep($reps[$r], $val, $user);
-        }
+        $val = '<script> let nom = ('. $_POST[`$qr[0]-$qr[1]`].') getChecked(); </script> ';
+        addRep($reps[$qr], $val, $user);
+        valider($_SESSION['idquestionnaire'], $user);
     }
 }
 
