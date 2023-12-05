@@ -19,7 +19,7 @@ ini_set("display_errors", 1);
 
 function getMembre_Role($idequipe){
     global $pdo;
-    $req=$pdo->prepare("Select nom,prenom,email,iscaptain from users where equipe_id=?");
+    $req=$pdo->prepare("Select nom,prenom,email,iscaptain from users where equipe_id=? order by iscaptain desc");
     $req->execute(array($idequipe));
     $rep=$req->fetchAll();
     return $rep;
@@ -51,39 +51,39 @@ function verifequipe($iduser){
     $req->execute(array($iduser));
     return $req->fetch();
 }
-function insertToken($token,$email)
+function insertToken($token,$email,$idequipe)
 {
     global $pdo;
     $date = date("Y-m-d H:i:s");
-    $insertToken = $pdo->prepare('INSERT INTO token VALUES (?, ?, ?,true)');
-    $insertToken->execute(array($token, $date,$email ));
+    $insertToken = $pdo->prepare('INSERT INTO token VALUES (?, ?, ?,true,?)');
+    $insertToken->execute(array($token, $date,$email,$idequipe ));
 }
-function UpdateToken($token,$email){
+function UpdateToken($token,$email,$idequipe){
     global $pdo;
     $date = date("Y-m-d H:i:s");
-    $update = $pdo->prepare('UPDATE token SET token = ?,creation=? WHERE email = ? and isinvitation=true');
-    $update->execute(array($token,$date,$email));
+    $update = $pdo->prepare('UPDATE token SET token = ?,creation=?,idequipe=? WHERE (email = ? and isinvitation=true and idequipe=?)');
+    $update->execute(array($token,$date,$idequipe,$email,$idequipe));
 }
-function getToken($email){
+function getToken($email,$idequipe){
     global $pdo;
-    $getToken = $pdo->prepare('SELECT * FROM token WHERE email = ? and isinvitation!=false');
-    $getToken->execute(array($email));
+    $getToken = $pdo->prepare('SELECT * FROM token WHERE email = ? and isinvitation!=false and idequipe=?');
+    $getToken->execute(array($email,$idequipe));
     $token = $getToken->fetch();
     return $token;
 }
 function inviter($mail,$equipe){
     $token=bin2hex(random_bytes(24));
     $token=base64_encode($token);
-    if (getToken($mail)!=null){
+    if (getToken($mail,$equipe)!=null){
         ?>
         <script>console.log("on est dans le if")</script>
         <?php
-        UpdateToken($token,$mail);
+        UpdateToken($token,$mail,$equipe);
     }else{
         ?>
         <script>console.log("on est dans le else")</script>
         <?php
-        insertToken($token,$mail);
+        insertToken($token,$mail,$equipe);
     }
     $mailer = new PHPMailer(true);
     try {

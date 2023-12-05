@@ -76,7 +76,7 @@
 </div>
 
 
-<!-- Div afin d'afficher deux bouton distinc pour la gestion de la validation -->
+<!-- div permettant les choix entres les différentes pages liées aux équipes -->
 <div class="modal fade" id="Equipe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -85,6 +85,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <a class="modal-footer">
+                <?php
+                if ($_SESSION["equipe"]!=null){
+                    echo "<a href='../../Controller/Tournoi/GestionEquipe.php'><button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Gestion équipe</button></a>";
+                }
+                ?>
                 <a href="../../Controller/Tournoi/afficherEquipe.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button></a>
                 <a href="../../Controller/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
             </div>
@@ -93,7 +98,7 @@
 </div>
 
 
-<!-- div permettant les choix entres les différentes pages liées aux équipes -->
+<!-- Div afin d'afficher deux bouton distinct pour la gestion de la validation -->
 <div class="modal fade" id="Validation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

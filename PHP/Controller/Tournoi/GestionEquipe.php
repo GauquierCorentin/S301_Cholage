@@ -16,7 +16,7 @@ if($_SESSION["equipe"]==null){
             // Vérifier si le bouton "OK" a été cliqué
             if (result.value) {
                 // Redirection côté client
-                window.location.href = '../../View/Accueil/MainPage.php';
+                window.location.href = '../../Controller/Accueil/MainPage.php';
             }
         });
     </script>
@@ -26,7 +26,6 @@ if (isset($_POST["SupprEquipe"])){
     ?>
         <script>
             function supprimerEquipe(idequipe) {
-                console.log('Fonction supprimerEquipe appelée avec succès.');
                 $.ajax({
 
                     url:("../../Model/Tournoi/SupprEquipe.php"),
@@ -61,7 +60,7 @@ if (isset($_POST["SupprEquipe"])){
                     // Vérifier si le bouton "OK" a été cliqué
                     if (result.value) {
                         // Redirection côté client
-                        window.location.href = '../../View/Accueil/MainPage.php';
+                        window.location.href = '../../Controller/Accueil/MainPage.php';
                     }
                 });
             }
@@ -73,7 +72,6 @@ if (isset($_POST["QuitterEquipe"])){
     ?>
         <script>
     function supprimerUser() {
-        console.log('Fonction supprimerEquipe appelée avec succès.');
         $.ajax({
 
                     url:("../../Model/Tournoi/SupprUser.php"),
@@ -107,7 +105,7 @@ if (isset($_POST["QuitterEquipe"])){
                 // Vérifier si le bouton "OK" a été cliqué
                 if (result.value) {
                     // Redirection côté client
-                    window.location.href = '../../View/Accueil/MainPage.php';
+                    window.location.href = '../../Controller/Accueil/MainPage.php';
                 }
             });
         }
@@ -118,4 +116,43 @@ if (isset($_POST["QuitterEquipe"])){
 if (isset($_POST["inviter"])){
     inviter($_POST["email"],$_SESSION["equipe"]);
     exit();
+}
+if (isset($_POST["exclure"])){
+    ?>
+    <script>
+        function exclureUser(idUser) {
+            $.ajax({
+
+                url:("../../Model/Tournoi/ExclureUser.php"),
+                type: 'POST',
+                data: { action: 'supprEquipe',idUser},
+                success: function(response) {
+                    // Traitement de la réponse du serveur, si nécessaire
+                    console.log('Réponse du serveur :', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur AJAX:', error);
+                }
+            });
+        }
+        Swal.fire({
+            icon: 'warning',
+            title: 'Exclure un joueur',
+            text: 'Vous allez exclure un joueur',
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "Annuler",
+            confirmButtonText: "Valider"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                exclureUser(document.getElementById());
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Joeur exclu',
+                    text: 'Vous avez exclu un joueur'
+                })
+            }
+        });
+    </script>
+<?php
 }

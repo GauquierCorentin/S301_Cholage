@@ -22,6 +22,7 @@ echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
         echo '<input type="hidden" name="idequipe" id="idequipe" value="' . $_SESSION["equipe"] . '">';
             if ($_SESSION["isCaptain"]==true){
                 echo "<input type='submit' name='SupprEquipe'  value='Dissoudre  l équipe'>";
+                echo '<input type="hidden" name="idequipe" id="idJoueurExclu" value="0">';
             }
             else{
                 echo "<input type='submit' name='QuitterEquipe' value='Quitter l équipe'>";
@@ -38,24 +39,32 @@ echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
             <th>Mail</th>
             <th>Prénom</th>
             <th>Nom</th>
+            <th>Role</th>
             <th>Exclure</th>
         </tr>
         <?php
+        $i=0;
             foreach ($_SESSION["Membres"] as $item){
                 echo "<form method='post'>";
                 echo "<tr class='test'>";
                 echo "<td>". $item["email"]."</td>";
                 echo '<input type="hidden" name="test" value="' . $item['email'] . '">';
-                echo '<td>' . $item['nom'] . '</td>';
                 echo '<td>' . $item['prenom'] . '</td>';
+                echo '<td>' . $item['nom'] . '</td>';
+                if ($item["iscaptain"]==true){
+                    echo'<td>Capitaine</td>';
+                }else{
+                    echo '<td>Membre</td>';
+                }
                 if ($_SESSION["isCaptain"]==true && $item["email"]!=$_SESSION["mail"]) {
-                    echo '<td><input type="submit" id="submit" name="submit" value="Exclure"></td>';
+                    echo '<td><input type="submit" id="exclure'.$i.'" name="exclure" value="Exclure" onclick="setJoueurExclu()"></td>';
                 }
                 else{
                     echo'<td></td>';
                 }
                 echo '</tr>';
                 echo "</form>";
+                $i++;
 }
 ?>
     </table>
@@ -83,7 +92,7 @@ foreach ($_SESSION["MembresInvitables"] as $item){
     echo "<tr class='test'>";
     echo "<td>". $item["email"]."</td>";
     echo '<input type="hidden" name="email" id="email" value="' . $item['email'].'">';
-    echo '<input type="hidden" id="nbinviter" value='.$i.'>';
+    echo '<input type="hidden" id="nbJoueur'.$i.'" value='.$i.'>';
     echo '<td>' . $item['nom'] . '</td>';
     echo '<td>' . $item['prenom'] . '</td>';
     echo '<td><input type="submit" name="inviter" value="Inviter">';
@@ -99,7 +108,12 @@ foreach ($_SESSION["MembresInvitables"] as $item){
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
-
+    function setJoueurExclu(){
+        idbouton=event.target.id;
+        console.log(idbouton);
+        document.getElementById("idJoueurExclu").value=event.target.value
+        console.log(document.getElementById("idJoueurExclu").value)
+    }
 </script>
 </body>
 </html>
