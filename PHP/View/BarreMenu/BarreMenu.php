@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Activités/Tournois</a>
+                    <a class="nav-link" href="../../Controller/Activite/Activite.php">Activités/Tournois</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../Controller/Chat/chat.php">Chat</a>
