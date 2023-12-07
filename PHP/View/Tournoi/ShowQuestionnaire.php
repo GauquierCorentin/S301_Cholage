@@ -13,13 +13,13 @@ $questions = $_SESSION['showQuestions'];
 </head>
 
 <body>
-<form method="POST" action="ShowQuestionnaire.php">
+<form method="POST">
     <?php
     echo($_SESSION['mail']);
     $_SESSION['qr'] = array();
     foreach($questionnaires as $questionnaire) {
         echo('<div class="questionnaire">');
-        echo('<h1>' . $questionnaire['nom'] . '</h1>');
+        echo('<h1>' . $questionnaire['name'] . '</h1>');
         $q = 0;
         foreach($questions as $question) {
             echo('<div class="question">');
@@ -36,7 +36,7 @@ $questions = $_SESSION['showQuestions'];
             echo('</div>');
             $q++;
         }
-        echo('<input type="submit" value="valider">');
+        echo('<input type="submit" name="valider" value="valider">');
         echo('</div>');
     }
 
