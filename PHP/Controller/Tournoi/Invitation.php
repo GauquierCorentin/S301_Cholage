@@ -28,9 +28,9 @@ if (gettype($creation)=='NULL'){
 }
 $creation=date_create($creation);
 $copieDate=$creation;
-$decalage=date_interval_create_from_date_string("1 day");
+$decalage=date_interval_create_from_date_string("1 days");
 $copieDate->add($decalage);
-if ($creation>$decalage){
+if ($creation>$copieDate){
     ?>
     <script>
         console.log("il ya une erreur")
