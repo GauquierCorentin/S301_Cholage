@@ -75,9 +75,14 @@ function addReponse($reponse,$idquestion){
     $reqA = $pdo->prepare('select email from users where isvalidate = true');
     $reqA->execute();
     $users = $reqA->fetchAll();
+    $reqA = $pdo->prepare('INSERT INTO reponse VALUES (default,?,?)');
+    $reqA->execute(array($reponse,$idquestion));
+    $reqB = $pdo->prepare('SELECT idreponse FROM reponse order by idreponse desc');
+    $reqB->execute();
+    $idrep = $reqB->fetch();
     foreach ($users as $u) {
-        $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?,?)');
-        $req->execute(array($reponse,$idquestion,$u[0]));
+        $reqC = $pdo->prepare('INSERT INTO repquestion VALUES (?, ?, false, ?, default)');
+        $reqC->execute(array($idrep[0], $u[0], ''));
     }
 }
 

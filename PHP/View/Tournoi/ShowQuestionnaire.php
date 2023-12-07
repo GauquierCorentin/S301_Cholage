@@ -19,7 +19,7 @@ $questions = $_SESSION['showQuestions'];
     $_SESSION['qr'] = array();
     foreach($questionnaires as $questionnaire) {
         echo('<div class="questionnaire">');
-        echo('<h1>' . $questionnaire['nom'] . '</h1>');
+        echo('<h1>' . $questionnaire['name'] . '</h1>');
         $q = 0;
         foreach($questions as $question) {
             echo('<div class="question">');
