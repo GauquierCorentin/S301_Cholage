@@ -87,10 +87,10 @@
             <a class="modal-footer">
                 <?php
                 if ($_SESSION["equipe"]!=null){
-                    echo "<a href='../../Controller/Tournoi/GestionEquipe.php'><button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Gestion équipe</button></a>";
+                    echo "<a href='../../Controller/Tournoi/GestionEquipe.php'><button type='button' class='btn btn-primary'>Gestion équipe</button></a>";
                 }
                 ?>
-                <a href="../../Controller/Tournoi/afficherEquipe.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir toutes les équipes</button></a>
+                <a href="../../Controller/Tournoi/afficherEquipe.php"><button type="button" class="btn btn-primary" >Voir toutes les équipes</button></a>
                 <a href="../../Controller/Tournoi/CreerEquipe.php"><button type="button" class="btn btn-primary">Créer un équipe</button></a>
             </div>
         </div>
