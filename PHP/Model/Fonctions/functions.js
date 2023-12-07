@@ -110,8 +110,6 @@ function suppQuestion(i){
     document.getElementById('nbQuestion').value=i;
     return i;
 }
-/*
-var j=0;
 function addReponse(i,j){
     console.log(j);
     j++;
@@ -126,4 +124,3 @@ function addReponse(i,j){
     doc.appendChild(input);
     document.getElementById('nbReponseQ'+i.toString()).value=j;
 }
-*/
