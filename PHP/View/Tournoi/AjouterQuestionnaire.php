@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<script src="../../Model/Fonctions/functions.js"></script>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -34,5 +34,6 @@
         <input type="submit" name="submit" value="Valider">
     </div>
 </form>
+<script src="../../Model/Fonctions/functions.js"></script>
 </body>
 </html>
