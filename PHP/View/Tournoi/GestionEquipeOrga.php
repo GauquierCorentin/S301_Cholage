@@ -14,13 +14,27 @@ include ("../../View/BarreMenu/BarreMenu.php");
 <body>
 <div class="GestionEquipeOrga-container-fluid GestionEquipeOrga-mx">
     <div class="row">
-        <div class="col-xl-9">
-            <div class="card" style="width: 100%;">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+            <?php
+            foreach($_SESSION["lstEquipes"] as $lstEquipe){
+                echo '<div class="card" style="width: 75%;">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">'.$lstEquipe[0].'</h5>
+                    <p class="card-text">
+                    <div class="list-group">';
+                foreach ($_SESSION["membreEquipe".$lstEquipe[0]] as $membreEquipe){
+                    echo '<li class="list-group-item list-group-item-primary" draggable="true">'.$membreEquipe["nom"]." ".$membreEquipe["prenom"].'</li>';
+                };
+                echo '</div>
+                    <input type="hidden" id="equipe'.$lstEquipe[0].'" value="'.$lstEquipe[0].'">
+                    <input type="button" id="equipe" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
+                    </p>
                 </div>
             </div>
+            <br><br>';
+            }
+            ?>
         </div>
 
         <div class="col-xl-3 DivJoeurSansEquipe">
@@ -42,5 +56,27 @@ include ("../../View/BarreMenu/BarreMenu.php");
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>
+    function supprimerEquipe(idequipe) {
+        $.ajax({
+
+            url:("../../Model/Tournoi/SupprEquipe.php"),
+            type: 'POST',
+            data: { action: 'supprEquipe',data: idequipe },
+            success: function(response) {
+                // Traitement de la réponse du serveur, si nécessaire
+                console.log('Réponse du serveur :', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur AJAX:', error);
+            }
+        });
+    }
+    function supprEquipe(idequipe){
+        Swal.fire({
+            title: "Supression équipe"
+        })
+    }
+</script>
 </body>
 </html>
