@@ -106,7 +106,8 @@ th,td{
 }
 
 .dateT {
-
+    color: black;
     text-align: right;
+    float: right;
 }
 

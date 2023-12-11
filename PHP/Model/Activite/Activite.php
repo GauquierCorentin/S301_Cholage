@@ -9,3 +9,5 @@ function getTournois()
     $_SESSION["tournois"]= $tournois;
     return $tournois;
 }
+
+?>
