@@ -38,7 +38,7 @@ require_once "../../View/BarreMenu/BarreMenu.php";
                 data:{action:"exclu",mail:mail},
                 success: function(response) {
                     console.log('Réponse du serveur :', response);
-                    //location.reload()
+                    location.reload()
                 },
                 error: function(xhr, status, error) {
                     console.error('Erreur AJAX:', error);
