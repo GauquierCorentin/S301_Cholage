@@ -32,4 +32,10 @@ function getMatchs(int $idEquipe, int $idtournoi){
     return $req->fetchAll();
 }
 
+function getNomEquipe(int $idEquipe, int $idtournoi){
+    global $pdo;
+    $req=$pdo->prepare("Select nom from equipe where idequipe = ? and idtournoi = ?");
+    $req->execute(array($idEquipe,$idtournoi));
+    return $req->fetchAll();
+}
 ?>
