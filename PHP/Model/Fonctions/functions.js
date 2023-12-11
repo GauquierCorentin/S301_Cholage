@@ -24,6 +24,20 @@ function search_Nom() {
         }
     }
 }
+function search_Nom_Plu_Barre(nb) {
+    let input = document.getElementById('searchbar'+nb).value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('test');
+
+    for (i = 0; i < x.length; i++) {
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="table-row";
+        }
+    }
+}
 
 
 //Fonction afin d'ajouter une question dans une div
@@ -96,8 +110,6 @@ function suppQuestion(i){
     document.getElementById('nbQuestion').value=i;
     return i;
 }
-/*
-var j=0;
 function addReponse(i,j){
     console.log(j);
     j++;
@@ -112,4 +124,3 @@ function addReponse(i,j){
     doc.appendChild(input);
     document.getElementById('nbReponseQ'+i.toString()).value=j;
 }
-*/

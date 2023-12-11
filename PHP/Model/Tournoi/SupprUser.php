@@ -1,4 +1,5 @@
 <?php
+include ("GestionEquipe.php");
 session_start();
 $iduser=$_SESSION["mail"];
 global $pdo ;
