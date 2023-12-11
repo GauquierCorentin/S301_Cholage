@@ -20,15 +20,15 @@ include ("../../View/BarreMenu/BarreMenu.php");
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
                 echo '<div class="card" style="width: 75%;" id="'.$lstEquipe[0].'" ondragover="activerdrop()" ondrop="drop() ">
                 <div class="card-body" > 
-                    <h5 class="card-title" >'.$lstEquipe[0].'</h5>
+                    <h5 class="card-title" id="tittle/'.$lstEquipe[0].'" >'.$lstEquipe[0].'</h5>
                     <p class="card-text">
-                    <div class="list-group" id="'."/".$lstEquipe[0].'">';
+                    <div class="list-group" id="'."listgroup/".$lstEquipe[0].'">';
                 foreach ($_SESSION["membreEquipe".$lstEquipe[0]] as $membreEquipe){
                     echo '<li class="list-group-item list-group-item-primary" draggable="true" id="'.$membreEquipe[4]."/".$lstEquipe[0].'" ondragstart="recupererData()">'.$membreEquipe["nom"]." ".$membreEquipe["prenom"].'</li>';
                 };
                 echo '</div>
                     <input type="hidden" id="equipe'.$lstEquipe[0].'" value="'.$lstEquipe[2].'">
-                    <input type="button" id="equipe" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
+                    <input type="button" id="equipe/'.$lstEquipe[0].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
                     </p>
                 </div>
             </div>
@@ -95,16 +95,25 @@ include ("../../View/BarreMenu/BarreMenu.php");
     }
 
     function drop(){
-        console.log(event.target.id)
         event.preventDefault();
-
         var idjoueur=event.dataTransfer.getData("text");
 
+        var idelementdeplace=idjoueur.split("/");
+        console.log(idelementdeplace);
+
+        var iddiv=event.target.id.split("/");
+        console.log(iddiv)
+
         var elementdeplace=document.getElementById(idjoueur);
-
-        var madiv=document.getElementById(event.target.id);
-
-        madiv.prepend(elementdeplace)
+        if (event.target.id.includes("listgroup/")){
+            var madiv=document.getElementById(event.target.id);
+        }
+        else{
+            var madiv=document.getElementById("listgroup/"+iddiv[1]);
+        }
+        madiv.prepend(elementdeplace);
+        elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1]
+        console.log(elementdeplace.id)
     }
 </script>
 </body>
