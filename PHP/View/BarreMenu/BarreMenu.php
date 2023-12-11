@@ -18,7 +18,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../../Controller/Activite/Activite.php">Activités/Tournois</a>
+                    <?php
+                    if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
+                        echo '<a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Activite">Activités/Tournois</a>';
+                    } else {
+                        echo '<a class="nav-link" href="../../Controller/Activite/Activite.php">Activités/Tournois</a>';
+                    };
+                    ?>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../Controller/Chat/chat.php">Chat</a>
@@ -109,6 +115,23 @@
             <div class="modal-footer">
                 <a href="../../Controller/Admin/ManageValidation.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir tous les Utilisateurs</button></a>
                 <a href="../../Controller/Admin/ShowHiddenValidation.php"><button type="button" class="btn btn-primary">Voir les utilisateurs caché</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Div afin d'afficher deux bouton distinct pour les activites -->
+
+<div class="modal fade" id="Activite" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Que voulez-vous faire ?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <a href="../../Controller/Activite/Activite.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir Activités</button></a>
+                <a href="../../Controller/Activite/creerActivite.php"><button type="button" class="btn btn-primary">Créer Activité</button></a>
             </div>
         </div>
     </div>

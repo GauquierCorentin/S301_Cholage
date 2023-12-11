@@ -2,7 +2,6 @@
 include("../../Model/checkSession/checkSession.php");
 checkMailValidate();
 include("../../Model/BDD/ConnexionBDD.php");
-include("../../../PHP/View/Activite/Activite.php");
 include("../../Model/Activite/Activite.php");
 
 try {
@@ -12,5 +11,6 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 
-$tournois= getTournois();
+getTournois();
+include("../../../PHP/View/Activite/Activite.php");
 ?>
