@@ -33,8 +33,8 @@ function insertToken($token,$email)
 {
     global $pdo;
     $date = date("Y-m-d H:i:s");
-    $insertToken = $pdo->prepare('INSERT INTO token (token, creation, email) VALUES (?, ?, ?,default,null)');
-    $insertToken->execute(array($token, $date,$email ));
+    $insertToken = $pdo->prepare('INSERT INTO token (token, creation, email) VALUES (?, ?, ?)');
+    $insertToken->execute(array($token, $date,$email));
 }
 
 /**
