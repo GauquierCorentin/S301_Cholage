@@ -28,7 +28,7 @@ if (isset($_POST["SupprEquipe"])){
             function supprimerEquipe(idequipe) {
                 $.ajax({
 
-                    url:("../../Model/Tournoi/SupprEquipe.php"),
+                    url:("../../Model/Tournoi/SupprEquipeSession.php"),
                     type: 'POST',
                     data: { action: 'supprEquipe',data: idequipe },
                     success: function(response) {

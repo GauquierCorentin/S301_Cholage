@@ -29,3 +29,4 @@ function getMembreEquipe($idequipe){
     $req->execute(array($idequipe));
     return $req->fetchAll();
 }
+

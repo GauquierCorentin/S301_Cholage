@@ -46,7 +46,7 @@ function getQuestions(): array
 function getRep(int $idquestion): array
 {
     global $pdo;
-    $req = $pdo->prepare('select distinct textreponse from reponse where idquestion = ?');
+    $req = $pdo->prepare('select distinct idreponse, textreponse from reponse where idquestion = ?');
     $req->execute(array($idquestion));
     return $req->fetchAll();
 }
@@ -111,6 +111,6 @@ function getReponsesPasRepondues(string $idu, int $idq)
 {
     global $pdo;
     $req = $pdo->prepare('select idrep from repquestion join public.repqestionnaire r on repquestion.iduser = r.iduser where repquestion.iduser = ? and idquestionnaire = ? and repondue = false order by idrep');
-    $req->execute(array($idu));
+    $req->execute(array($idu, $idq));
     return $req->fetchAll();
 }

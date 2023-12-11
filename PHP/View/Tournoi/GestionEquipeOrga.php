@@ -18,17 +18,17 @@ include ("../../View/BarreMenu/BarreMenu.php");
         <div class="col-xl-6">
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
-                echo '<div class="card" style="width: 75%;">
-                <div class="card-body">
-                    <h5 class="card-title">'.$lstEquipe[0].'</h5>
+                echo '<div class="card" style="width: 75%;" id="'.$lstEquipe[0].'" ondragover="activerdrop()" ondrop="drop() ">
+                <div class="card-body" > 
+                    <h5 class="card-title" id="tittle/'.$lstEquipe[0].'" >'.$lstEquipe[0].'</h5>
                     <p class="card-text">
-                    <div class="list-group">';
+                    <div class="list-group" id="'."listgroup/".$lstEquipe[0].'">';
                 foreach ($_SESSION["membreEquipe".$lstEquipe[0]] as $membreEquipe){
-                    echo '<li class="list-group-item list-group-item-primary" draggable="true">'.$membreEquipe["nom"]." ".$membreEquipe["prenom"].'</li>';
+                    echo '<li class="list-group-item list-group-item-primary" draggable="true" id="'.$membreEquipe[4]."/".$lstEquipe[0].'" ondragstart="recupererData()">'.$membreEquipe["nom"]." ".$membreEquipe["prenom"].'</li>';
                 };
                 echo '</div>
-                    <input type="hidden" id="equipe'.$lstEquipe[0].'" value="'.$lstEquipe[0].'">
-                    <input type="button" id="equipe" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
+                    <input type="hidden" id="equipe'.$lstEquipe[0].'" value="'.$lstEquipe[2].'">
+                    <input type="button" id="equipe/'.$lstEquipe[0].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
                     </p>
                 </div>
             </div>
@@ -39,16 +39,13 @@ include ("../../View/BarreMenu/BarreMenu.php");
 
         <div class="col-xl-3 DivJoeurSansEquipe">
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action" draggable="true">A simple default list group item</a>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item list-group-item-primary">This is a primary list group item</li>
-                <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
-                <li class="list-group-item list-group-item-success">This is a success list group item</li>
-                <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
-                <li class="list-group-item list-group-item-warning">This is a warning list group item</li>
-                <li class="list-group-item list-group-item-info">This is a info list group item</li>
-                <li class="list-group-item list-group-item-light">This is a light list group item</li>
-                <li class="list-group-item list-group-item-dark">This is a dark list group item</li>
+                <?php
+                foreach ($_SESSION["membreSansEquipe"] as $membreSansEquipe){
+                   echo '<li class="list-group-item list-group-item-primary" value="'.$membreSansEquipe[2].'" draggable="true">'.$membreSansEquipe[0]." ".$membreSansEquipe[1].'</li>';
+                }
+
+                ?>
+
             </div>
         </div>
 
@@ -59,13 +56,12 @@ include ("../../View/BarreMenu/BarreMenu.php");
 <script>
     function supprimerEquipe(idequipe) {
         $.ajax({
-
-            url:("../../Model/Tournoi/SupprEquipe.php"),
+            url:("../../Model/Tournoi/SupprEquipePost.php"),
             type: 'POST',
-            data: { action: 'supprEquipe',data: idequipe },
+            data: { action: 'supprEquipe',idequipe: idequipe },
             success: function(response) {
-                // Traitement de la réponse du serveur, si nécessaire
                 console.log('Réponse du serveur :', response);
+                location.reload()
             },
             error: function(xhr, status, error) {
                 console.error('Erreur AJAX:', error);
@@ -74,8 +70,50 @@ include ("../../View/BarreMenu/BarreMenu.php");
     }
     function supprEquipe(idequipe){
         Swal.fire({
-            title: "Supression équipe"
+            title: "Supression équipe",
+            text:"Vous allez supprimer l'équipe",
+            icon:"warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "Annuler",
+            confirmButtonText: "Valider"
+        }).then((result)=>{
+            if (result.value){
+                supprimerEquipe(idequipe)
+            }
+
         })
+    }
+
+
+    function recupererData(){
+        event.dataTransfer.setData("text",event.target.id)
+    }
+
+    function activerdrop(){
+        event.preventDefault()
+    }
+
+    function drop(){
+        event.preventDefault();
+        var idjoueur=event.dataTransfer.getData("text");
+
+        var idelementdeplace=idjoueur.split("/");
+        console.log(idelementdeplace);
+
+        var iddiv=event.target.id.split("/");
+        console.log(iddiv)
+
+        var elementdeplace=document.getElementById(idjoueur);
+        if (event.target.id.includes("listgroup/")){
+            var madiv=document.getElementById(event.target.id);
+        }
+        else{
+            var madiv=document.getElementById("listgroup/"+iddiv[1]);
+        }
+        madiv.prepend(elementdeplace);
+        elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1]
+        console.log(elementdeplace.id)
     }
 </script>
 </body>
