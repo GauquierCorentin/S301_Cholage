@@ -3,7 +3,6 @@ ob_start();
 include ("../../Model/checkSession/checkSession.php");
 include("../../Model/Tournoi/ShowMatch.php");
 checkMailValidate();
-include("../../View/Tournoi/ShowMatch.php");
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -31,4 +30,6 @@ foreach ($arrayMatchs as $match){
     array_push($arrayNomEquipe, $nomEquipe);
 }
 $_SESSION['matchs'] = $arrayNomEquipe;
+
+include("../../View/Tournoi/ShowMatch.php");
 ?>
