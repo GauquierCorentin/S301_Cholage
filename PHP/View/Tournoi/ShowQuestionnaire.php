@@ -28,6 +28,7 @@ $questions = $_SESSION['showQuestions'];
             $r = 0;
             foreach($reponses as $reponse) {
                 echo('<div class="reponse">');
+                echo($reponse['idreponse']);
                 echo('<input type="radio" id="q' . $q . 'r' . $r . '" name="q' . $q . '" value="' . $reponse['textreponse'] . '">');
                 echo('<label for="q' . $q . 'r' . $r . '">' . $reponse['textreponse'] . '</label>');
                 echo('</div>');
@@ -36,7 +37,7 @@ $questions = $_SESSION['showQuestions'];
             echo('</div>');
             $q++;
         }
-        echo('<input type="submit" name="valider" value="valider">');
+        echo('<input type="submit" name="submit" value="submit">');
         echo('</div>');
     }
 
