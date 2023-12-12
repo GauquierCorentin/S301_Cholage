@@ -15,7 +15,7 @@ try {
 function getEquipe(): array
 {
     global $pdo;
-    $req = $pdo->prepare('select * from equipe');
+    $req = $pdo->prepare('select equipe.nom, equipe.idtournoi, equipe.idequipe, tournoi.annee from equipe join public.tournoi on equipe.idtournoi = tournoi.idtournoi');
     $req->execute();
     return $req->fetchAll();
 }
@@ -33,4 +33,12 @@ function getMembreEquipe(){
         array_push($l, $row);
     }
     return $l;
+}
+
+function getTournoi() : array
+{
+    global $pdo;
+    $req =  $pdo ->prepare("select * from tournoi");
+    $req->execute();
+    return $req->fetchAll();
 }

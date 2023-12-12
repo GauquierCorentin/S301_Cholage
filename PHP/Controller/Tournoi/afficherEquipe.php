@@ -4,7 +4,8 @@ checkMailValidate();
 include("../../View/BarreMenu/BarreMenu.php");
 include("../../Model/Tournoi/afficherEquipe.php");
 
-
+$tournoi = getTournoi();
+$_SESSION['Tournoi'] = $tournoi;
 $equipe = getEquipe();
 $_SESSION['LstEquipe'] = $equipe;
 $membreEquipe = getMembreEquipe();
