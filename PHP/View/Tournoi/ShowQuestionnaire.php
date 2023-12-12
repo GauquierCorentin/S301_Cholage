@@ -29,11 +29,13 @@ $questions = $_SESSION['showQuestions'];
             foreach($reponses as $reponse) {
                 echo('<div class="reponse">');
                 echo($reponse['idreponse']);
-                echo('<input type="radio" id="q' . $q . 'r' . $r . '" name="q' . $q . '" value="' . $reponse['textreponse'] . '">');
+                echo('<input type="radio" name="q' . $q . 'r' . $r . '" value="' . $reponse['textreponse'] . '">');
                 echo('<label for="q' . $q . 'r' . $r . '">' . $reponse['textreponse'] . '</label>');
                 echo('</div>');
                 $r++;
+                echo ("<input type='hidden' name='nbrep$q' value='$r'>");
             }
+            echo ("<input type='hidden' name='nbq$q' value='$q'>");
             echo('</div>');
             $q++;
         }
