@@ -77,7 +77,6 @@
             <div class="modal-footer">
                 <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Admin/AjoutOrganisateur.php';" value="Ajouter un organisateur">
                 <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Admin/SupprOrganisateur.php';" value="Supprimer un organisateur">
-
             </div>
         </div>
     </div>
@@ -116,7 +115,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Admin/ManageValidation.php';" value="Voir tout les Utilisateurs">
-                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Admin/ShowHiddenValidation.php';" value="Voir les utlisateurs caché"   >
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Admin/ShowHiddenValidation.php';" value="Voir les utlisateurs cachés"      >
             </div>
         </div>
     </div>
@@ -132,8 +131,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
-                <a href="../../Controller/Activite/Activite.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voir Activités</button></a>
-                <a href="../../Controller/Activite/creerActivite.php"><button type="button" class="btn btn-primary">Créer Activité</button></a>
+                <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Activite/Activite.php';" value="Voir Activités">
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Activite/creerActivite.php';" value="Créer Activités">
             </div>
         </div>
     </div>
@@ -145,3 +144,4 @@
     }</script>
 </body>
 </html>
+
