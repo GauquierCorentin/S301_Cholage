@@ -15,7 +15,7 @@ include ("../../View/BarreMenu/BarreMenu.php");
 <div class="GestionEquipeOrga-container-fluid GestionEquipeOrga-mx">
     <div class="row">
         <div class="col-xl-3"></div>
-        <div class="col-xl-6">
+        <div class="col-xl-6" id="divEquipe">
             <br>
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
@@ -41,6 +41,7 @@ include ("../../View/BarreMenu/BarreMenu.php");
             <br><br>';
             }
             ?>
+            <input type="button" id="creerEquipe" value="rajouter une équipe" onclick="creerEquipe()">
         </div>
 
         <div class="col-xl-3 DivJoeurSansEquipe" id="col/vide" ondragover="activerdrop()" ondrop="drop()">
@@ -74,6 +75,8 @@ include ("../../View/BarreMenu/BarreMenu.php");
             }
         });
     }
+
+
     function supprEquipe(idequipe){
         Swal.fire({
             title: "Supression équipe",
@@ -93,12 +96,14 @@ include ("../../View/BarreMenu/BarreMenu.php");
 
 
     function recupererData(){
-        event.dataTransfer.setData("text",event.target.id)
+        event.dataTransfer.setData("text",event.target.id);
     }
 
+
     function activerdrop(){
-        event.preventDefault()
+        event.preventDefault();
     }
+
 
     function drop(){
         event.preventDefault();
@@ -113,16 +118,13 @@ include ("../../View/BarreMenu/BarreMenu.php");
         var elementdeplace=document.getElementById(idjoueur);
 
         if(!event.target.id.includes("vide") && idelementdeplace[1].includes("vide")){
-            var checkbox=document.createElement("input")
-            checkbox.type="checkbox"
-            checkbox.id="iscaptain/"+idelementdeplace[0]
-            elementdeplace.appendChild(checkbox)
+            var checkbox=document.createElement("input");
+            checkbox.type="checkbox";
+            checkbox.id="iscaptain/"+idelementdeplace[0];
+            elementdeplace.appendChild(checkbox);
         }
         else if (event.target.id.includes("vide")){
-            console.log(elementdeplace.childNodes)
-            console.log("iscaptain/"+elementdeplace[0])
-            elementdeplace.removeChild(document.getElementById("iscaptain/"+idelementdeplace[0]))
-            console.log("on le fait else")
+            elementdeplace.removeChild(document.getElementById("iscaptain/"+idelementdeplace[0]));
         }
 
         if (event.target.id.includes("listgroup/")){
@@ -136,8 +138,73 @@ include ("../../View/BarreMenu/BarreMenu.php");
 
         elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1];
     }
+
+
     function setchecked(){
-        console.log(event.target.checked)
+        console.log(event.target.checked);
+    }
+
+
+
+    function creerEquipe(){
+
+        Swal.fire({
+            input: "text",
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonText: "valider",
+            cancelButtonText: "annuler"
+        }).then((result)=> {
+            if (result.value) {
+                console.log(`${result.value}`);
+
+                var divCard = document.createElement("div");
+                divCard.className = "card";
+                divCard.style.width = "75%";
+                divCard.ondrop = drop;
+                divCard.ondragover = activerdrop;
+                divCard.id=`${result.value}`
+
+                var divCardBody = document.createElement("div");
+                divCardBody.className = "card-body";
+                divCardBody.id="body/"+`${result.value}`;
+                divCard.appendChild(divCardBody);
+
+                var divCardTittle = document.createElement("h5");
+                divCardTittle.className = "card-tittle";
+                divCardTittle.textContent = `${result.value}`
+                divCardTittle.id="tittle/"+`${result.value}`;
+                divCardBody.appendChild(divCardTittle);
+
+                var divCardText = document.createElement("p");
+                divCardText.className = "card-text"
+                divCardText.id="text/"+`${result.value}`
+                divCardBody.appendChild(divCardText);
+
+                var listGroupCardText = document.createElement("div");
+                listGroupCardText.className = "list-group";
+                listGroupCardText.id="listgroup/"+`${result.value}`
+                divCardText.appendChild(listGroupCardText);
+
+                var inputCardText = document.createElement("input");
+                inputCardText.type = "button";
+                inputCardText.value = "Supprimer Equipe";
+                inputCardText.id="text/"+`${result.value}`
+                divCardText.appendChild(inputCardText);
+
+                var colonneEquipe = document.getElementById("divEquipe");
+                colonneEquipe.appendChild(divCard);
+
+                var bouton = document.getElementById("creerEquipe")
+                var nouvBouton = bouton.cloneNode(true)
+                colonneEquipe.removeChild(bouton)
+                colonneEquipe.appendChild(document.createElement("br"))
+                colonneEquipe.appendChild(document.createElement("br"))
+                colonneEquipe.appendChild(nouvBouton)
+            }
+        })
+
+
     }
 </script>
 </body>
