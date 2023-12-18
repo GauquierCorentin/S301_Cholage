@@ -20,9 +20,9 @@ include ("../../View/BarreMenu/BarreMenu.php");
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
                 echo '<div class="card" style="width: 75%;" id="'.$lstEquipe[0].'" ondragover="activerdrop()" ondrop="drop() ">
-                <div class="card-body" > 
+                <div class="card-body" id="body/'.$lstEquipe[0].'" > 
                     <h5 class="card-title" id="tittle/'.$lstEquipe[0].'" >'.$lstEquipe[0].'</h5>
-                    <p class="card-text">
+                    <p class="card-text" id="text/'.$lstEquipe[0].'">
                     <div class="list-group" id="'."listgroup/".$lstEquipe[0].'">';
                 foreach ($_SESSION["membreEquipe".$lstEquipe[0]] as $membreEquipe){
                     if ($membreEquipe[3]) {
@@ -104,19 +104,26 @@ include ("../../View/BarreMenu/BarreMenu.php");
         event.preventDefault();
         var idjoueur=event.dataTransfer.getData("text");
 
-        console.log(idjoueur)
-
         var idelementdeplace=idjoueur.split("/");
-
-        console.log(idelementdeplace)
 
         var iddiv=event.target.id.split("/");
 
-        console.log(iddiv)
+        console.log("iddiv: " + iddiv);
 
         var elementdeplace=document.getElementById(idjoueur);
 
-        console.log(elementdeplace)
+        if(!event.target.id.includes("vide") && idelementdeplace[1].includes("vide")){
+            var checkbox=document.createElement("input")
+            checkbox.type="checkbox"
+            checkbox.id="iscaptain/"+idelementdeplace[0]
+            elementdeplace.appendChild(checkbox)
+        }
+        else if (event.target.id.includes("vide")){
+            console.log(elementdeplace.childNodes)
+            console.log("iscaptain/"+elementdeplace[0])
+            elementdeplace.removeChild(document.getElementById("iscaptain/"+idelementdeplace[0]))
+            console.log("on le fait else")
+        }
 
         if (event.target.id.includes("listgroup/")){
             var madiv=document.getElementById(event.target.id);
@@ -126,19 +133,6 @@ include ("../../View/BarreMenu/BarreMenu.php");
             var madiv=document.getElementById("listgroup/"+iddiv[1]);
         }
         madiv.prepend(elementdeplace);
-        if(!event.target.id.includes("vide")){
-            console.log(elementdeplace)
-            var checkbox=document.createElement("input")
-            checkbox.type="checkbox"
-            checkbox.id="iscaptain/"+idelementdeplace[0]
-            elementdeplace.appendChild(checkbox)
-            console.log(elementdeplace)
-        }
-        else{
-            elementdeplace.removeChild(document.getElementById("iscaptain/"+idelementdeplace[0]))
-            console.log("on le fait else")
-        }
-
 
         elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1];
     }
