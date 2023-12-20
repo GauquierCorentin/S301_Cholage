@@ -19,22 +19,22 @@ include ("../../View/BarreMenu/BarreMenu.php");
             <br>
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
-                echo '<div class="card" style="width: 75%;" id="'.$lstEquipe[0].'" ondragover="activerdrop()" ondrop="drop() ">
-                <div class="card-body" id="body/'.$lstEquipe[0].'" > 
-                    <h5 class="card-title" id="tittle/'.$lstEquipe[0].'" >'.$lstEquipe[0].'</h5>
-                    <p class="card-text" id="text/'.$lstEquipe[0].'">
-                    <div class="list-group" id="'."listgroup/".$lstEquipe[0].'">';
+                echo '<div class="card" style="width: 75%;" id="'.$lstEquipe[2].'" ondragover="activerdrop()" ondrop="drop() ">
+                <div class="card-body" id="body/'.$lstEquipe[2].'" > 
+                    <h5 class="card-title" id="tittle/'.$lstEquipe[2].'" >'.$lstEquipe[0].'</h5>
+                    <p class="card-text" id="text/'.$lstEquipe[2].'">
+                    <div class="list-group" id="'."listgroup/".$lstEquipe[2].'">';
                 foreach ($_SESSION["membreEquipe".$lstEquipe[0]] as $membreEquipe){
                     if ($membreEquipe[3]) {
-                        echo '<li class="list-group-item list-group-item-primary" draggable="true" id="' . $membreEquipe[4] . "/" . $lstEquipe[0] . '" ondragstart="recupererData()">' . $membreEquipe["nom"] . " " . $membreEquipe["prenom"] . '      <a>capitaine</a>  <input type="checkbox" id="iscaptain/'.$membreEquipe[4].'" onclick="setchecked()" value="true" checked="checked"></li>';
+                        echo '<li class="list-group-item list-group-item-primary" draggable="true" id="' . $membreEquipe[4] . "/" . $lstEquipe[2] . '" ondragstart="recupererData()">' . $membreEquipe["nom"] . " " . $membreEquipe["prenom"] . '      <b id="text/'.$membreEquipe[4]."/".$lstEquipe[2].'">capitaine</b>  <input type="checkbox" id="iscaptain/'.$membreEquipe[4]."/".$lstEquipe[2].'" onclick="ValiderCapitaine(\''.$membreEquipe[4].'\',\''.$lstEquipe[2].'\')" value="true" checked="checked"></li>';
                     }
                     else{
-                        echo '<li class="list-group-item list-group-item-primary" draggable="true" id="' . $membreEquipe[4] . "/" . $lstEquipe[0] . '" ondragstart="recupererData()">' . $membreEquipe["nom"] . " " . $membreEquipe["prenom"] . '  <input type="checkbox" id="iscaptain/'.$membreEquipe[4].'" onclick="setchecked()" value="true" ></li>';
+                        echo '<li class="list-group-item list-group-item-primary" draggable="true" id="' . $membreEquipe[4] . "/" . $lstEquipe[2] . '" ondragstart="recupererData()">' . $membreEquipe["nom"] . " " . $membreEquipe["prenom"] . '      <b id="text/'.$membreEquipe[4]."/".$lstEquipe[2].'">capitaine</b>    <input type="checkbox" id="iscaptain/'.$membreEquipe[4]."/".$lstEquipe[2].'" onclick="ValiderCapitaine(\''.$membreEquipe[4].'\',\''.$lstEquipe[2].'\')" value="true"></li>';
                     }
                 };
                 echo '</div>
-                    <input type="hidden" id="equipe'.$lstEquipe[0].'" value="'.$lstEquipe[2].'">
-                    <input type="button" id="equipe/'.$lstEquipe[0].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
+                    <input type="hidden" id="equipehidden/'.$lstEquipe[2].'" value="'.$lstEquipe[2].'">
+                    <input type="button" id="equipe/'.$lstEquipe[2].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
                     </p>
                 </div>
             </div>
@@ -118,17 +118,42 @@ include ("../../View/BarreMenu/BarreMenu.php");
         var elementdeplace=document.getElementById(idjoueur);
 
         if(!event.target.id.includes("vide") && idelementdeplace[1].includes("vide")){
-            var checkbox=document.createElement("input");
-            checkbox.type="checkbox";
-            checkbox.id="iscaptain/"+idelementdeplace[0];
-            elementdeplace.appendChild(checkbox);
+            if (event.target.id.includes("text")){
+                var text = document.createElement("b")
+                text.textContent = "      capitaine     "
+                text.id = "text/" + idelementdeplace[0] + "/" + iddiv[2];
+                elementdeplace.appendChild(text)
+
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = "iscaptain/" + idelementdeplace[0] + "/" + iddiv[2];
+                checkbox.onclick = ValiderCapitaine
+                elementdeplace.appendChild(checkbox);
+            }
+            else {
+                var text = document.createElement("b")
+                text.textContent = "      capitaine     "
+                text.id = "text/" + idelementdeplace[0] + "/" + iddiv[1];
+                elementdeplace.appendChild(text)
+
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = "iscaptain/" + idelementdeplace[0] + "/" + iddiv[1];
+                checkbox.onclick = ValiderCapitaine
+                elementdeplace.appendChild(checkbox);
+            }
         }
         else if (event.target.id.includes("vide")){
-            elementdeplace.removeChild(document.getElementById("iscaptain/"+idelementdeplace[0]));
+            console.log(idelementdeplace)
+            elementdeplace.removeChild(document.getElementById("text/"+idelementdeplace[0]+"/"+idelementdeplace[1]))
+            elementdeplace.removeChild(document.getElementById("iscaptain/"+idelementdeplace[0]+"/"+idelementdeplace[1]));
         }
 
         if (event.target.id.includes("listgroup/")){
             var madiv=document.getElementById(event.target.id);
+        }
+        else if (event.target.id.includes("text/")){
+            var madiv=document.getElementById("listgroup/"+iddiv[2])
         }
         else{
             console.log("listgroup/"+iddiv[1])
@@ -137,6 +162,7 @@ include ("../../View/BarreMenu/BarreMenu.php");
         madiv.prepend(elementdeplace);
 
         elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1];
+        AjaxAjoutJoueurEquipe(idelementdeplace[0],iddiv[1])
     }
 
 
@@ -202,10 +228,62 @@ include ("../../View/BarreMenu/BarreMenu.php");
                 colonneEquipe.appendChild(document.createElement("br"))
                 colonneEquipe.appendChild(nouvBouton)
             }
-        })
-
-
+        });
     }
+
+        function AjaxAjoutJoueurEquipe(idjoueur,idequipe){
+            $.ajax({
+                url: "../../Model/Tournoi/AjoutJoueurAjax.php",
+                type : "POST",
+                data: {idjoueur:idjoueur,idequipe:idequipe},
+                success: function (response){
+                    console.log(response)
+                },
+                error: function (xhr,status,error){
+                    console.error(error)
+                }
+            });
+        }
+        function AjaxValiderCapitaine(idjoueur){
+            $.ajax({
+                url: "../../Model/Tournoi/AjoutJoueurAjax.php",
+                type : "POST",
+                data: {idjoueur:idjoueur},
+                success: function (response){
+                    console.log(response)
+                },
+                error: function (xhr,status,error){
+                    console.error(error)
+                }
+            });
+        }
+        function AjaxRetirerCapitaine(idjoueur){
+
+        }
+        function Ajoutjoueur(idjoueur,idequipe){
+            AjaxAjoutJoueurEquipe(idjoueur,idequipe);
+        }
+        function ValiderCapitaine(){
+            checkboxactive=event.target
+            var mesval=checkboxactive.id.split("/")
+            console.log(mesval)
+            if(checkboxactive.checked) {
+                var mesCheckBoxs = document.querySelectorAll(".card input[type=checkbox ]");
+                mesCheckBoxs.forEach(function verifCheckbox(checkbox) {
+                    if (checkbox.id.includes(mesval[2])) {
+                        if (checkbox !== checkboxactive && checkbox.checked) {
+                            console.log(checkbox.id.split("/"))
+                            AjaxRetirerCapitaine(checkbox.id.split("/")[1])
+                            checkbox.checked = false;
+                        }
+                    }
+                });
+                AjaxValiderCapitaine(mesval[1])
+            }
+            else{
+                AjaxRetirerCapitaine(checkboxactive.id.split("/")[1])
+            }
+        }
 </script>
 </body>
 </html>
