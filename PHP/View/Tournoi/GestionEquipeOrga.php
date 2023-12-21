@@ -33,8 +33,8 @@ include ("../../View/BarreMenu/BarreMenu.php");
                     }
                 };
                 echo '</div>
-                    <input type="hidden" id="equipehidden/'.$lstEquipe[2].'" value="'.$lstEquipe[2].'">
-                    <input type="button" id="equipe/'.$lstEquipe[2].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[0].'\').value)">
+                    <input type="hidden" id="equipe'.$lstEquipe[2].'" value="'.$lstEquipe[2].'">
+                    <input type="button" id="equipe/'.$lstEquipe[2].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[2].'\').value)">
                     </p>
                 </div>
             </div>
@@ -113,8 +113,6 @@ include ("../../View/BarreMenu/BarreMenu.php");
 
         var iddiv=event.target.id.split("/");
 
-        console.log("iddiv: " + iddiv);
-
         var elementdeplace=document.getElementById(idjoueur);
 
         if(!event.target.id.includes("vide") && idelementdeplace[1].includes("vide")){
@@ -161,8 +159,17 @@ include ("../../View/BarreMenu/BarreMenu.php");
         }
         madiv.prepend(elementdeplace);
 
+        if (!event.target.id.includes("vide") && !idelementdeplace[1].includes("vide")) {
+            document.getElementById("iscaptain/" + idelementdeplace[0]+"/"+idelementdeplace[1]).id="iscaptain/"+idelementdeplace[0]+"/"+iddiv[1];
+            document.getElementById("text/" + idelementdeplace[0]+"/"+idelementdeplace[1]).id="text/"+idelementdeplace[0]+"/"+iddiv[1];
+        }
         elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1];
-        AjaxAjoutJoueurEquipe(idelementdeplace[0],iddiv[1])
+        if (event.target.id.includes("vide")){
+            AjaxRetirerJoueurEquipe(idelementdeplace[0])
+        }
+        else {
+            AjaxAjoutJoueurEquipe(idelementdeplace[0], iddiv[1])
+        }
     }
 
 
@@ -182,7 +189,7 @@ include ("../../View/BarreMenu/BarreMenu.php");
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                console.log(`${result.value}`);
+                var idequipe=AjaxAjoutEquipe(`${result.value}`)
 
                 var divCard = document.createElement("div");
                 divCard.className = "card";
@@ -193,29 +200,29 @@ include ("../../View/BarreMenu/BarreMenu.php");
 
                 var divCardBody = document.createElement("div");
                 divCardBody.className = "card-body";
-                divCardBody.id="body/"+`${result.value}`;
+                divCardBody.id="body/"+idequipe;
                 divCard.appendChild(divCardBody);
 
                 var divCardTittle = document.createElement("h5");
                 divCardTittle.className = "card-tittle";
                 divCardTittle.textContent = `${result.value}`
-                divCardTittle.id="tittle/"+`${result.value}`;
+                divCardTittle.id="tittle/"+idequipe;
                 divCardBody.appendChild(divCardTittle);
 
                 var divCardText = document.createElement("p");
                 divCardText.className = "card-text"
-                divCardText.id="text/"+`${result.value}`
+                divCardText.id="text/"+idequipe
                 divCardBody.appendChild(divCardText);
 
                 var listGroupCardText = document.createElement("div");
                 listGroupCardText.className = "list-group";
-                listGroupCardText.id="listgroup/"+`${result.value}`
+                listGroupCardText.id="listgroup/"+idequipe
                 divCardText.appendChild(listGroupCardText);
 
                 var inputCardText = document.createElement("input");
                 inputCardText.type = "button";
                 inputCardText.value = "Supprimer Equipe";
-                inputCardText.id="text/"+`${result.value}`
+                inputCardText.id="text/"+idequipe
                 divCardText.appendChild(inputCardText);
 
                 var colonneEquipe = document.getElementById("divEquipe");
@@ -227,6 +234,22 @@ include ("../../View/BarreMenu/BarreMenu.php");
                 colonneEquipe.appendChild(document.createElement("br"))
                 colonneEquipe.appendChild(document.createElement("br"))
                 colonneEquipe.appendChild(nouvBouton)
+
+            }
+        });
+    }
+
+    function AjaxAjoutEquipe(nomEquipe){
+        $.ajax({
+            url: "../../Model/Tournoi/AjoutEquipeAjax.php",
+            type : "POST",
+            data: {nomEquipe:nomEquipe},
+            success: function (response){
+                console.log(response)
+                return response
+            },
+            error: function (xhr,status,error){
+                console.error(error)
             }
         });
     }
@@ -244,9 +267,22 @@ include ("../../View/BarreMenu/BarreMenu.php");
                 }
             });
         }
+        function AjaxRetirerJoueurEquipe(idjoueur){
+            $.ajax({
+                url: "../../Model/Tournoi/RetirerJoueurAjax.php",
+                type : "POST",
+                data: {idjoueur:idjoueur,idequipe:idequipe},
+                success: function (response){
+                    console.log(response)
+                },
+                error: function (xhr,status,error){
+                    console.error(error)
+                }
+            });
+        }
         function AjaxValiderCapitaine(idjoueur){
             $.ajax({
-                url: "../../Model/Tournoi/AjoutJoueurAjax.php",
+                url: "../../Model/Tournoi/AjoutCapitaineAjax.php",
                 type : "POST",
                 data: {idjoueur:idjoueur},
                 success: function (response){
@@ -258,7 +294,17 @@ include ("../../View/BarreMenu/BarreMenu.php");
             });
         }
         function AjaxRetirerCapitaine(idjoueur){
-
+            $.ajax({
+                url: "../../Model/Tournoi/RetirerCapitaineAjax.php",
+                type : "POST",
+                data: {idjoueur:idjoueur},
+                success: function (response){
+                    console.log(response)
+                },
+                error: function (xhr,status,error){
+                    console.error(error)
+                }
+            });
         }
         function Ajoutjoueur(idjoueur,idequipe){
             AjaxAjoutJoueurEquipe(idjoueur,idequipe);
@@ -272,7 +318,6 @@ include ("../../View/BarreMenu/BarreMenu.php");
                 mesCheckBoxs.forEach(function verifCheckbox(checkbox) {
                     if (checkbox.id.includes(mesval[2])) {
                         if (checkbox !== checkboxactive && checkbox.checked) {
-                            console.log(checkbox.id.split("/"))
                             AjaxRetirerCapitaine(checkbox.id.split("/")[1])
                             checkbox.checked = false;
                         }

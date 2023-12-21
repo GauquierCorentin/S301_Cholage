@@ -29,4 +29,10 @@ function getMembreEquipe($idequipe){
     $req->execute(array($idequipe));
     return $req->fetchAll();
 }
+function getLastTournoi(){
+    global $pdo;
+    $req=$pdo->prepare("Select idtournoi from tournoi order by idtournoi desc");
+    $req->execute();
+    return $req->fetch();
+}
 
