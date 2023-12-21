@@ -6,6 +6,13 @@ require ("../../Model/Includes/PHPMailer/src/SMTP.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
+/**
+ * @author Gallouin Matisse
+ * @param $mail
+ * @param $equipe
+ * permet d'inviter un joueur dans une équipe à l'aide d'ajax et des donées envoyés par celui-ci
+ */
 $mail=$_POST["mail"];
 $equipe=$_POST["equipe"];
 

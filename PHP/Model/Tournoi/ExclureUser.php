@@ -7,6 +7,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+/**
+ * @author  Gallouin Matisse
+ * @param $iduser
+ * permet d'exclure un joueur de l'équipe et de le notifier à l'aide d'ajax
+ */
 session_start();
 $iduser=$_POST["mail"];
 $nomEquipe=getNomEquipeByMail($iduser);

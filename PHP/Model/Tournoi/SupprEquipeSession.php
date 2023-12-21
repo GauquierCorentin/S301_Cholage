@@ -1,5 +1,10 @@
 <?php
 session_start();
+/**
+ * @author  Gallouin Matisse
+ * @param $idequipe
+ * permet de supprimer une équipe avec des joueurs dedans avec des données obtenues à l'aide d'une session
+ */
 $idequipe=$_SESSION["equipe"];
 include("GestionEquipe.php");
 

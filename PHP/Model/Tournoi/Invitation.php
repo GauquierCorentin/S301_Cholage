@@ -13,6 +13,12 @@ try {
 } catch (PDOException $e) {
     die ('Erreur : ' . $e->getMessage());
 }
+/**
+ * @param $token
+ * @return mixed
+ * @author Gallouin Matisse
+ * permet de récupérer l'équipe lié au token demandé
+ */
 
 function getequipeToken($token){
     global $pdo;
@@ -20,6 +26,13 @@ function getequipeToken($token){
     $req->execute(array($token));
     return $req->fetch();
 }
+
+/**
+ * @param $token
+ * @return mixed
+ * @author Gallouin Matisse
+ * permet d'obtenir l'heure précise à laquelle le token a été créé
+ */
 function getCreationToken($token)
 {
     global $pdo;
@@ -28,6 +41,13 @@ function getCreationToken($token)
     $getDate = $date->fetch();
     return $getDate;
 }
+
+/**
+ * @param $idequipe
+ * @return mixed
+ * @author Gallouin Matisse
+ * permet d'obtenir le nom d'une équipe à l'aide de son id
+ */
 function getNomEquipe($idequipe){
     global $pdo;
     $req=$pdo->prepare("Select nom from equipe where idequipe=? ");
@@ -36,11 +56,27 @@ function getNomEquipe($idequipe){
     return $rep;
 }
 
+/**
+ * @param $token
+ * @return void
+ * @author Gallouin Matisse
+ * permet de supprimer le token dans la BDD afin d'éviter qu'il puisse etre réutilisé plus tard
+ */
+
 function deleteToken($token){
     global $pdo;
     $req=$pdo->prepare("Delete from token where token=?");
     $req->execute(array($token));
 }
+
+/**
+ * @param $idequipe
+ * @param $mail
+ * @param $token
+ * @return void
+ * @author Gallouin Matisse
+ * permet de rejoindre l'équipe demandé ainsi que d'envoyer un mail afin de notifier l'utilisateur qu'il a bien rejoint l'équipe
+ */
 function rejoindreEquipe($idequipe,$mail,$token){
     global $pdo;
     $req=$pdo->prepare("Update users set equipe_id=? where email=?");

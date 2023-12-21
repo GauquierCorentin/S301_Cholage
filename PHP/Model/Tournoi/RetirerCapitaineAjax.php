@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Gallouin Matisse
+ * @param $idjoueur
+ * permet de retirer le role capitaine à un joueur à l'aide de données obtenues dans ajax
+ */
 include "../../Model/Tournoi/GestionEquipeOrga.php";
 $idjoueur=$_POST["idjoueur"];
 global $pdo;

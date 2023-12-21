@@ -1,5 +1,11 @@
 <?php
 include "../../Model/Tournoi/GestionEquipeOrga.php";
+/**
+ * @author Gallouin Matisse
+ * @param $nomEquipe
+ * @param $dernierTournoi
+ * permet d'ajouter une équipe et de renvoyer l'id de l'équipe à l'aide d'ajax
+ */
 global $pdo;
 $nomEquipe=$_POST["nomEquipe"];
 $dernierTournoi=getLastTournoi()[0];
