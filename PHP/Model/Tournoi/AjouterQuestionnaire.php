@@ -99,7 +99,7 @@ function getUsersValidate(){
     return $users;
 }
 
-function sendMailQuestionnaire($email){
+function sendMailQuestionnaire($email,$lien){
 
     $mailer = new PHPMailer(true);
     try {
@@ -117,7 +117,7 @@ function sendMailQuestionnaire($email){
         $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
         $mailer->Subject = 'Nouveau questionnaire';
         //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
-        $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que vous avez un questionnaire à remplir';
+        $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que vous avez un questionnaire à remplir : '.$lien;
         $mailer->addAddress($email);
         $mailer->send();
         echo 'Message has been sent';

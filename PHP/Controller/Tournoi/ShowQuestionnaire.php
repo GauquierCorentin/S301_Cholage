@@ -10,37 +10,19 @@ $questions = getQuestions();
 
 $_SESSION['showQuestionnaires'] = $questionnaires;
 $_SESSION['showQuestions'] = $questions;
+foreach ($questionnaires as $questionnaire){
+    echo ("test");
+    if (isset($_POST['submit'.$questionnaire[0]['id']])) {
+        $nbq = $_POST['nbq'];
+        for ($i = 0; $i <= $nbq; $i++) {
+            $nbrep = $_POST['nbrep' . $i];
+            for ($j = 0; $j <= $nbrep; $j++) {
+                if (($_POST['q' . $i . 'r' . $j])=="Oui") {
 
-
-if (isset($_POST['submit'])) {
-    echo('submit' . '<br>');
-    echo('nombre de questionnaires : ' . count($questionnaires) . '<br>');
-    for ($i = 0; $i < count($questionnaires); $i++) {
-        $reps = getReponsesPasRepondues($_SESSION['mail'], $questionnaires[$i]['id']);
-        echo ('nombre de réponses : ' . count($reps) . '<br>');
-        for ($j = 0; $j < count($reps); $j++) {
-            echo($reps[$j]['idrep'] . '<br>');
-            $qr = array();
-            $qr['idquestionnaire'] = $questionnaires[$i]['id'];
-            $qr['iduser'] = $_SESSION['mail'];
-            $qr['idreponse'] = $reps[$i]['idrep'];
-            $qr['rep'] = $_POST['q'.$i.'r'.$j];
-            echo ($qr['rep'] . '<br>');
-            if ($qr['rep'] == 'Oui') {
-                $qr['rep'] = true;
-            } else {
-                $qr['rep'] = false;
+                }
             }
-            echo ($qr['rep'] . '<br>');
-            echo('Type de la réponse : '.gettype($qr['rep']).'<br>');
-            echo($qr['idreponse'] . '-' . $qr['iduser'] . '<br>');
-            repondre($qr['idreponse'], $qr['iduser'], $qr['rep'], '');
         }
-        echo($questionnaires[$i][0] . '-' . $_SESSION['mail']);
-        validerQuestionnaire($questionnaires[$i]['id'], $_SESSION['mail']);
     }
-    echo('fin');
 }
-$_POST['submit'] = null;
 
 require_once('../../View/Tournoi/ShowQuestionnaire.php');

@@ -35,11 +35,11 @@ $questions = $_SESSION['showQuestions'];
                 $r++;
                 echo ("<input type='hidden' name='nbrep$q' value='$r'>");
             }
-            echo ("<input type='hidden' name='nbq$q' value='$q'>");
             echo('</div>');
             $q++;
         }
-        echo('<input type="submit" name="submit" value="submit">');
+        echo ("<input type='hidden' name='nbq' value='$q'>");
+        echo ("<input type='submit' name='submit$questionnaire[id]' value='Valider'>");
         echo('</div>');
     }
 
