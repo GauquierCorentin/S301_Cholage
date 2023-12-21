@@ -54,6 +54,8 @@
 
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Questionnaire">Questionnaire</a>
                         </li>');
+                        echo ('<li class="nav-item">
+                               <a class="nav-link" href="../../Controller/Tournoi/GestionEquipeOrga.php">Gestion Equipe Organisateur</a>"');
                     }
                     if($_SESSION['isadmin'] == true){
                         echo('<li class="nav-item">
