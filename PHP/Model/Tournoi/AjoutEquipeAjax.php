@@ -11,5 +11,5 @@ try {
 }
 $requeteRec=$pdo->prepare("Select * from equipe where nom=? and idtournoi=?");
 $requeteRec->execute(array($nomEquipe,$dernierTournoi));
-return $requete->fetchAll()[0];
+echo $requeteRec->fetchAll()[0][2];
 

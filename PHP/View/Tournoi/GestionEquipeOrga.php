@@ -189,68 +189,71 @@ include ("../../View/BarreMenu/BarreMenu.php");
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                var idequipe=AjaxAjoutEquipe(`${result.value}`)
+                AjaxAjoutEquipe(`${result.value}`,function (idequipe){
+                    var divCard = document.createElement("div");
+                    divCard.className = "card";
+                    divCard.style.width = "75%";
+                    divCard.ondrop = drop;
+                    divCard.ondragover = activerdrop;
+                    divCard.id=`${result.value}`
 
-                var divCard = document.createElement("div");
-                divCard.className = "card";
-                divCard.style.width = "75%";
-                divCard.ondrop = drop;
-                divCard.ondragover = activerdrop;
-                divCard.id=`${result.value}`
+                    var divCardBody = document.createElement("div");
+                    divCardBody.className = "card-body";
+                    divCardBody.id="body/"+idequipe;
+                    divCard.appendChild(divCardBody);
 
-                var divCardBody = document.createElement("div");
-                divCardBody.className = "card-body";
-                divCardBody.id="body/"+idequipe;
-                divCard.appendChild(divCardBody);
+                    var divCardTittle = document.createElement("h5");
+                    divCardTittle.className = "card-tittle";
+                    divCardTittle.textContent = `${result.value}`
+                    divCardTittle.id="tittle/"+idequipe;
+                    divCardBody.appendChild(divCardTittle);
 
-                var divCardTittle = document.createElement("h5");
-                divCardTittle.className = "card-tittle";
-                divCardTittle.textContent = `${result.value}`
-                divCardTittle.id="tittle/"+idequipe;
-                divCardBody.appendChild(divCardTittle);
+                    var divCardText = document.createElement("p");
+                    divCardText.className = "card-text"
+                    divCardText.id="text/"+idequipe
+                    divCardBody.appendChild(divCardText);
 
-                var divCardText = document.createElement("p");
-                divCardText.className = "card-text"
-                divCardText.id="text/"+idequipe
-                divCardBody.appendChild(divCardText);
+                    var listGroupCardText = document.createElement("div");
+                    listGroupCardText.className = "list-group";
+                    listGroupCardText.id="listgroup/"+idequipe
+                    divCardText.appendChild(listGroupCardText);
 
-                var listGroupCardText = document.createElement("div");
-                listGroupCardText.className = "list-group";
-                listGroupCardText.id="listgroup/"+idequipe
-                divCardText.appendChild(listGroupCardText);
+                    var inputCardText = document.createElement("input");
+                    inputCardText.type = "button";
+                    inputCardText.value = "Supprimer";
+                    inputCardText.id="text/"+idequipe
+                    inputCardText.onclick=function () {
+                        supprEquipe(idequipe)
+                    }
+                    divCardText.appendChild(inputCardText);
 
-                var inputCardText = document.createElement("input");
-                inputCardText.type = "button";
-                inputCardText.value = "Supprimer Equipe";
-                inputCardText.id="text/"+idequipe
-                divCardText.appendChild(inputCardText);
+                    var colonneEquipe = document.getElementById("divEquipe");
+                    colonneEquipe.appendChild(divCard);
 
-                var colonneEquipe = document.getElementById("divEquipe");
-                colonneEquipe.appendChild(divCard);
+                    var bouton = document.getElementById("creerEquipe")
+                    var nouvBouton = bouton.cloneNode(true)
+                    colonneEquipe.removeChild(bouton)
+                    colonneEquipe.appendChild(document.createElement("br"))
+                    colonneEquipe.appendChild(document.createElement("br"))
+                    colonneEquipe.appendChild(nouvBouton)
 
-                var bouton = document.getElementById("creerEquipe")
-                var nouvBouton = bouton.cloneNode(true)
-                colonneEquipe.removeChild(bouton)
-                colonneEquipe.appendChild(document.createElement("br"))
-                colonneEquipe.appendChild(document.createElement("br"))
-                colonneEquipe.appendChild(nouvBouton)
-
+                })
             }
         });
     }
 
-    function AjaxAjoutEquipe(nomEquipe){
+    function AjaxAjoutEquipe(nomEquipe,callback){
         $.ajax({
             url: "../../Model/Tournoi/AjoutEquipeAjax.php",
             type : "POST",
             data: {nomEquipe:nomEquipe},
             success: function (response){
-                console.log(response)
-                return response
+                callback(response)
             },
             error: function (xhr,status,error){
                 console.error(error)
             }
+
         });
     }
 
