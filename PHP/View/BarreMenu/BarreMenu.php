@@ -40,20 +40,26 @@
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Equipe">équipe</a>
                         </li>');
                     }
+                    if ($_SESSION['isValidate']==true && $_SESSION['isadmin']==false && $_SESSION['isorganisateur']==false){
+                        echo('<li class="nav-item" >
+
+                        <a class="nav-link" href="../../Controller/Tournoi/ShowQuestionnaire.php">Questionnaire</a>
+                        </li>');
+                    }
                     if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
                         echo('<li class="nav-item">
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Validation">Validation</a>
                         </li>');
                         echo('<li class="nav-item" >
 
-                        <a class="nav-link" href="../../Controller/Tournoi/AjouterQuestionnaire.php">Créer un questionnaire</a>
+                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Questionnaire">Questionnaire</a>
                         </li>');
                     }
-                if($_SESSION['isadmin'] == true){
-                    echo('<li class="nav-item">
+                    if($_SESSION['isadmin'] == true){
+                        echo('<li class="nav-item">
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Organisateur">Gestion Organisateur</a>
                         </li>');
-                }
+                    }
                 ?>
                 <li class="nav-item disconnect">
                     <a class="logo nav-link" href="../../Controller/Accueil/Disconnect.php">
@@ -133,6 +139,22 @@
             <div class="modal-footer">
                 <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Activite/Activite.php';" value="Voir Activités">
                 <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Activite/creerActivite.php';" value="Créer Activités">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Div afin de permettre le choix dans gestion organisateur -->
+<div class="modal fade" id="Questionnaire" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Que voulez-vous faire ?</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/ShowQuestionnaire.php';" value="Voir les questionnaires">
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/AjouterQuestionnaire.php';" value="Créer un questionnaire">
             </div>
         </div>
     </div>
