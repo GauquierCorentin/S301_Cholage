@@ -40,19 +40,13 @@
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Equipe">équipe</a>
                         </li>');
                     }
-                    if ($_SESSION['isValidate']==true && $_SESSION['isadmin']==false && $_SESSION['isorganisateur']==false){
-                        echo('<li class="nav-item" >
-
-                        <a class="nav-link" href="../../Controller/Tournoi/ShowQuestionnaire.php">Questionnaire</a>
-                        </li>');
-                    }
                     if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
                         echo('<li class="nav-item">
                         <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Validation">Validation</a>
                         </li>');
                         echo('<li class="nav-item" >
 
-                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Questionnaire">Questionnaire</a>
+                        <a class="nav-link" href="../../Controller/Tournoi/AjouterQuestionnaire.php">Créer un questionnaire</a>
                         </li>');
                         echo ('<li class="nav-item">
                                <a class="nav-link" href="../../Controller/Tournoi/GestionEquipeOrga.php">Gestion Equipe Organisateur</a>"');
@@ -146,26 +140,9 @@
     </div>
 </div>
 
-<!-- Div afin de permettre le choix dans gestion organisateur -->
-<div class="modal fade" id="Questionnaire" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Que voulez-vous faire ?</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/ShowQuestionnaire.php';" value="Voir les questionnaires">
-                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/AjouterQuestionnaire.php';" value="Créer un questionnaire">
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>function alert(){
     window.alert("sima")
     }</script>
 </body>
 </html>
-
