@@ -15,7 +15,7 @@ $matchId = $_SESSION['matchId'];
     <title>Show Match</title>
 </head>
 <body>
-<h1>Voici la liste des matchs qu'il vous reste a affectuer : </h1>
+<h1>Voici la liste des matchs qu'ils vous restent a effectuer : </h1>
 <form method="POST">
     <?php
     foreach ($matchs as $match){
