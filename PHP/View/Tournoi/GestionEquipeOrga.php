@@ -163,13 +163,13 @@ include ("../../View/BarreMenu/BarreMenu.php");
             document.getElementById("iscaptain/" + idelementdeplace[0]+"/"+idelementdeplace[1]).id="iscaptain/"+idelementdeplace[0]+"/"+iddiv[1];
             document.getElementById("text/" + idelementdeplace[0]+"/"+idelementdeplace[1]).id="text/"+idelementdeplace[0]+"/"+iddiv[1];
         }
-        elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1];
         if (event.target.id.includes("vide")){
             AjaxRetirerJoueurEquipe(idelementdeplace[0])
         }
         else {
             AjaxAjoutJoueurEquipe(idelementdeplace[0], iddiv[1])
         }
+        elementdeplace.id=idelementdeplace[0]+"/"+iddiv[1];
     }
 
 
@@ -274,7 +274,7 @@ include ("../../View/BarreMenu/BarreMenu.php");
             $.ajax({
                 url: "../../Model/Tournoi/RetirerJoueurAjax.php",
                 type : "POST",
-                data: {idjoueur:idjoueur,idequipe:idequipe},
+                data: {idjoueur:idjoueur},
                 success: function (response){
                     console.log(response)
                 },

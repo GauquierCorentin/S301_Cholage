@@ -150,11 +150,11 @@ foreach ($_SESSION["MembresInvitables"] as $item){
     echo "<form method='post'>";
     echo "<tr class='test'>";
     echo "<td>". $item["email"]."</td>";
-    echo '<input type="hidden" name="email" id="email'.$i.'" value="' . $item['email'].'">';
+    echo '<input type="hidden" name="emailInvit" id="emailInvit'.$i.'" value="' . $item['email'].'">';
     echo '<input type="hidden" id="nbJoueur'.$i.'" value='.$i.'>';
     echo '<td>' . $item['nom'] . '</td>';
     echo '<td>' . $item['prenom'] . '</td>';
-    echo '<td><input type="button" id="inviter'.$i.'" name="inviter" value="Inviter" onclick="envoyerInvitation(document.getElementById(\'email'.$i.'\').value,\''.$_SESSION["equipe"].'\')"">';
+    echo '<td><input type="button" id="inviter'.$i.'" name="inviter" value="Inviter" onclick="envoyerInvitation(document.getElementById(\'emailInvit'.$i.'\').value,\''.$_SESSION["equipe"].'\')"">';
     echo '</tr>';
     echo "</form>";
     $i++;

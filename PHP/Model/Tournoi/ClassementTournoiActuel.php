@@ -11,7 +11,7 @@ function getScoreEquipe($idtournoi){
  global $pdo;
  $requete=$pdo->prepare("select nom,count(m.equipegagnante) as victoire,count(m2.equipeperdante) as défaite
 from equipe
-         left join public.match m on equipe.idequipe = m.equipegagnante
+left join public.match m on equipe.idequipe = m.equipegagnante
 left join public.match m2 on equipe.idequipe = m2.equipeperdante
 where idtournoi=?
 group by idequipe;");

@@ -26,7 +26,13 @@ $token=base64_encode($token);
     }
     $mailer = new PHPMailer(true);
     try {
-
+        $mailer->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
         //Server settings
         $mailer->SMTPDebug = 0;
         $mailer->isSMTP();
