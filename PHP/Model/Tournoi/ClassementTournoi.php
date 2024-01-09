@@ -13,7 +13,7 @@ function getScoreEquipe($idtournoi){
 from equipe
 left join public.match m on equipe.idequipe = m.equipegagnante
 left join public.match m2 on equipe.idequipe = m2.equipeperdante
-where idtournoi=?
+where equipe.idtournoi=?
 group by idequipe;");
  $requete->execute(array($idtournoi));
  return $requete->fetchAll();
@@ -22,11 +22,13 @@ group by idequipe;");
 /**
  * @return mixed
  * @author Gallouin Matisse
- * permet d'obtenir le dernier tournoi créé
+ * permet d'obtenir tous les tournois créés
  */
-function getLastTournoi(){
+function getAllTournoi(){
     global $pdo;
-    $req=$pdo->prepare("Select idtournoi from tournoi order by idtournoi desc");
+    $req=$pdo->prepare("Select idtournoi,nomtournoi,datetournoi from tournoi order by datetournoi desc");
     $req->execute();
-    return $req->fetch();
+    return $req->fetchAll();
 }
+
+

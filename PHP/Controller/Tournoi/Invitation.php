@@ -82,7 +82,7 @@ else{
         Swal.fire({
             icon: 'warning',
             title: 'rejoindre l\'équipe',
-            text: 'Voulez-vous rejoindre l\'équipe',
+            text: 'Voulez-vous rejoindre l\'équipe '+'<?php echo $nomequipe[0] ?>',
             cancelButtonText:"ne pas rejoindre",
             confirmButtonText:"rejoindre",
             showCancelButton:true,
@@ -90,11 +90,11 @@ else{
         }).then((result)=>{
             if(result.isConfirmed) {
                 accepterInvitationAjax('<?php echo $equipe?>','<?php echo $token ?>','<?php echo $email?>')
-                window.location.href="../../View/Accueil/MainPage.php"
+                window.location.href="../../Controller/Accueil/Accueil.php"
             }
             else{
                 refuserInvitationAjax('<?php echo $token?>')
-                window.location.href="../../View/Accueil/MainPage.php"
+                window.location.href="../../Controller/Accueil/Accueil.php"
             }
         })
     </script>

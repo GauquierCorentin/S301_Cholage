@@ -14,8 +14,11 @@ include ("../../View/BarreMenu/BarreMenu.php");
 <body>
 <div class="GestionEquipeOrga-container-fluid GestionEquipeOrga-mx">
     <div class="row">
-        <div class="col-xl-3"></div>
+        <div class="col-xl-3">
+            <h1>Pour changer les joueurs d'équipe il suffit de les faire glisser dans la zone correspondante à l'équipe voulu</h1>
+        </div>
         <div class="col-xl-6" id="divEquipe">
+            <h2>Equipe</h2>
             <br>
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
@@ -45,6 +48,7 @@ include ("../../View/BarreMenu/BarreMenu.php");
         </div>
 
         <div class="col-xl-3 DivJoeurSansEquipe" id="col/vide" ondragover="activerdrop()" ondrop="drop()">
+            <h3 class="TittreSansEquipe">Membres sans équipes</h3>
             <div class="list-group" id="listgroup/vide" ondragover="activerdrop()" ondrop="drop() ">
                 <?php
                 foreach ($_SESSION["membreSansEquipe"] as $membreSansEquipe){

@@ -15,6 +15,12 @@ use PHPMailer\PHPMailer\Exception;
  */
 $mail=$_POST["mail"];
 $equipe=$_POST["equipe"];
+$membre=getMembre_Role($equipe);
+for ($i=0;$i<sizeof($membre);$i++){
+    if($membre[$i][3]){
+        $capitaine=" dont le capitaine est ".$membre[$i][1]." ".$membre[$i][0];
+    }
+}
 
 
 $token=bin2hex(random_bytes(24));
@@ -46,7 +52,7 @@ $token=base64_encode($token);
         $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
         $mailer->Subject = 'Invitation dans une équipe';
 
-        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]."\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/Tournoi/Invitation.php?email=".$mail."&token=".$token."&equipe=".$equipe;
+        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]." ".$capitaine. "\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/Tournoi/Invitation.php?email=".$mail."&token=".$token."&equipe=".$equipe;
         $mailer->addAddress($mail);
         $mailer->send();
         exit();

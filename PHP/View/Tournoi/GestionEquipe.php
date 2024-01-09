@@ -77,7 +77,7 @@ echo "<h1>" . $_SESSION["NomEquipe"][0] . "</h1>";
         <?php
         echo '<input type="hidden" name="idequipe" id="idequipe" value="' . $_SESSION["equipe"] . '">';
             if ($_SESSION["isCaptain"]==true){
-                echo "<input type='submit' name='SupprEquipe'  value='Dissoudre  l équipe'>";
+                echo "<input type='submit' name='SupprEquipe' value='Dissoudre l&#39;équipe'>";
                 echo '<input type="hidden" name="idequipe" id="idJoueurExclu" value="0">';
             }
             else{

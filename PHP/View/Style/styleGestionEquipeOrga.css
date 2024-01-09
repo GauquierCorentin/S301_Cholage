@@ -2,9 +2,21 @@
     padding: 20px;
 }
 .DivJoeurSansEquipe{
-    background-color: whitesmoke;
+    background-color: #3074d7;
 }
 .GestionEquipeOrga-mx {
     margin-right: 12px;
     margin-left: 12px;
+}
+.col-xl-6{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: visible;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100vh;
+}
+.TittreSansEquipe{
+    color: white;
 }
