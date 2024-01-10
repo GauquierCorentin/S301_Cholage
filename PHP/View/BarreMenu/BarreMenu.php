@@ -37,7 +37,7 @@
                 ob_start();
                     if ($_SESSION['isValidate']==true || $_SESSION['isadmin']==true){
                         echo('<li class="nav-item">
-                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Equipe">équipe</a>
+                        <a class="nav-link"  href="" data-bs-toggle="modal" data-bs-target="#Equipe">Équipe</a>
                         </li>');
                     }
                     if($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true){
@@ -135,6 +135,8 @@
             <div class="modal-footer">
                 <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Activite/Activite.php';" value="Voir Activités">
                 <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Activite/creerActivite.php';" value="Créer Activités">
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/ClassementTournoiActuel.php';" value="Voir le classement du tournoi actuel">
+                <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Tournoi/ClassementTournoi.php';" value="Voir tout les classements">
             </div>
         </div>
     </div>
