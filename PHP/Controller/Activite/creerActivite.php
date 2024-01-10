@@ -1,4 +1,8 @@
 <?php
+require("../../Model/checkSession/checkSession.php");
+checkMailOrgaOrAdmin();
+require("../../View/Activite/creerActivite.php");
+?>
 include("../../Model/checkSession/checkSession.php");
 checkMailAdmin();
 checkMailOrga();
