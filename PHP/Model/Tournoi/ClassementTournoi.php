@@ -14,7 +14,8 @@ from equipe
 left join public.match m on equipe.idequipe = m.equipegagnante
 left join public.match m2 on equipe.idequipe = m2.equipeperdante
 where equipe.idtournoi=?
-group by idequipe;");
+group by idequipe
+order by victoire desc ;");
  $requete->execute(array($idtournoi));
  return $requete->fetchAll();
 }
