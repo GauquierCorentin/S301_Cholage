@@ -1,11 +1,6 @@
 <?php
 include ("../../Model/BDD/ConnexionBDD.php");
-require("../../Model/Includes/PHPMailer/src/Exception.php");
-require("../../Model/Includes/PHPMailer/src/PHPMailer.php");
-require ("../../Model/Includes/PHPMailer/src/SMTP.php");
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+
 
 try {
     $conn = ConnexionBDD::getInstance();
@@ -17,13 +12,27 @@ ob_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+/**
+ * @param $idequipe
+ * @return array|false
+ * @author Gallouin Matisse
+ * permet de récupérer les membres de l'équipe demandé
+ */
+
 function getMembre_Role($idequipe){
     global $pdo;
-    $req=$pdo->prepare("Select nom,prenom,email,iscaptain from users where equipe_id=?");
+    $req=$pdo->prepare("Select nom,prenom,email,iscaptain from users where equipe_id=? order by iscaptain desc");
     $req->execute(array($idequipe));
     $rep=$req->fetchAll();
     return $rep;
 }
+
+/**
+ * @param $idequipe
+ * @return mixed
+ * @author Gallouin Matisse
+ * permet d'obtenir le nom d'une équipe à l'aide de son id
+ */
 function getNomEquipe($idequipe){
     global $pdo;
     $req=$pdo->prepare("Select nom from equipe where idequipe=? ");
@@ -31,13 +40,40 @@ function getNomEquipe($idequipe){
     $rep=$req->fetch();
     return $rep;
 }
+
+/**
+ * @param $mail
+ * @return mixed
+ * @author Gallouin Matisse
+ * permet d'obtenir l'équipe d'un joueur à l'aide de son email
+ */
+function getNomEquipeByMail($mail){
+    global $pdo;
+    $req=$pdo->prepare("Select equipe_id from users where email=? ");
+    $req->execute(array($mail));
+    $rep=$req->fetch();
+    return getNomEquipe($rep[0]);
+}
+
+/**
+ * @return array|false
+ * @author Gallouin Matisse
+ * permet d'obtenir les membres n'ayant pas d'équipe
+ */
 function getMembreSansEquipe(){
     global $pdo;
-    $req=$pdo->prepare("Select nom,prenom,email from users where equipe_id is null");
+    $req=$pdo->prepare("Select nom,prenom,email from users where equipe_id is null and isvalidate=true");
     $req->execute();
     $rep=$req->fetchAll();
     return $rep;
 }
+
+/**
+ * @param $iduser
+ * @return void
+ * @author Gallouin Matisse
+ * permet de supprimer un user d'une équipe à l'aide de son mail
+ */
 function supprUser($iduser){
     global $pdo ;
     $req=$pdo->prepare("Update users set equipe_id=null,iscaptain=false where email=?");
@@ -45,69 +81,46 @@ function supprUser($iduser){
     $_SESSION["equipe"]=null;
     $_SESSION["isCaptain"]=null;
 }
-function verifequipe($iduser){
-    global $pdo;
-    $req=$pdo->prepare("Select equipe_id from users where email=?");
-    $req->execute(array($iduser));
-    return $req->fetch();
-}
-function insertToken($token,$email)
+
+/**
+ * @param $token
+ * @param $email
+ * @param $idequipe
+ * @return void
+ * permet d'insérer dans la bdd un token crée et de lier à un user et une équipe
+ */
+function insertToken($token,$email,$idequipe)
 {
     global $pdo;
     $date = date("Y-m-d H:i:s");
-    $insertToken = $pdo->prepare('INSERT INTO token VALUES (?, ?, ?,true)');
-    $insertToken->execute(array($token, $date,$email ));
+    $insertToken = $pdo->prepare('INSERT INTO token VALUES (?, ?, ?,true,?)');
+    $insertToken->execute(array($token, $date,$email,$idequipe ));
 }
-function UpdateToken($token,$email){
+
+/**
+ * @param $token
+ * @param $email
+ * @param $idequipe
+ * @return void
+ * permet de mettre à jour un token existant si il possède les memes carectirestiques qu'un présent dans la BDD
+ */
+function UpdateToken($token,$email,$idequipe){
     global $pdo;
     $date = date("Y-m-d H:i:s");
-    $update = $pdo->prepare('UPDATE token SET token = ?,creation=? WHERE email = ? and isinvitation=true');
-    $update->execute(array($token,$date,$email));
+    $update = $pdo->prepare('UPDATE token SET token = ?,creation=?,idequipe=? WHERE (email = ? and isinvitation=true and idequipe=?)');
+    $update->execute(array($token,$date,$idequipe,$email,$idequipe));
 }
-function getToken($email){
+
+/**
+ * @param $email
+ * @param $idequipe
+ * @return mixed
+ * permet d'obtenir le token lié à un joueur et une équipe
+ */
+function getToken($email,$idequipe){
     global $pdo;
-    $getToken = $pdo->prepare('SELECT * FROM token WHERE email = ? and isinvitation!=false');
-    $getToken->execute(array($email));
+    $getToken = $pdo->prepare('SELECT * FROM token WHERE email = ? and isinvitation!=false and idequipe=?');
+    $getToken->execute(array($email,$idequipe));
     $token = $getToken->fetch();
     return $token;
-}
-function inviter($mail,$equipe){
-    $token=bin2hex(random_bytes(24));
-    $token=base64_encode($token);
-    if (getToken($mail)!=null){
-        ?>
-        <script>console.log("on est dans le if")</script>
-        <?php
-        UpdateToken($token,$mail);
-    }else{
-        ?>
-        <script>console.log("on est dans le else")</script>
-        <?php
-        insertToken($token,$mail);
-    }
-    $mailer = new PHPMailer(true);
-    try {
-
-        //Server settings
-        $mailer->SMTPDebug = 0;
-        $mailer->isSMTP();
-        $mailer->Host = 'smtp.gmail.com';
-        $mailer->SMTPAuth = true;
-        $mailer->Username = 'cholage.offi@gmail.com';
-        $mailer->Password = 'fufvajtuygojmfro';
-        $mailer->SMTPSecure = 'tls';
-        $mailer->Port = 587;
-        //Recipients
-        $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
-        $mailer->Subject = 'Invitation dans une équipe';
-
-        $mailer->Body = 'Bonjour, nous vous indiquons que vous avez été inviter dans l\'équipe '.getNomEquipe($equipe)[0]."\nVous pouvez la rejoindre à l\'aide du lien suivant http://localhost:63342/S301_Cholage/PHP/Controller/Tournoi/Invitation.php?email=".$mail."&token=".$token."&equipe=".$equipe;
-        $mailer->addAddress($mail);
-        $mailer->send();
-        exit();
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
-    }
-    exit();
-
 }

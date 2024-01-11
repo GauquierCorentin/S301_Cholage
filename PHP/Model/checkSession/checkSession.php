@@ -36,5 +36,12 @@ function checkMailCaptain()
         header('Location: http://localhost:63342/S301_Cholage/PHP/Controller/Accueil/Accueil.php');
     }
 }
+
+function checkMailOrgaOrAdmin()
+{
+    if (!isset($_SESSION['mail']) and (!$_SESSION['isadmin'] or $_SESSION['isorganisateur'])) {
+        header('Location: http://localhost:63342/S301_Cholage/PHP/Controller/Accueil/Accueil.php');
+    }
+}
 ?>
 

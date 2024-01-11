@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../../View/Accueil/Accueil.php");
+require("../../View/Accueil/Accueil.php");
 
 require("../../Model/BDD/ConnexionBDD.php");
 require("../../Model/Accueil/Connexion.php");

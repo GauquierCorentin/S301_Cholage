@@ -64,7 +64,7 @@ function addQuestion($question,$idquestionnaire){
 }
 
 /**
- * @author WILLIAME Anthony, GALLOUIN Matisse
+ * @author WILLIAME Anthony, GALLOUIN Matisse, WEBER Guilhem
  * Fonction qui ajoute une réponse dans la table reponse
  * @param $reponse
  * @param $idquestion
@@ -72,8 +72,18 @@ function addQuestion($question,$idquestionnaire){
  */
 function addReponse($reponse,$idquestion){
     global $pdo;
-    $req = $pdo->prepare('INSERT INTO reponse VALUES (default,?,false,?)');
-    $req->execute(array($reponse,$idquestion));
+    $reqA = $pdo->prepare('select email from users where isvalidate = true');
+    $reqA->execute();
+    $users = $reqA->fetchAll();
+    $reqA = $pdo->prepare('INSERT INTO reponse VALUES (default,?,?)');
+    $reqA->execute(array($reponse,$idquestion));
+    $reqB = $pdo->prepare('SELECT idreponse FROM reponse order by idreponse desc');
+    $reqB->execute();
+    $idrep = $reqB->fetch();
+    foreach ($users as $u) {
+        $reqC = $pdo->prepare('INSERT INTO repquestion VALUES (?, ?, false, ?, default)');
+        $reqC->execute(array($idrep[0], $u[0], ''));
+    }
 }
 
 /**
@@ -89,7 +99,7 @@ function getUsersValidate(){
     return $users;
 }
 
-function sendMailQuestionnaire($email){
+function sendMailQuestionnaire($email,$lien){
 
     $mailer = new PHPMailer(true);
     try {
@@ -107,7 +117,7 @@ function sendMailQuestionnaire($email){
         $mailer->setFrom('cholage.offi@gmail.com', 'Cholage');
         $mailer->Subject = 'Nouveau questionnaire';
         //Remplacer le "S301_Cholage" par le nom du dossier qui contient le projet
-        $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que vous avez un questionnaire à remplir';
+        $mailer->Body = 'Bonjour, nous avons le plaisir de vous annoncer que vous avez un questionnaire à remplir : '.$lien;
         $mailer->addAddress($email);
         $mailer->send();
         echo 'Message has been sent';

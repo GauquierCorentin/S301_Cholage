@@ -90,3 +90,24 @@ th,td{
     border-color: #5669c0;
 }
 
+.activite {
+    height: 50%;
+    margin-top: .5%;
+    margin-right: .5%;
+    margin-left: .5%;
+    background-color: #85beeb;
+}
+
+.nomT {
+    color: black;
+    text-align: left;
+    float: left;
+    clear: none;
+}
+
+.dateT {
+    color: black;
+    text-align: right;
+    float: right;
+}
+

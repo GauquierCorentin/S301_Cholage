@@ -10,7 +10,7 @@ require_once ('../../View/Tournoi/AjouterQuestionnaire.php');
 
 $email = getUsersValidate();
 if (isset($_POST['submit'])){
-    $nom = $_POST['nom'];
+    /**$nom = $_POST['nom'];
     addQuestionnaire($nom);
     $idquestionnaire = getQuestionnaire()[0];
     $nbQuestion = $_POST['nbQuestion'];
@@ -19,16 +19,15 @@ if (isset($_POST['submit'])){
     for($i=1 ; $i<=$nbQuestion; $i++ ) {
         $question = $_POST['question' . $i];
         $idquestion=addQuestion($question, $idquestionnaire);
-        for ($j=1; $j<=$_POST['nbReponseQ'.$i]; $j++){
+        for ($j=0; $j<=$_POST['nbReponseQ'.$i]; $j++){
             echo('I au début du j : '.$i.'\n');
             $reponse = $_POST["Q".$i.'reponse'.$j];
             addReponse($reponse,$idquestion);
         }
-    }
-
+    }**/
     //On envoie un mail à tous les utilisateurs validés
     foreach ($email as $mail){
-        sendMailQuestionnaire($mail[0]);
+        sendMailQuestionnaire($mail[0],$_POST['lien']);
     }
     header('Location: ../../Controller/Tournoi/AjouterQuestionnaire.php');
     exit();

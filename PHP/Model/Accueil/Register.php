@@ -37,7 +37,7 @@ function signIn($mail, $mdp, $mdpcheck)
                 die ('Erreur : ' . $e->getMessage());
             }
             $hash = password_hash($mdp, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users VALUES (:mail,:nom,:prenom,:numtel,:hash,null,null,false,false,false,false,false,0)";
+            $sql = "INSERT INTO users VALUES (:mail,:nom,:prenom,:numtel,:hash,null,false,false,false,false,false,0,null)";
             $req = $pdo->prepare($sql);
             $req->bindParam('mail',$mail);
             $req->bindParam('nom', $nom);

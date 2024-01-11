@@ -20,7 +20,7 @@ if ($_SESSION["equipe"]!=null || $_SESSION["isCaptain"] == true ){
             // Vérifier si le bouton "OK" a été cliqué
             if (result.value) {
                 // Redirection côté client
-                window.location.href = '../../View/Accueil/MainPage.php';
+                window.location.href = '../../Controller/Accueil/MainPage.php';
             }
         });
     </script>
@@ -29,21 +29,33 @@ if ($_SESSION["equipe"]!=null || $_SESSION["isCaptain"] == true ){
 
 if (isset($_POST["CreerEquipe"])){
     if ($_POST["NameEquipe"]!=null){
-        addEquipe($_SESSION["mail"],$_POST["NameEquipe"]/*,gettournoi()[0]*/);
-        ?>
-        <script>
-        Swal.fire({
+        try {
+            addEquipe($_SESSION["mail"], $_POST["NameEquipe"], getLastTournoi()[0]);
+            ?>
+            <script>
+                Swal.fire({
                     icon: 'success',
                     title: 'Nouvelle Equipe',
                     text: 'Vous avez créez une nouvelle équipe'
-        }).then((result) => {
-            // Vérifier si le bouton "OK" a été cliqué
-            if (result.value) {
-                // Redirection côté client
-                window.location.href = '../../View/Accueil/MainPage.php';
-            }
-        });
-        </script>
-<?php }
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href = '../../Controller/Accueil/MainPage.php';
+                    }
+                });
+            </script>
+            <?php
+        }catch (PDOException){
+            ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Nom utilisé',
+                    text: 'Le nom d\'équipe que vous avez utilisé est déjà pris'
+                })
+                console.log("il y a une erreur")
+            </script>
+            <?php
+        }
+    }
 }
 

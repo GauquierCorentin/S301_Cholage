@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Gallouin Matisse
+ * @param $iduser
+ * permet de supprimer un utilisateur à l'aide d'ajax avec des données obtenus d'une session
+ */
+include ("GestionEquipe.php");
 session_start();
 $iduser=$_SESSION["mail"];
 global $pdo ;

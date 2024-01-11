@@ -7,22 +7,38 @@ try {
 } catch (PDOException $e) {
     die('Erreur :'. $e->getMessage());
 }
-
+/**
+ * Fonction récuperant l'ensemble de la table equipe
+ * @return array
+ * @author GUERIN jean-baptiste
+ */
 function getEquipe(): array
 {
     global $pdo;
-    $req = $pdo->prepare('select * from equipe');
+    $req = $pdo->prepare('select equipe.nom, equipe.idtournoi, equipe.idequipe, tournoi.annee from equipe join public.tournoi on equipe.idtournoi = tournoi.idtournoi');
     $req->execute();
     return $req->fetchAll();
 }
-
+/**
+ * Fonction récuperant les membres avec l'id d'equipe associé
+ * @return array
+ * @author GUERIN jean-baptiste
+ */
 function getMembreEquipe(){
     global $pdo;
-    $req = $pdo -> prepare("select nom, prenom, equipe_id from users");
+    $req = $pdo -> prepare("select nom, prenom, equipe_id, iscaptain, email from users order by iscaptain desc ");
     $req->execute();
     $l = array();
     while ($row = $req->fetch()) {
         array_push($l, $row);
     }
     return $l;
+}
+
+function getTournoi() : array
+{
+    global $pdo;
+    $req =  $pdo ->prepare("select * from tournoi");
+    $req->execute();
+    return $req->fetchAll();
 }
