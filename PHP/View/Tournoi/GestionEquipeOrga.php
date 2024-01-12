@@ -54,7 +54,6 @@ include ("../../View/BarreMenu/BarreMenu.php");
                 foreach ($_SESSION["membreSansEquipe"] as $membreSansEquipe){
                    echo '<li class="list-group-item list-group-item-primary" id="'.$membreSansEquipe[2].'/vide" value="'.$membreSansEquipe[2].'" draggable="true" ondragstart="recupererData()">'.$membreSansEquipe[0]." ".$membreSansEquipe[1].'</li>';
                 }
-
                 ?>
 
             </div>
