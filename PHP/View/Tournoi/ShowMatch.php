@@ -27,7 +27,7 @@ $matchId = $_SESSION['idmatch'];
         echo "<div class='card-body'>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
-            echo("<input type='hidden' name='idMatch' value='$match[2]' id='$match[2]'>");
+            echo("<input type='hidden' name='idMatch' value='$match[2]' idmatch='$match[2]'>");
         if ($_SESSION['isCaptain']==1){
         echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis()'></input>");
         }
@@ -54,35 +54,16 @@ $matchId = $_SESSION['idmatch'];
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                AjaxAjoutEquipe(`${result.value}`{
-                    var divCard = document.createElement("div");
-                    divCard.className = "card";
-                    divCard.style.width = "75%";
-                    divCard.ondrop = drop;
-                    divCard.ondragover = activerdrop;
-                    divCard.id=`${result.value}`
-
-                    var divCardBody = document.createElement("div");
-                    divCardBody.className = "card-body";
-                    divCardBody.id="body/"+idequipe;
-                    divCard.appendChild(divCardBody);
-
-                    var divCardTittle = document.createElement("h5");
-                    divCardTittle.className = "card-tittle";
-                    divCardTittle.textContent = `${result.value}`
-                    divCardTittle.id="tittle/";
-                    divCardBody.appendChild(divCardTittle);
-
-                })
+                AddPari(<?php echo $_SESSION['equipe'] ?>,result.value,$(this).attr('idmatch'));
             }
         });
     }
 
-    function AjaxAjoutJoueurEquipe(){
+    function AddPari(idequipe,pari,idmatch){
         $.ajax({
-            url: "../../Model/Tournoi/AjoutJoueurAjax.php",
+            url: "../../Model/Tournoi/ShowMatchAjax.php",
             type : "POST",
-            data: {idjoueur:idjoueur,idequipe:idequipe},
+            data: {idequipe:idequipe,idmatch:idmatch,pari:pari},
             success: function (response){
                 console.log(response)
             },
