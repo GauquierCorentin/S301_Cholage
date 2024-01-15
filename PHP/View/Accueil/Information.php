@@ -14,6 +14,13 @@ include("../../View/BarreMenu/BarreMenu.php")
 </head>
 
 <body>
+<form>
+    <label for="langues">changer la langue:</label>
+    <select id="langues" name="langues">
+        <option onclick="window.location.href='../../View/Accueil/Information.php'">Français</option>
+        <option onclick="window.location.href='../../View/Accueil/InformationAnglais.php'">Anglais</option>
+    </select>
+</form>
 <div>
     <h1>Présentation</h1>
     <p>Le chôlage est un sport de rue ressemblant à une sorte de golf, pratiqué dans quelques rares villages du nord

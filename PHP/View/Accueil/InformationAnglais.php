@@ -17,6 +17,13 @@ include("../../View/BarreMenu/BarreMenu.php")
 </head>
 
 <body>
+<form>
+    <label for="langues">changer la langue:</label>
+    <select id="langues" name="langues">
+        <option onclick="window.location.href='../../View/Accueil/Information.php'">Français</option>
+        <option onclick="window.location.href='../../View/Accueil/InformationAnglais.php'">Anglais</option>
+    </select>
+</form>
 <div>
     <h1>Presentation</h1>
     <p>"Le Chôlage" is a street sport, resembling golf, played in a small number of villages in the north of France,
