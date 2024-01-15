@@ -11,10 +11,13 @@ try {
  * @author Gallouin Matisse
  * permet d'obtenir tous les membres sans équipe qui sont validés
  */
-function getMembreSansEquipe(){
+function getMembreSansEquipe($idtournoi){
     global $pdo;
-    $req=$pdo->prepare("Select nom,prenom,email from users where equipe_id is null and isvalidate=true");
-    $req->execute();
+    $req=$pdo->prepare("select users.nom,prenom,users.email
+from users
+    left join public.equipe e on e.idequipe = users.equipe_id
+where (equipe_id IS NULL or e.idtournoi!=?) and isvalidate=true");
+    $req->execute(array($idtournoi));
     $rep=$req->fetchAll();
     return $rep;
 }
@@ -22,13 +25,13 @@ function getMembreSansEquipe(){
 /**
  * @return array|false
  * @author Gallouin Matisse
- * permet de récupérer toutes les équipes
+ * permet de récupérer toutes les équipes du dernier tournoi créé
  */
-function getEquipe()
+function getEquipe($idtournoi)
 {
     global $pdo;
-    $req = $pdo->prepare('select * from equipe');
-    $req->execute();
+    $req = $pdo->prepare('select * from equipe where idtournoi=?');
+    $req->execute(array($idtournoi));
     return $req->fetchAll();
 }
 
