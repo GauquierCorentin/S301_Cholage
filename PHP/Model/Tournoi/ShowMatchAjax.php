@@ -12,6 +12,8 @@ $equipe = $req->fetch();
 
 if ($equipe['equipechole'] == $idequipe) {
     $sql = $pdo->prepare("UPDATE match set (pariequipe1) VALUES (?) WHERE idmatch = ?");
+    $sql->execute(array($pari, $idmatch));
 } else {
-    $equipe = "equipedechole";
+    $sql = $pdo->prepare("UPDATE match set (pariequipe2) VALUES (?) WHERE idmatch = ?");
+    $sql->execute(array($pari, $idmatch));
 }
