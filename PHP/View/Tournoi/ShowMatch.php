@@ -27,9 +27,9 @@ $matchId = $_SESSION['idmatch'];
         echo "<div class='card-body'>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
-            echo("<input type='hidden' name='idMatch' value='$match[2]'>");
+            echo("<input type='hidden' name='idMatch' value='$match[2]' id='$match[2]'>");
         if ($_SESSION['isCaptain']==1){
-        echo("<button type='submit' class='btn btn-primary' name='match'>Miser</button>");
+        echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis()'></input>");
         }
         echo "<h5 class='card-title'>Equipe adverse</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipeAdverse[$i][0] . "</p>";
@@ -54,7 +54,7 @@ $matchId = $_SESSION['idmatch'];
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                AjaxAjoutEquipe(`${result.value}`,function (idequipe){
+                AjaxAjoutEquipe(`${result.value}`{
                     var divCard = document.createElement("div");
                     divCard.className = "card";
                     divCard.style.width = "75%";
@@ -70,39 +70,24 @@ $matchId = $_SESSION['idmatch'];
                     var divCardTittle = document.createElement("h5");
                     divCardTittle.className = "card-tittle";
                     divCardTittle.textContent = `${result.value}`
-                    divCardTittle.id="tittle/"+idequipe;
+                    divCardTittle.id="tittle/";
                     divCardBody.appendChild(divCardTittle);
 
-                    var divCardText = document.createElement("p");
-                    divCardText.className = "card-text"
-                    divCardText.id="text/"+idequipe
-                    divCardBody.appendChild(divCardText);
-
-                    var listGroupCardText = document.createElement("div");
-                    listGroupCardText.className = "list-group";
-                    listGroupCardText.id="listgroup/"+idequipe
-                    divCardText.appendChild(listGroupCardText);
-
-                    var inputCardText = document.createElement("input");
-                    inputCardText.type = "button";
-                    inputCardText.value = "Supprimer";
-                    inputCardText.id="text/"+idequipe
-                    inputCardText.onclick=function () {
-                        supprEquipe(idequipe)
-                    }
-                    divCardText.appendChild(inputCardText);
-
-                    var colonneEquipe = document.getElementById("divEquipe");
-                    colonneEquipe.appendChild(divCard);
-
-                    var bouton = document.getElementById("creerEquipe")
-                    var nouvBouton = bouton.cloneNode(true)
-                    colonneEquipe.removeChild(bouton)
-                    colonneEquipe.appendChild(document.createElement("br"))
-                    colonneEquipe.appendChild(document.createElement("br"))
-                    colonneEquipe.appendChild(nouvBouton)
-
                 })
+            }
+        });
+    }
+
+    function AjaxAjoutJoueurEquipe(){
+        $.ajax({
+            url: "../../Model/Tournoi/AjoutJoueurAjax.php",
+            type : "POST",
+            data: {idjoueur:idjoueur,idequipe:idequipe},
+            success: function (response){
+                console.log(response)
+            },
+            error: function (xhr,status,error){
+                console.error(error)
             }
         });
     }
