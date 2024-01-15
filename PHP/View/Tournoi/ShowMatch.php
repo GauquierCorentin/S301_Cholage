@@ -1,8 +1,8 @@
 <?php
 include ("../../View/BarreMenu/BarreMenu.php");
 $matchs = $_SESSION['matchs'];
-$idMatchs = $_SESSION['idMatchs'];
-$matchId = $_SESSION['matchId'];
+$nomEquipeAdverse = $_SESSION['nomEquipeAdverse'];
+$nomEquipe= $_SESSION['nomEquipe'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,11 +25,15 @@ $matchId = $_SESSION['matchId'];
         echo "<div class='card'>";
         echo "<div class='card-body'>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
-        echo "<p class='card-text'>Equipe : " . $match . "</p>";
+        echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
         foreach ($matchId as $idMatch){
             echo("<input type='hidden' name='idMatch' value='$idMatch[0]'>");
         }
+        if ($_SESSION['isCaptain']==1){
         echo("<button type='submit' class='btn btn-primary' name='match'>Miser</button>");
+        }
+        echo "<h5 class='card-title'>Equipe adverse</h5>";
+        echo "<p class='card-text'>Equipe : " . $nomEquipeAdverse[0][0] . "</p>";
         echo("</div>");
         echo("</div>");
         echo("</div>");

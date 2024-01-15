@@ -16,26 +16,23 @@ function getLastTournoi(){
     $req->execute();
     return $req->fetch();
 }
-
-
 /**
  * Fonction qui renvoie tous les matchs non fait du tournoi en cours
  * @param int $idEquipe
  * @param int $idtournoi
  * @return array
  */
-
 function getMatchs(int $idEquipe, int $idtournoi){
     global $pdo;
-    $req=$pdo->prepare("SELECT * from match WHERE (equipechole = ? or equipedechole = ?) and idtournoi = ?");
+    $req=$pdo->prepare("SELECT equipechole,equipedechole,idmatch from match WHERE (equipechole = ? or equipedechole = ?) and idtournoi = ?");
     $req->execute(array($idEquipe,$idEquipe, $idtournoi));
     return $req->fetchAll();
 }
 
-function getNomEquipe(int $idEquipe, int $idtournoi){
+function getNomEquipe(int $idEquipe){
     global $pdo;
-    $req=$pdo->prepare("Select nom from equipe where idequipe = ? and idtournoi = ?");
-    $req->execute(array($idEquipe,$idtournoi));
-    return $req->fetchAll();
+    $req=$pdo->prepare("SELECT nom from equipe WHERE idequipe = ?");
+    $req->execute(array($idEquipe));
+    return $req->fetch();
 }
 ?>
