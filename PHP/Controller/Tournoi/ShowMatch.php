@@ -13,10 +13,13 @@ $matchs = getMatchs($idequipe, $idtournoi);
 $_SESSION['matchs'] = $matchs;
 $nomEquipeAdverse= array();
 $_SESSION['nomEquipe']= getNomEquipe($idequipe);
+$idmatch = array();
 foreach ($matchs as $match){
     array_push($nomEquipeAdverse, getNomEquipe($match[1]));
+    array_push($idmatch, $match[2]);
 }
 $_SESSION['nomEquipeAdverse'] = $nomEquipeAdverse;
+$_SESSION['idmatch'] = $idmatch;
 include "../../Controller/BarreMenu/BarreMenu.php";
 include("../../View/Tournoi/ShowMatch.php");
 ?>

@@ -2,6 +2,7 @@
 $matchs = $_SESSION['matchs'];
 $nomEquipeAdverse = $_SESSION['nomEquipeAdverse'];
 $nomEquipe= $_SESSION['nomEquipe'];
+$matchId = $_SESSION['idmatch'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,7 @@ $nomEquipe= $_SESSION['nomEquipe'];
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
         foreach ($matchId as $idMatch){
-            echo("<input type='hidden' name='idMatch' value='$idMatch[0]'>");
+            echo("<input type='hidden' name='idMatch' value='$idMatch'>");
         }
         if ($_SESSION['isCaptain']==1){
         echo("<button type='submit' class='btn btn-primary' name='match'>Miser</button>");
