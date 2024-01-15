@@ -4,7 +4,7 @@ checkMailOrga();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 ob_start();
-require_once '../../View/BarreMenu/BarreMenu.php';
+require_once '../../Controller/BarreMenu/BarreMenu.php';
 require_once ('../../Model/Tournoi/AjouterQuestionnaire.php');
 require_once ('../../View/Tournoi/AjouterQuestionnaire.php');
 

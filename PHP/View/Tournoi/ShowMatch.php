@@ -1,5 +1,4 @@
 <?php
-include ("../../View/BarreMenu/BarreMenu.php");
 $matchs = $_SESSION['matchs'];
 $nomEquipeAdverse = $_SESSION['nomEquipeAdverse'];
 $nomEquipe= $_SESSION['nomEquipe'];

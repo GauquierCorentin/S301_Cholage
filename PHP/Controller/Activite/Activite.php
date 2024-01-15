@@ -12,5 +12,6 @@ try {
 }
 
 getTournois();
+include("../../Controller/BarreMenu/BarreMenu.php");
 include("../../../PHP/View/Activite/Activite.php");
 ?>

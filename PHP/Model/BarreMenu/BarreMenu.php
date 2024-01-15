@@ -1,5 +1,5 @@
 <?php
-include ("../../Model/BDD/ConnexionBDD.php");
+require_once ("../../Model/BDD/ConnexionBDD.php");
 try {
     $conn = ConnexionBDD::getInstance();
     $pdo = $conn::getpdo();

@@ -17,6 +17,6 @@ foreach ($matchs as $match){
     array_push($nomEquipeAdverse, getNomEquipe($match[1]));
 }
 $_SESSION['nomEquipeAdverse'] = $nomEquipeAdverse;
-
+include "../../Controller/BarreMenu/BarreMenu.php";
 include("../../View/Tournoi/ShowMatch.php");
 ?>

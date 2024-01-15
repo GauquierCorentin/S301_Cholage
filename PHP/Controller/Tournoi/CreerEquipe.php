@@ -2,7 +2,7 @@
 require("../../Model/checkSession/checkSession.php");
 checkMailValidate();
 checkMailCaptain();
-include("../../View/BarreMenu/BarreMenu.php");
+include("../../Controller/BarreMenu/BarreMenu.php");
 require_once("../../View/Tournoi/CreationEquipe.html");
 require_once ("../../Model/Tournoi/CreerEquipe.php");
 ob_start();
@@ -14,7 +14,6 @@ if ($_SESSION["equipe"]!=null || $_SESSION["isCaptain"] == true ){
     <script>
     Swal.fire({
                     icon: 'error',
-                    title: 'Nouvelle Equipe',
                     text: 'Vous avez déjà une équipe'
         }).then((result) => {
             // Vérifier si le bouton "OK" a été cliqué

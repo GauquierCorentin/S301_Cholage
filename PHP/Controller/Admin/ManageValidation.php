@@ -2,8 +2,8 @@
 require("../../Model/checkSession/checkSession.php");
 checkMailAdmin();
 ob_start();
-require_once '../../View/BarreMenu/BarreMenu.php';
 require_once '../../Model/Admin/ManageValidation.php';
+include "../../Controller/BarreMenu/BarreMenu.php";
 getUsersNonValidate();
 require_once '../../View/Admin/ManageValidation.php';
 

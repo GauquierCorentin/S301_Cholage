@@ -1,7 +1,7 @@
 <?php
 require("../../Model/checkSession/checkSession.php");
 checkMailValidate();
-include("../../View/BarreMenu/BarreMenu.php");
+include("../../Controller/BarreMenu/BarreMenu.php");
 include("../../Model/Tournoi/afficherEquipe.php");
 
 $tournoi = getTournoi();
