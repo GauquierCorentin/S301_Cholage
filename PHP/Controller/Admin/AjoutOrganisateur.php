@@ -1,11 +1,11 @@
 <?php
 require("../../Model/checkSession/checkSession.php");
 checkMailAdmin();
-include('../../View/BarreMenu/BarreMenu.php');
 
 ob_start();
 require_once("../../Model/Admin/AjoutOrganisateur.php");
 recupUsersNonOrga();
+include "../../Controller/BarreMenu/BarreMenu.php";
 require_once("../../View/Admin/AjoutOrganisateur.php");
 
 if ($_SESSION["users"] == null) {

@@ -5,16 +5,15 @@
     <title>Messagerie</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../View/Style/styleCholage.css">
+    <link rel="stylesheet" href="../../View/Style/styleNavBar.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
 <body>
-
 <?php
-include("../../View/BarreMenu/BarreMenu.php");
+include("../../Controller/BarreMenu/BarreMenu.php");
 ?>
-
 <div class="message">
     <form method="POST" >
         <textarea name="message" rows="10" cols="80"></textarea>

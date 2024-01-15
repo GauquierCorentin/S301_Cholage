@@ -1,6 +1,3 @@
-<?php
-include ("../../View/BarreMenu/BarreMenu.php");
-?>
 <!DOCTYPE html>
 <html>
 <head>

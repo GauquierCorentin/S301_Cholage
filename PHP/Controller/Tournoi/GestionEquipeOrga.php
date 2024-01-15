@@ -6,4 +6,5 @@ foreach ($_SESSION["lstEquipes"] as $equipe){
     $_SESSION["membreEquipe".$equipe[0]]=getMembreEquipe($equipe[2]);
 }
 $_SESSION["membreSansEquipe"]=getMembreSansEquipe(getLastTournoi()[0]);
+include "../../Controller/BarreMenu/BarreMenu.php";
 include "../../View/Tournoi/GestionEquipeOrga.php";

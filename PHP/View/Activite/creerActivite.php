@@ -9,9 +9,6 @@
 </head>
 
 <body>
-<?php
-include("../../View/BarreMenu/BarreMenu.php");
- ?>
 <div class="content">
 
     <form method="post">

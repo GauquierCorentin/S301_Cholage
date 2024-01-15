@@ -6,30 +6,21 @@ checkMailValidate();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-$equipe = $_SESSION['equipe'];
-$idtournoi = getLastTournoi()['idtournoi'];
-$matchs = getMatchs($equipe, $idtournoi);
-$arrayMatchs = array();
-$arrayNomEquipe = array();
-$arrayIdMatch = array();
-
+$idequipe = $_SESSION['equipe'];
+$idtournoi = getLastTournoi();
+$idtournoi = $idtournoi[0];
+$matchs = getMatchs($idequipe, $idtournoi);
+$_SESSION['matchs'] = $matchs;
+$nomEquipeAdverse= array();
+$_SESSION['nomEquipe']= getNomEquipeMatch($idequipe);
+$idmatch = array();
 foreach ($matchs as $match){
-    $match = array($match['idmatch']);
-    array_push($arrayIdMatch, $match);
+    array_push($nomEquipeAdverse, getNomEquipeMatch($match[1]));
+    array_push($idmatch, $match[2]);
 }
-$_SESSION['matchId'] = $arrayIdMatch;
-
-foreach ($matchs as $match){
-    $match = array($match['equipechole'], $match['equipedechole']);
-    array_push($arrayMatchs, $match);
-}
-$_SESSION['idMatchs'] = $arrayMatchs;
-
-foreach ($arrayMatchs as $match){
-    $nomEquipe = getNomEquipe($match[0], $idtournoi)[0]['nom'];
-    array_push($arrayNomEquipe, $nomEquipe);
-}
-$_SESSION['matchs'] = $arrayNomEquipe;
-
+$_SESSION['nomEquipeAdverse'] = $nomEquipeAdverse;
+$_SESSION['idmatch'] = $idmatch;
+include "../../Controller/BarreMenu/BarreMenu.php";
 include("../../View/Tournoi/ShowMatch.php");
+
 ?>
