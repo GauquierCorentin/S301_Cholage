@@ -18,6 +18,7 @@ $matchId = $_SESSION['idmatch'];
 <h1>Voici la liste des matchs qu'ils vous restent a effectuer : </h1>
 <form method="POST">
     <?php
+    $i=0;
     foreach ($matchs as $match){
         echo "<div class='container'>";
         echo "<div class='row'>";
@@ -26,20 +27,18 @@ $matchId = $_SESSION['idmatch'];
         echo "<div class='card-body'>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
-        foreach ($matchId as $idMatch){
-            echo("<input type='hidden' name='idMatch' value='$idMatch'>");
-        }
+            echo("<input type='hidden' name='idMatch' value='$match[2]'>");
         if ($_SESSION['isCaptain']==1){
         echo("<button type='submit' class='btn btn-primary' name='match'>Miser</button>");
         }
         echo "<h5 class='card-title'>Equipe adverse</h5>";
-        echo "<p class='card-text'>Equipe : " . $nomEquipeAdverse[0][0] . "</p>";
+        echo "<p class='card-text'>Equipe : " . $nomEquipeAdverse[$i][0] . "</p>";
         echo("</div>");
         echo("</div>");
         echo("</div>");
         echo("</div>");
         echo("</div>");
-
+        $i++;
     }
     ?>
 </form>

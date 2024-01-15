@@ -29,7 +29,7 @@ function getMatchs(int $idEquipe, int $idtournoi){
     return $req->fetchAll();
 }
 
-function getNomEquipe(int $idEquipe){
+function getNomEquipeMatch(int $idEquipe){
     global $pdo;
     $req=$pdo->prepare("SELECT nom from equipe WHERE idequipe = ?");
     $req->execute(array($idEquipe));

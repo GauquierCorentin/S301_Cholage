@@ -12,10 +12,10 @@ $idtournoi = $idtournoi[0];
 $matchs = getMatchs($idequipe, $idtournoi);
 $_SESSION['matchs'] = $matchs;
 $nomEquipeAdverse= array();
-$_SESSION['nomEquipe']= getNomEquipe($idequipe);
+$_SESSION['nomEquipe']= getNomEquipeMatch($idequipe);
 $idmatch = array();
 foreach ($matchs as $match){
-    array_push($nomEquipeAdverse, getNomEquipe($match[1]));
+    array_push($nomEquipeAdverse, getNomEquipeMatch($match[1]));
     array_push($idmatch, $match[2]);
 }
 $_SESSION['nomEquipeAdverse'] = $nomEquipeAdverse;
