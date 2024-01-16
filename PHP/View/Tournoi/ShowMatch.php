@@ -54,7 +54,7 @@ $matchId = $_SESSION['idmatch'];
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                AddPari(<?php echo $_SESSION['equipe'] ?>,result.value,<?php echo $matchId[0] ?>);
+                AddPari('<?php echo $_SESSION['equipe'] ?>',result.value,'<?php echo $matchId[0] ?>');
             }
         });
     }
