@@ -6,7 +6,7 @@ $idmatch = $_POST['idmatch'];
 $idequipe = $_POST['idequipe'];
 
 #On regarde si l'équipe est en dechole ou chole
-$req = $pdo->prepare("SELECT equipechole,equipedechole from match WHERE idmatch = ?, equipechole = ?");
+$req = $pdo->prepare("SELECT equipechole,equipedechole from match WHERE idmatch = ? and equipechole = ?");
 $req->execute(array($idmatch, $idequipe));
 $equipe = $req->fetch();
 

@@ -27,7 +27,7 @@ $matchId = $_SESSION['idmatch'];
         echo "<div class='card-body'>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
-            echo("<input type='hidden' name='idMatch' value='$match[2]' idmatch='$match[2]'>");
+            echo("<input type='hidden' name='idMatch' value='$match[2]' id='idmatch'>");
         if ($_SESSION['isCaptain']==1){
         echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis()'></input>");
         }
@@ -54,12 +54,16 @@ $matchId = $_SESSION['idmatch'];
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                AddPari(<?php echo $_SESSION['equipe'] ?>,result.value,$(this).attr('idmatch'));
+                AddPari(<?php echo $_SESSION['equipe'] ?>,result.value,<?php echo $matchId[0] ?>);
             }
         });
     }
 
     function AddPari(idequipe,pari,idmatch){
+        console.log('on est dans addpari');
+        console.log('idequipe:', idequipe);
+        console.log('pari:', pari);
+        console.log('idmatch:', idmatch);
         $.ajax({
             url: "../../Model/Tournoi/ShowMatchAjax.php",
             type : "POST",

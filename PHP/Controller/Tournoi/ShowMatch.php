@@ -20,6 +20,7 @@ foreach ($matchs as $match){
 }
 $_SESSION['nomEquipeAdverse'] = $nomEquipeAdverse;
 $_SESSION['idmatch'] = $idmatch;
+
 include "../../Controller/BarreMenu/BarreMenu.php";
 include("../../View/Tournoi/ShowMatch.php");
 
