@@ -25,6 +25,7 @@ $matchId = $_SESSION['idmatch'];
         echo "<div class='col-18'>";
         echo "<div class='card'>";
         echo "<div class='card-body'>";
+        echo "<h5 class='card-title'>Heure du match :  $match[3]</h5>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
             echo("<input type='hidden' name='idMatch' value='$match[2]' id='idmatch'>");

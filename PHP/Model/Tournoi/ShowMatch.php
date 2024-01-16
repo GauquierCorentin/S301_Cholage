@@ -24,7 +24,7 @@ function getLastTournoi(){
  */
 function getMatchs(int $idEquipe, int $idtournoi){
     global $pdo;
-    $req=$pdo->prepare("SELECT equipechole,equipedechole,idmatch from match WHERE (equipechole = ? or equipedechole = ?) and idtournoi = ?");
+    $req=$pdo->prepare("SELECT equipechole,equipedechole,idmatch,heure from match WHERE (equipechole = ? or equipedechole = ?) and idtournoi = ?");
     $req->execute(array($idEquipe,$idEquipe, $idtournoi));
     return $req->fetchAll();
 }
