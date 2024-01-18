@@ -15,16 +15,25 @@
 <div>
     <table class="tableau">
         <tr>
-            <th>Mail</th>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Role</th>
-            <th>Exclure</th>
+            <th>Equipe 1</th>
+            <th></th>
+            <th>Equipe 2</th>
+            <th>Heure</th>
         </tr>
 <?php
 $listeMatchCharge=$_SESSION["allMatch"];
-foreach ($listeMatchCharge as $match){
-    echo 
+if (gettype($listeMatchCharge)!="NULL") {
+    foreach ($listeMatchCharge as $match) {
+        echo "<tr>";
+        echo "<td>" . $match[0] . "</td>";
+        echo "<td>vs</td>";
+        echo "<td>" . $match[1] . "</td>";
+        echo "<td>".$match[2]."</td>";
+        echo "</tr>";
+    }
+}
+else{
+    echo "Aucun Match";
 }
 ?>
 </body>

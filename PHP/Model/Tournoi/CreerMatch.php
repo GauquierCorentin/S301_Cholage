@@ -45,20 +45,8 @@ function genererMatch($listecompetiteurs) {
         }
         $copie[1] = $mem;
 
-
-        echo "<br></br>listeblanc<br>";
-        foreach ($listeblanc as $item) {
-            echo $item . "  ";
-        }
-        echo "<br>listenoire<br>";
-        foreach ($listenoire as $item) {
-            echo $item . "  ";
-        }
-        echo "<br>liste ronde<br>";
-        foreach ($copie as $item) {
-            echo $item . "  ";
-        }
     }
+    return $lstmatch;
 }
 function getAllMatchTournoi($idtournoi)
 {
@@ -81,4 +69,20 @@ function getLastTournoi(){
     $req=$pdo->prepare("Select idtournoi from tournoi order by idtournoi desc");
     $req->execute();
     return $req->fetch();
+}
+function addMatch($idtournoi,$equipe1,$equipe2){
+    global $pdo;
+    $req=$pdo->prepare("insert into match values (default,null,null,null,null,null,?,?,?,null,null,null,null)");
+    $req->execute(array($idtournoi,$equipe1,$equipe2));
+}
+function getAllEquipeTournoi($idtournoi){
+    global $pdo;
+    $req=$pdo->prepare("select idequipe from equipe where idtournoi=?");
+    $req->execute(array($idtournoi));
+    return $req->fetchAll();
+}
+function supprMatchTournoi($idtournoi){
+    global $pdo;
+    $req=$pdo->prepare("delete from match where $idtournoi=?");
+    $req->execute(array($idtournoi));
 }
