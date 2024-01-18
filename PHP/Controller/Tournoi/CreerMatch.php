@@ -11,10 +11,9 @@ if($_POST["creerEquipe"]){
     $equipe=getAllEquipeTournoi(getLastTournoi()[0]);
     $allmatch=genererMatch($equipe);
     foreach ($allmatch as $match){
-        addMatch(getLastTournoi()[0],$match[0],$match[1]);
+        if($match[1]!=0 and $match[2]!=0){
+            addMatch(getLastTournoi()[0], $match[1], $match[2]);
+        }
     }
     header("Location: ../../Controller/Tournoi/CreerMatch.php");
-}
-if ($_POST["supprEquipe"]){
-
 }

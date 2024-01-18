@@ -7,6 +7,12 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 
+/**
+ * @param $idtournoi
+ * @return array|false
+ * @author Gallouin Matisse
+ * permet de récupérer les scores des équipes d'un tournoi
+ */
 function getScoreEquipe($idtournoi){
  global $pdo;
  $requete=$pdo->prepare("select nom,count(m.equipegagnante) as victoire,count(m2.equipeperdante) as défaite

@@ -10,8 +10,14 @@
 </head>
 <body>
 <br>
-<input type="button" value="créer tous les matchs" name="creerEquipe">
-<input type="button" value="supprimer tous les matchs" name="supprEquipe">
+<?php
+if(gettype($_SESSION["allMatch"])!="NULL"){
+    echo '<input type="button" value="supprimer tous les matchs" name="supprEquipe" onclick="">';
+}
+else{
+    echo '<input type="button" value="créer tous les matchs" name="creerEquipe">';
+}
+?>
 <div>
     <table class="tableau">
         <tr>
@@ -19,16 +25,23 @@
             <th></th>
             <th>Equipe 2</th>
             <th>Heure</th>
+            <th></th>
         </tr>
 <?php
 $listeMatchCharge=$_SESSION["allMatch"];
 if (gettype($listeMatchCharge)!="NULL") {
     foreach ($listeMatchCharge as $match) {
         echo "<tr>";
-        echo "<td>" . $match[0] . "</td>";
-        echo "<td>vs</td>";
         echo "<td>" . $match[1] . "</td>";
-        echo "<td>".$match[2]."</td>";
+        echo "<td>vs</td>";
+        echo "<td>" . $match[2] . "</td>";
+        if (gettype($match[3])!="NULL") {
+            echo "<td><input type='time' id='heure/'".$match[0]." min='8:00' max='18:00' value='".$match[3]."'></td>";
+        }
+        else{
+            echo "<td><input type='time' id='heure/'".$match[0]." min='8:00' max='18:00' ></td>";
+        }
+        echo "<td><button onclick='changerheure(/".$match[0].")'>changer l'heure</button></td>";
         echo "</tr>";
     }
 }
@@ -36,4 +49,55 @@ else{
     echo "Aucun Match";
 }
 ?>
+
+    </table>
+</div>
+<script>
+    function changerHeureAjax(idmatch,heure){
+        $.ajax({
+            url:"../../Model/Tournoi/ChangerHeureAjax.php",
+            type:"POST",
+            data:{idmatch:idmatch,heure:heure},
+            success: function(response) {
+                // Traitement de la réponse du serveur, si nécessaire
+                console.log('Réponse du serveur :', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur AJAX:', error);
+            }
+        })
+    }
+    function changerheure(idmatch){
+        let heure=document.getElementById("heure/"+idmatch).value
+        changerHeureAjax(idmatch,heure)
+    }
+    function SupprAllMatch(){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Suppression des matchs',
+            text: 'Vous allez supprimez tous les matchs',
+            showConfirmButton: true,
+            showCancelButton: true,
+            cancelButtonText: "Annuler",
+            confirmButtonText: "Valider"
+        }).then((result)=>{
+            if(result.value){
+                SupprAllMatchAjax()
+            }
+        })
+    }
+    function SupprAllMatchAjax(){
+        $.ajax({
+            url:"../../Model/Tournoi/SupprAllMatchAjax.php",
+            type:"POST",
+            success: function(response) {
+                // Traitement de la réponse du serveur, si nécessaire
+                console.log('Réponse du serveur :', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur AJAX:', error);
+            }
+        })
+    }
+</script>
 </body>

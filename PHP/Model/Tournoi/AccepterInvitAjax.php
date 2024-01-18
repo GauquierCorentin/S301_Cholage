@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Gallouin Matisse
+ * permet de rejoindre à l'aide d'ajax
+ */
 include "../../Model/Tournoi/Invitation.php";
 
 $idequipe=$_POST["idequipe"];
