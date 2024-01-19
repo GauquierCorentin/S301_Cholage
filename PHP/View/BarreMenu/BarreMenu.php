@@ -50,6 +50,7 @@
                         </li>');
                         echo ('<li class="nav-item">
                                <a class="nav-link" href="../../Controller/Tournoi/GestionEquipeOrga.php">Gestion Equipe Organisateur</a>"');
+                        echo ('<li class="nav-item"> <a class="nav-link" href="../../Controller/Tournoi/CreerMatch.php">Gestion Match</a>');
                     }
                     if($_SESSION['isadmin'] == true){
                         echo('<li class="nav-item">

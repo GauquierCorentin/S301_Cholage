@@ -11,11 +11,13 @@
 <body>
 <br>
 <?php
-if(gettype($_SESSION["allMatch"])!="NULL"){
-    echo '<input type="button" value="supprimer tous les matchs" name="supprEquipe" onclick="">';
+if(count($_SESSION["allMatch"])!=0){
+    echo '<input type="button" value="supprimer tous les matchs" name="supprEquipe" onclick="SupprAllMatch()">';
 }
 else{
-    echo '<input type="button" value="créer tous les matchs" name="creerEquipe">';
+    echo "<form method='post'>";
+    echo '<input type="submit" value="créer tous les matchs" name="creerMatch">';
+    echo "</form>";
 }
 ?>
 <div>
@@ -27,28 +29,28 @@ else{
             <th>Heure</th>
             <th></th>
         </tr>
-<?php
-$listeMatchCharge=$_SESSION["allMatch"];
-if (gettype($listeMatchCharge)!="NULL") {
-    foreach ($listeMatchCharge as $match) {
-        echo "<tr>";
-        echo "<td>" . $match[1] . "</td>";
-        echo "<td>vs</td>";
-        echo "<td>" . $match[2] . "</td>";
-        if (gettype($match[3])!="NULL") {
-            echo "<td><input type='time' id='heure/'".$match[0]." min='8:00' max='18:00' value='".$match[3]."'></td>";
+        <?php
+        $listeMatchCharge=$_SESSION["allMatch"];
+        if (gettype($listeMatchCharge)!="NULL") {
+            foreach ($listeMatchCharge as $match) {
+                echo "<tr>";
+                echo "<td>" . $match[1] . "</td>";
+                echo "<td>vs</td>";
+                echo "<td>" . $match[2] . "</td>";
+                if (gettype($match[3])!="NULL") {
+                    echo "<td><input type='time' id='heure/'".$match[0]." min='8:00' max='18:00' value='".$match[3]."'></td>";
+                }
+                else{
+                    echo "<td><input type='time' id='heure/".$match[0]."' min='8:00' max='18:00' ></td>";
+                }
+                echo "<td><button onclick='changerheure(\"".$match[0]."\")'>changer l'heure</button></td>";
+                echo "</tr>";
+            }
         }
         else{
-            echo "<td><input type='time' id='heure/'".$match[0]." min='8:00' max='18:00' ></td>";
+            echo "Aucun Match";
         }
-        echo "<td><button onclick='changerheure(/".$match[0].")'>changer l'heure</button></td>";
-        echo "</tr>";
-    }
-}
-else{
-    echo "Aucun Match";
-}
-?>
+        ?>
 
     </table>
 </div>
@@ -83,6 +85,15 @@ else{
         }).then((result)=>{
             if(result.value){
                 SupprAllMatchAjax()
+                Swal.fire({
+                    icon:'success',
+                    tittle:'Match supprimé',
+                    text:"tous les matchs ont été supprimés"
+                }).then((result)=>{
+                    if(result){
+                        window.location.reload();
+                    }
+                })
             }
         })
     }
@@ -101,3 +112,4 @@ else{
     }
 </script>
 </body>
+

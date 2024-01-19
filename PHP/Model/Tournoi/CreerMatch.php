@@ -16,7 +16,7 @@ function genererMatch($listecompetiteurs) {
     $couleur=true;
     $lstmatch=[];
     //ajout d'une équipe fantome pour avoir une liste pair et permettre à l'algo de fonctionner comme il faut
-    if(sizeof($listecompetiteurs)){
+    if(sizeof($listecompetiteurs)%2!=0){
         array_push($listecompetiteurs,0);
     }
     $copie=$listecompetiteurs;
@@ -55,7 +55,16 @@ function genererMatch($listecompetiteurs) {
             }
         }
         $copie[1] = $mem;
-
+        echo "listenoire";
+        foreach ($listenoire as $item){
+            echo $item[0];
+        }
+        echo"<br>";
+        echo "listeblanc";
+        foreach ($listeblanc as $item){
+            echo $item[0];
+        }
+        echo "<br>";
     }
     return $lstmatch;
 }
@@ -73,9 +82,11 @@ function getAllMatchTournoi($idtournoi)
 from match
 join public.equipe e on e.idequipe = match.equipechole
 join public.equipe e2 on e2.idequipe = match.equipedechole
-where match.idtournoi=? ");
+where match.idtournoi=? 
+order by heure");
     $req->execute(array($idtournoi));
     return $req->fetchAll();
+
 }
 /**
  * @author Gallouin Matisse
