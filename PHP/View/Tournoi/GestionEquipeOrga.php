@@ -9,6 +9,13 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
+<form>
+    <label for="langues">changer la langue:</label>
+    <select id="langues" name="langues">
+        <option onclick="window.location.href='../../View/Tournoi/GestionEquipeOrga.php'">Français</option>
+        <option onclick="window.location.href='../../View/Tournoi/GestionEquipeOrgaAnglais.php'">Anglais</option>
+    </select>
+</form>
 <div class="GestionEquipeOrga-container-fluid GestionEquipeOrga-mx">
     <div class="row">
         <div class="col-xl-3">
