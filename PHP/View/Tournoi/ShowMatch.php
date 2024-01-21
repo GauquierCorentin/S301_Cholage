@@ -25,12 +25,12 @@ $matchId = $_SESSION['idmatch'];
         echo "<div class='col-18'>";
         echo "<div class='card'>";
         echo "<div class='card-body'>";
-        echo "<h5 class='card-title'>Heure du match :  $match[3]</h5>";
+        echo "<h5 class='card-title'>Heure du match : ".$match[3]."</h5>";
         echo "<h5 class='card-title'>Votre Equipe</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
-            echo("<input type='hidden' name='idMatch' value='$match[2]' id='idmatch'>");
+        echo("<input type='hidden' name='idMatch' value='$match[2]' id='idmatch'>");
         if ($_SESSION['isCaptain']==1){
-        echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis()'></input>");
+            echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis()'></input>");
         }
         echo "<h5 class='card-title'>Equipe adverse</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipeAdverse[$i][0] . "</p>";

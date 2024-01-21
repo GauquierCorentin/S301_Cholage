@@ -19,7 +19,21 @@ $equipe = $req->fetch();
 if ($equipe[0]== $idequipe) {
     $sql = $pdo->prepare("UPDATE match set pariequipe1=? WHERE idmatch = ?");
     $sql->execute(array($pari, $idmatch));
+    $sql=$pdo->prepare("Select pariequipe2 from match where idmatch=?");
+    $sql->execute(array($idmatch));
+    $result=$sql->fetch();
+    if ($pari>$result[0]){
+        $sql=$pdo->prepare("update match set equipechole=?,equipedechole=?,pariequipe1=?,pariequipe2=? where idmatch=?");
+        $sql->execute(array($equipe[1],$equipe[0],$result[0],$pari,$idmatch));
+    }
 } else {
     $sql = $pdo->prepare("UPDATE match set pariequipe2=? WHERE idmatch = ?");
     $sql->execute(array($pari, $idmatch));
+    $sql=$pdo->prepare("Select pariequipe1 from match where idmatch=?");
+    $sql->execute(array($idmatch));
+    $result=$sql->fetch();
+    if ($pari<$result[0]){
+        $sql=$pdo->prepare("update match set equipechole=?,equipedechole=?,pariequipe1=?,pariequipe2=? where idmatch=?");
+        $sql->execute(array($equipe[1],$equipe[0],$pari,$result[0],$idmatch));
+    }
 }

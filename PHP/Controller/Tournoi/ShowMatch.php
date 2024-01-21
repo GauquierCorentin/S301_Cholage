@@ -15,7 +15,12 @@ $nomEquipeAdverse= array();
 $_SESSION['nomEquipe']= getNomEquipeMatch($idequipe);
 $idmatch = array();
 foreach ($matchs as $match){
-    array_push($nomEquipeAdverse, getNomEquipeMatch($match[1]));
+    if ($idequipe==$match[0]) {
+        array_push($nomEquipeAdverse, getNomEquipeMatch($match[1]));
+    }
+    else{
+        array_push($nomEquipeAdverse,getNomEquipeMatch($match[0]));
+    }
     array_push($idmatch, $match[2]);
 }
 $_SESSION['nomEquipeAdverse'] = $nomEquipeAdverse;
