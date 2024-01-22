@@ -1,7 +1,11 @@
 <?php
 
 
-
+/**
+ * @return void
+ * Fonction pour envoyer un message (ajout dans bdd)
+ * @author Corentin Gauquier
+ */
 function envoyerMess($bdd)
 {
     /* ce if sert a permettre d'envoyer des messages*/
@@ -13,6 +17,11 @@ function envoyerMess($bdd)
     }
 }
 
+/**
+ * @return void
+ * Fonction pour recharger le chat (sans recharger la page, jquery)
+ * @author Corentin Gauquier
+ */
 function loadChat(){
     ?>
     <section id="messages"></section>
@@ -29,6 +38,12 @@ function loadChat(){
     </script>
     <?php
 }
+
+/**
+ * @return void
+ * Fonction pour supprimer les messages vieux de 1 jour
+ * @author Corentin Gauquier
+ */
 function deleteOldMessages($pdo) {
     try {
         $currentDate = new DateTime();

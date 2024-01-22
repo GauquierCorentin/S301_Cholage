@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+/**
+ * @return void
+ * Fonction pour verifier si l'utilisateur est connecté avec un compte
+ * @author Corentin Gauquier
+ */
 function checkMail()
 {
     if (!isset($_SESSION['mail'])) {
@@ -8,6 +13,11 @@ function checkMail()
     }
 }
 
+/**
+ * @return void
+ * Fonction pour verifier si l'utilisateur est connecté avec un compte et est administrateur
+ * @author Corentin Gauquier
+ */
 function checkMailAdmin()
 {
     if (!isset($_SESSION['mail']) and $_SESSION['isadmin'] == false) {
@@ -15,6 +25,11 @@ function checkMailAdmin()
     }
 }
 
+/**
+ * @return void
+ * Fonction pour verifier si l'utilisateur est connecté avec un compte et est organisateur
+ * @author Corentin Gauquier
+ */
 function checkMailOrga()
 {
 
@@ -23,6 +38,11 @@ function checkMailOrga()
     }
 }
 
+/**
+ * @return void
+ * Fonction pour verifier si l'utilisateur est connecté avec un compte et est validé
+ * @author Corentin Gauquier
+ */
 function checkMailValidate()
 {
     if (!isset($_SESSION['mail']) and $_SESSION['isValidate'] == false) {
@@ -30,6 +50,11 @@ function checkMailValidate()
     }
 }
 
+/**
+ * @return void
+ * Fonction pour verifier si l'utilisateur est connecté avec un compte et est capitaine d'équipe
+ * @author Corentin Gauquier
+ */
 function checkMailCaptain()
 {
     if (!isset($_SESSION['mail']) and $_SESSION['isCaptain'] == false) {
@@ -37,6 +62,11 @@ function checkMailCaptain()
     }
 }
 
+/**
+ * @return void
+ * Fonction pour verifier si l'utilisateur est connecté avec un compte et est admin et organisateur
+ * @author Corentin Gauquier
+ */
 function checkMailOrgaOrAdmin()
 {
     if (!isset($_SESSION['mail']) and (!$_SESSION['isadmin'] or $_SESSION['isorganisateur'])) {
