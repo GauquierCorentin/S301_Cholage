@@ -22,7 +22,7 @@
             <h1>To change a player's team, drag their name in the desired team</h1>
         </div>
         <div class="col-xl-6" id="divEquipe">
-            <h2>Equipe</h2>
+            <h2>Team</h2>
             <br>
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
