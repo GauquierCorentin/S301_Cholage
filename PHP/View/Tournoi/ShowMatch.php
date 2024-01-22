@@ -30,7 +30,7 @@ $matchId = $_SESSION['idmatch'];
         echo "<p class='card-text'>Equipe : " . $nomEquipe[0] . "</p>";
         echo("<input type='hidden' name='idMatch' value='$match[2]' id='idmatch'>");
         if ($_SESSION['isCaptain']==1){
-            echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis()'></input>");
+            echo("<input type='button' class='btn btn-primary' name='match' value='Miser' onclick='ajouterParis(\"$match[2]\")'></input>");
         }
         echo "<h5 class='card-title'>Equipe adverse</h5>";
         echo "<p class='card-text'>Equipe : " . $nomEquipeAdverse[$i][0] . "</p>";
@@ -45,7 +45,7 @@ $matchId = $_SESSION['idmatch'];
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
-    function ajouterParis(){
+    function ajouterParis(idmatch){
 
         Swal.fire({
             input: "text",
@@ -55,7 +55,7 @@ $matchId = $_SESSION['idmatch'];
             cancelButtonText: "annuler"
         }).then((result)=> {
             if (result.value) {
-                AddPari('<?php echo $_SESSION['equipe'] ?>',result.value,'<?php echo $matchId[0] ?>');
+                AddPari('<?php echo $_SESSION['equipe'] ?>',result.value,idmatch);
             }
         });
     }

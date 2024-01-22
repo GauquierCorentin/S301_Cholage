@@ -7,6 +7,12 @@ try {
     die ('Erreur : ' . $e->getMessage());
 }
 
+/**
+ * @param $idequipe
+ * @return array|false
+ * @author Gallouin Matisse
+ * permet de récupérer les matchs ayant un résultat donnée
+ */
 function getInfoMatchAvecResult($idequipe)
 {
     global $pdo;
@@ -18,6 +24,13 @@ where (equipechole=? or equipedechole=?) and (pariequipe1 is not null and parieq
     $req->execute(array($idequipe,$idequipe));
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/**
+ * @param $idequipe
+ * @return array|false
+ * @author Gallouin Matisse
+ * récupérer les matchs sans résultat donnée
+ */
 function getInfoMatchSansResult($idequipe)
 {
     global $pdo;
@@ -30,6 +43,13 @@ where (equipechole=? or equipedechole=?) and (pariequipe1 is not null and parieq
     return $req->fetchAll();
 }
 
+/**
+ * @param $idmatch
+ * @param $resultat
+ * @return void
+ * @author Gallouin Matisse
+ * permet de changer le résultat donné pour un match
+ */
 function changerResultMatch($idmatch,$resultat)
 {
     global $pdo;
@@ -37,12 +57,25 @@ function changerResultMatch($idmatch,$resultat)
     $req->execute(array($resultat,$idmatch));
 }
 
+/**
+ * @param $idmatch
+ * @return void
+ * @author Gallouin Matisse
+ * permet de refuser le résultat donné
+ */
 function refuserResult($idmatch)
 {
     global $pdo;
     $req=$pdo->prepare("update match set valideresultat=false where idmatch=?");
     $req->execute(array($idmatch));
 }
+
+/**
+ * @param $idmatch
+ * @return void
+ * @author Gallouin Matisse
+ * permet d'accepter le résultat
+ */
 function accepterResult($idmatch)
 {
     global $pdo;
