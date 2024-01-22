@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @return array
+ * Fonction pour récupérer les informations d'un tournoi
+ * @author Corentin Gauquier
+ */
 function getTournois()
 {
     global $pdo;

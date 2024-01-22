@@ -50,6 +50,7 @@
                         </li>');
                         echo ('<li class="nav-item">
                                <a class="nav-link" href="../../Controller/Tournoi/GestionEquipeOrga.php">Gestion Equipe Organisateur</a>"');
+                        echo ('<li class="nav-item"> <a class="nav-link" href="../../Controller/Tournoi/CreerMatch.php">Gestion Match</a>');
                     }
                     if($_SESSION['isadmin'] == true){
                         echo('<li class="nav-item">
@@ -133,10 +134,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Activite/Activite.php';" value="Voir Activités">
-                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Activite/creerActivite.php';" value="Créer Activités">
-                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/ClassementTournoiActuel.php';" value="Voir le classement du tournoi actuel">
-                <input type="button" class="btn btn-secondary" onclick="window.location.href='../../Controller/Tournoi/ClassementTournoi.php';" value="Voir tout les classements">
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Activite/Activite.php';" value="Voir Activités">
+                <?php
+                if ($_SESSION['isadmin'] == true || $_SESSION['isorganisateur'] == true) {
+                    echo "<input type='button' class='btn btn-secondary' onclick='window.location.href='../../Controller/Activite/creeActivite.php';' value='Creer Activités'>";
+                }
+                ?>
+                <input type="button" class="btn btn-primary" onclick="window.location.href='../../Controller/Tournoi/ClassementTournoi.php';" value="Voir tout les classements">
             </div>
         </div>
     </div>

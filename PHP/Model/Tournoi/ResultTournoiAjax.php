@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @author Gallouin Matisse
+ * permet de récupérer les résultats des équipes en fonction du tournoi avec ajax
+ */
 include "ClassementTournoi.php";
 
 $idtournoi=$_POST["idtournoi"];

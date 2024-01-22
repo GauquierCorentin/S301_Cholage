@@ -111,3 +111,21 @@ th,td{
     float: right;
 }
 
+.tournoi {
+    height: 50%;
+    margin-top: .5%;
+    margin-right: .5%;
+    margin-left: .5%;
+    background-color: #3288da;
+    text-align: left;
+}
+
+.equipe {
+    height: 50%;
+    margin-top: .5%;
+    margin-right: .5%;
+    margin-left: .5%;
+    background-color: #85beeb;
+    text-align: left;
+}
+

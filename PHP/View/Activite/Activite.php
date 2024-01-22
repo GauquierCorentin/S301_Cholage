@@ -11,7 +11,6 @@
 <body>
 
 <?php
-include("../../View/BarreMenu/BarreMenu.php");
 $tournois= $_SESSION['tournois'];
 foreach($tournois as $activite){
     echo '<a href="afficheActivite.php">';

@@ -13,5 +13,7 @@ $membreequipe = getMembre_Role($idequipe);
 foreach ($membreequipe as $membre) {
     supprUser($membre['email']);
 }
+$req = $pdo->prepare("delete from token where idequipe=?");
+$req->execute(array($idequipe));
 $req = $pdo->prepare("delete  from equipe where idequipe=? ");
 $req->execute(array($idequipe));

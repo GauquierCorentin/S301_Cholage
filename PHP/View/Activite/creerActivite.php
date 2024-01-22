@@ -9,7 +9,18 @@
 </head>
 
 <body>
-<?php
-include("../../View/BarreMenu/BarreMenu.php");
- ?>
+<div class="content">
+
+    <form method="post">
+        <label for="nom">Nom du tournoi</label>
+        <input type="text" name="nom" id="nom" required>
+        <br>
+        <label for="date">Date du tournoi</label>
+        <input type="date" name="date" id="date" required>
+        <br>
+        <input type="submit" name="envoyer" value="Envoyer">
+    </form>
+</div>
+</div>
 </body>
+</html>

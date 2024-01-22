@@ -19,10 +19,10 @@
 <div class="GestionEquipeOrga-container-fluid GestionEquipeOrga-mx">
     <div class="row">
         <div class="col-xl-3">
-            <h1>Pour changer les joueurs d'équipe, faites glisser leurs noms dans l'équipe voulue</h1>
+            <h1>To change a player's team, drag their name in the desired team</h1>
         </div>
         <div class="col-xl-6" id="divEquipe">
-            <h2>Equipe</h2>
+            <h2>Team</h2>
             <br>
             <?php
             foreach($_SESSION["lstEquipes"] as $lstEquipe){
@@ -41,22 +41,22 @@
                 };
                 echo '</div>
                     <input type="hidden" id="equipe'.$lstEquipe[2].'" value="'.$lstEquipe[2].'">
-                    <input type="button" id="equipe/'.$lstEquipe[2].'" value="Supprimer" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[2].'\').value)">
+                    <input type="button" id="equipe/'.$lstEquipe[2].'" value="Delete" onclick="supprEquipe(document.getElementById(\'equipe'.$lstEquipe[2].'\').value)">
                     </p>
                 </div>
             </div>
             <br><br>';
             }
             ?>
-            <input type="button" id="creerEquipe" value="Ajouter une équipe" onclick="creerEquipe()">
+            <input type="button" id="creerEquipe" value="Add a new team" onclick="creerEquipe()">
         </div>
 
         <div class="col-xl-3 DivJoeurSansEquipe" id="col/vide" ondragover="activerdrop()" ondrop="drop()">
-            <h3 class="TittreSansEquipe">Membres sans équipes</h3>
+            <h3 class="TittreSansEquipe">Players with no team</h3>
             <div class="list-group" id="listgroup/vide" ondragover="activerdrop()" ondrop="drop() ">
                 <?php
                 foreach ($_SESSION["membreSansEquipe"] as $membreSansEquipe){
-                   echo '<li class="list-group-item list-group-item-primary" id="'.$membreSansEquipe[2].'/vide" value="'.$membreSansEquipe[2].'" draggable="true" ondragstart="recupererData()">'.$membreSansEquipe[0]." ".$membreSansEquipe[1].'</li>';
+                    echo '<li class="list-group-item list-group-item-primary" id="'.$membreSansEquipe[2].'/vide" value="'.$membreSansEquipe[2].'" draggable="true" ondragstart="recupererData()">'.$membreSansEquipe[0]." ".$membreSansEquipe[1].'</li>';
                 }
                 ?>
 
@@ -86,13 +86,13 @@
 
     function supprEquipe(idequipe){
         Swal.fire({
-            title: "Supression équipe",
-            text:"Vous allez supprimer l'équipe",
+            title: "Team Deletion",
+            text:"You are about to delete the team",
             icon:"warning",
             showConfirmButton: true,
             showCancelButton: true,
-            cancelButtonText: "Annuler",
-            confirmButtonText: "Valider"
+            cancelButtonText: "confirm",
+            confirmButtonText: "submit"
         }).then((result)=>{
             if (result.value){
                 supprimerEquipe(idequipe)
@@ -125,7 +125,7 @@
         if(!event.target.id.includes("vide") && idelementdeplace[1].includes("vide")){
             if (event.target.id.includes("text")){
                 var text = document.createElement("b")
-                text.textContent = "      capitaine     "
+                text.textContent = "      captain     "
                 text.id = "text/" + idelementdeplace[0] + "/" + iddiv[2];
                 elementdeplace.appendChild(text)
 
@@ -137,7 +137,7 @@
             }
             else {
                 var text = document.createElement("b")
-                text.textContent = "      capitaine     "
+                text.textContent = "      captain     "
                 text.id = "text/" + idelementdeplace[0] + "/" + iddiv[1];
                 elementdeplace.appendChild(text)
 
@@ -192,8 +192,8 @@
             input: "text",
             showCancelButton: true,
             showConfirmButton: true,
-            confirmButtonText: "valider",
-            cancelButtonText: "annuler"
+            confirmButtonText: "confirm",
+            cancelButtonText: "cancel"
         }).then((result)=> {
             if (result.value) {
                 AjaxAjoutEquipe(`${result.value}`,function (idequipe){
@@ -264,81 +264,81 @@
         });
     }
 
-        function AjaxAjoutJoueurEquipe(idjoueur,idequipe){
-            $.ajax({
-                url: "../../Model/Tournoi/AjoutJoueurAjax.php",
-                type : "POST",
-                data: {idjoueur:idjoueur,idequipe:idequipe},
-                success: function (response){
-                    console.log(response)
-                },
-                error: function (xhr,status,error){
-                    console.error(error)
-                }
-            });
-        }
-        function AjaxRetirerJoueurEquipe(idjoueur){
-            $.ajax({
-                url: "../../Model/Tournoi/RetirerJoueurAjax.php",
-                type : "POST",
-                data: {idjoueur:idjoueur},
-                success: function (response){
-                    console.log(response)
-                },
-                error: function (xhr,status,error){
-                    console.error(error)
-                }
-            });
-        }
-        function AjaxValiderCapitaine(idjoueur){
-            $.ajax({
-                url: "../../Model/Tournoi/AjoutCapitaineAjax.php",
-                type : "POST",
-                data: {idjoueur:idjoueur},
-                success: function (response){
-                    console.log(response)
-                },
-                error: function (xhr,status,error){
-                    console.error(error)
-                }
-            });
-        }
-        function AjaxRetirerCapitaine(idjoueur){
-            $.ajax({
-                url: "../../Model/Tournoi/RetirerCapitaineAjax.php",
-                type : "POST",
-                data: {idjoueur:idjoueur},
-                success: function (response){
-                    console.log(response)
-                },
-                error: function (xhr,status,error){
-                    console.error(error)
-                }
-            });
-        }
-        function Ajoutjoueur(idjoueur,idequipe){
-            AjaxAjoutJoueurEquipe(idjoueur,idequipe);
-        }
-        function ValiderCapitaine(){
-            checkboxactive=event.target
-            var mesval=checkboxactive.id.split("/")
-            console.log(mesval)
-            if(checkboxactive.checked) {
-                var mesCheckBoxs = document.querySelectorAll(".card input[type=checkbox ]");
-                mesCheckBoxs.forEach(function verifCheckbox(checkbox) {
-                    if (checkbox.id.includes(mesval[2])) {
-                        if (checkbox !== checkboxactive && checkbox.checked) {
-                            AjaxRetirerCapitaine(checkbox.id.split("/")[1])
-                            checkbox.checked = false;
-                        }
+    function AjaxAjoutJoueurEquipe(idjoueur,idequipe){
+        $.ajax({
+            url: "../../Model/Tournoi/AjoutJoueurAjax.php",
+            type : "POST",
+            data: {idjoueur:idjoueur,idequipe:idequipe},
+            success: function (response){
+                console.log(response)
+            },
+            error: function (xhr,status,error){
+                console.error(error)
+            }
+        });
+    }
+    function AjaxRetirerJoueurEquipe(idjoueur){
+        $.ajax({
+            url: "../../Model/Tournoi/RetirerJoueurAjax.php",
+            type : "POST",
+            data: {idjoueur:idjoueur},
+            success: function (response){
+                console.log(response)
+            },
+            error: function (xhr,status,error){
+                console.error(error)
+            }
+        });
+    }
+    function AjaxValiderCapitaine(idjoueur){
+        $.ajax({
+            url: "../../Model/Tournoi/AjoutCapitaineAjax.php",
+            type : "POST",
+            data: {idjoueur:idjoueur},
+            success: function (response){
+                console.log(response)
+            },
+            error: function (xhr,status,error){
+                console.error(error)
+            }
+        });
+    }
+    function AjaxRetirerCapitaine(idjoueur){
+        $.ajax({
+            url: "../../Model/Tournoi/RetirerCapitaineAjax.php",
+            type : "POST",
+            data: {idjoueur:idjoueur},
+            success: function (response){
+                console.log(response)
+            },
+            error: function (xhr,status,error){
+                console.error(error)
+            }
+        });
+    }
+    function Ajoutjoueur(idjoueur,idequipe){
+        AjaxAjoutJoueurEquipe(idjoueur,idequipe);
+    }
+    function ValiderCapitaine(){
+        checkboxactive=event.target
+        var mesval=checkboxactive.id.split("/")
+        console.log(mesval)
+        if(checkboxactive.checked) {
+            var mesCheckBoxs = document.querySelectorAll(".card input[type=checkbox ]");
+            mesCheckBoxs.forEach(function verifCheckbox(checkbox) {
+                if (checkbox.id.includes(mesval[2])) {
+                    if (checkbox !== checkboxactive && checkbox.checked) {
+                        AjaxRetirerCapitaine(checkbox.id.split("/")[1])
+                        checkbox.checked = false;
                     }
-                });
-                AjaxValiderCapitaine(mesval[1])
-            }
-            else{
-                AjaxRetirerCapitaine(checkboxactive.id.split("/")[1])
-            }
+                }
+            });
+            AjaxValiderCapitaine(mesval[1])
         }
+        else{
+            AjaxRetirerCapitaine(checkboxactive.id.split("/")[1])
+        }
+    }
 </script>
 </body>
 </html>
